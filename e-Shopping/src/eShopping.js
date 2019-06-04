@@ -1,23 +1,44 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  createAppContainer,
+  createSwitchNavigator,
+  createStackNavigator,
+  createDrawerNavigator,
+} from 'react-navigation';
 
-class EShopping extends React.Component {
+import {
+  WelcomeScreen,
+  SignInScreen,
+  SignUpScreen,
+  HomeScreen,
+  AuthLoadingScreen,
+} from './components/screens';
+
+import Icon from '@expo/vector-icons/Ionicons';
+
+export default class EShopping extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Welcome to E-Shopping</Text>
-      </View>
-    );
+    return <AppContainer />;
   }
 }
 
-export default EShopping;
+// React Navigation Structure
+const AuthStackNavigator = createStackNavigator(
+  {
+    Welcome: WelcomeScreen,
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen,
+  }
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const AppSwitchNavigator = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    Auth: AuthStackNavigator,
+    App: AppDrawerNavigator,
+  }
+);
+
+const AppContainer = createAppContainer(AppSwitchNavigator);
+
+
