@@ -10,8 +10,12 @@ import {
   WelcomeScreen,
   SignInScreen,
   SignUpScreen,
-  HomeScreen,
   AuthLoadingScreen,
+  HomeScreen,
+  FluffyScreen,
+  AquariumScreen,
+  BirdScreen,
+  ReptileScreen,
 } from './components/screens';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -23,6 +27,59 @@ export default class EShopping extends React.Component {
 }
 
 // React Navigation Structure
+
+const FluffyStackNavigator = createStackNavigator(
+  {
+    Fluffy: { screen: FluffyScreen },
+  }
+);
+
+const AquariumStackNavigator = createStackNavigator(
+  {
+    Aquarium: { screen: AquariumScreen },
+  }
+);
+
+const BirdStackNavigator = createStackNavigator(
+  {
+    Bird: { screen: BirdScreen },
+  }
+);
+
+const ReptileStackNavigator = createStackNavigator(
+  {
+    Reptile: { screen: ReptileScreen },
+  }
+);
+
+const HomeStackNavigator = createStackNavigator(
+  {
+    Home: { screen: HomeScreen },
+
+    Fluffy: { screen: FluffyStackNavigator },
+
+    Aquarium: { screen: AquariumStackNavigator },
+
+    Bird: { screen: BirdStackNavigator },
+
+    Reptile: { screen: ReptileStackNavigator },
+  }
+);
+
+const AppDrawerNavigator = createDrawerNavigator(
+  {
+    Home: { screen: HomeStackNavigator },
+
+    Fluffy: { screen: FluffyStackNavigator },
+
+    Aquarium: { screen: AquariumStackNavigator },
+
+    Bird: { screen: BirdStackNavigator },
+
+    Reptile: { screen: ReptileStackNavigator },
+  }
+);
+
 const AuthStackNavigator = createStackNavigator(
   {
     Welcome: WelcomeScreen,
