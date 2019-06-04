@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   createAppContainer,
   createSwitchNavigator,
@@ -20,7 +20,7 @@ import {
 
 import Icon from '@expo/vector-icons/Ionicons';
 
-export default class EShopping extends React.Component {
+export default class EShopping extends Component {
   render() {
     return <AppContainer />;
   }
@@ -92,7 +92,7 @@ const AppSwitchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
     Auth: AuthStackNavigator,
-    App: AppDrawerNavigator,
+    App: HomeStackNavigator,
   }
 );
 
