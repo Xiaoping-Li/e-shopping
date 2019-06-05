@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   item: {
     width: 250,
-    height: 200,
+    height: 190,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -89,8 +89,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   img: {
-    width: 250, 
+    width: 240, 
     height: 180, 
-    borderRadius: 5
+    marginTop: 5,
+    borderRadius: 5,
   },
 });
