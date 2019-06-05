@@ -77,7 +77,7 @@ class SignInScreen extends Component {
               <View style={styles.divider_bar}></View> 
 
               {/* Forgot Password link */}
-              <Text>Forgot password?</Text>
+              <Text style={{color: '#0E4375'}}>Forgot password?</Text>
           </View>
       );
   }
@@ -119,17 +119,20 @@ const styles = StyleSheet.create({
 
   },
   input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderStyle: 'solid',
-    padding: 10,
+    borderWidth: 2,
+    borderColor: '#F08E52',
+    padding: 15,
     width: 350,
     marginBottom: 25,
     borderRadius: 10,
+    shadowColor: '#2F1A0C',
+    shadowOffset: {width: 0.5, height: 0.5},
+    shadowOpacity: 1,
+    shadowRadius: 0.5,
   },
   btn: {
-    width: 280,
-    height: 45,
+    width: 350,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F08E52',
