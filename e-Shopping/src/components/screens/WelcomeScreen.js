@@ -7,9 +7,17 @@ class WelcomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <WelcomeCarousel />
-        <Text>Sign In</Text>
-        <Text>Sign Up</Text>
+        <View style={styles.carouselContainer}>
+          <WelcomeCarousel />
+        </View>
+        
+        <View>
+          <Text>Sign In</Text>
+        </View>
+        
+        <View>
+          <Text>Sign Up</Text>
+        </View>
       </View>  
     );
   }
@@ -23,6 +31,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center', 
     justifyContent: 'center',
+  },
+  carouselContainer: {
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    width: 375,
+    height: 375,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    // borderBottomEndRadius: 5,
   },
   carousel: {
     width: 375,
