@@ -92,7 +92,7 @@ const AppSwitchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
     Auth: AuthStackNavigator,
-    App: HomeStackNavigator,
+    App: AppDrawerNavigator,
   }
 );
 

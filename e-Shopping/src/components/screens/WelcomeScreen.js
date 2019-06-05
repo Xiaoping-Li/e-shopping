@@ -19,6 +19,14 @@ class WelcomeScreen extends React.Component {
     this.setState({ fontLoaded: true });
   }
 
+  navigateToSignin = () => {
+    this.props.navigation.navigate('SignIn');
+  }
+
+  navigateToSignup = () => {
+    this.props.navigation.navigate('SignUp');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,13 +40,13 @@ class WelcomeScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={this.navigateToSignin}>
             <Text style={styles.text}>Sign In</Text>
           </TouchableOpacity>
 
           <View style={styles.divider}></View>
           
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={this.navigateToSignup}>
             <Text style={styles.text}>Sign Up</Text>
           </TouchableOpacity>
         </View> 
