@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { WelcomeCarousel } from '../presentations';
+
+
 
 
 class WelcomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.carouselContainer}>
+        <View >
           <WelcomeCarousel />
         </View>
         
@@ -31,20 +33,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center', 
     justifyContent: 'center',
-  },
-  carouselContainer: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    width: 375,
-    height: 375,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 1,
-    // borderBottomEndRadius: 5,
-  },
-  carousel: {
-    width: 375,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
   },
 });
