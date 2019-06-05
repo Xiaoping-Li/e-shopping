@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import { 
-    View, 
-    Text, 
-    StyleSheet, 
-    TextInput,
-    AsyncStorage, 
-    ActivityIndicator, 
+  View, 
+  Text, 
+  StyleSheet, 
+  TextInput,
+  AsyncStorage, 
+  ActivityIndicator,
+  TouchableOpacity, 
 } from 'react-native';
 import { Font } from 'expo';
 
 
 class SignInScreen extends Component {
   constructor() {
-      super();
-      this.state = {
-          email: '',
-          password: '',
-          fontLoaded: false,
-      }
+    super();
+    this.state = {
+        email: '',
+        password: '',
+        fontLoaded: false,
+    }
   }
 
   // Make sure the font loaded before using
-  async componentDidMount() {
-      await Font.loadAsync({
-          'Pacifico-Reg': require('../../../assets/fonts/Pacifico-Regular.ttf'), 
-      });
+  componentDidMount = async () => {
+    await Font.loadAsync({
+        'Pacifico-Reg': require('../../../assets/fonts/Pacifico-Regular.ttf'), 
+    });
 
-      this.setState({ fontLoaded: true });
+    this.setState({ fontLoaded: true });
   }
 
   signIn = async () => {
@@ -35,51 +36,47 @@ class SignInScreen extends Component {
   }
     
   render() {
-      return (
-          <View style={styles.container}>
-              {/* App Header */}
-              {this.state.fontLoaded ? 
-                <Text style={styles.header}>Pets e-Shopping</Text>    
-               : 
-                <ActivityIndicator size="large" />
-              }
+    return (
+      <View style={styles.container}>
+        {/* App Header */}
+        {this.state.fontLoaded ? 
+          <Text style={styles.header}>Pets e-Shopping</Text>    
+          : 
+          <ActivityIndicator size="large" />
+        }
 
-              <View style={styles.divider_bar}></View>
+        <View style={styles.divider_bar}></View>
 
-              {/* Sign In Form */}
-              <View style={styles.form}>
-                <TextInput
-                  placeholder="Phone number or email"
-                  value={this.state.username}
-                  onChangeText={email => this.setState({email})}
-                  style={styles.input}
-                />
+        {/* Sign In Form */}
+        <View style={styles.form}>
+          <TextInput
+            placeholder="Phone number or email"
+            value={this.state.username}
+            onChangeText={email => this.setState({email})}
+            style={styles.input}
+          />
 
-                <TextInput
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChangeText={password => this.setState({password})}
-                  style={styles.input}
-                />
-              </View>
-              
-              {/* Sign In Button */}
-              <View style={styles.btn}>
-                  <Text
-                      onPress={this.signIn}
-                      accessibilityLabel="Sign In"
-                      style={styles.btnText}
-                  >
-                      Sign In
-                  </Text>
-              </View>
+          <TextInput
+            placeholder="Password"
+            value={this.state.password}
+            onChangeText={password => this.setState({password})}
+            style={styles.input}
+          />
+        </View>
+        
+        {/* Sign In Button */}
+        <View style={styles.btn}>
+            <TouchableOpacity onPress={this.signIn} style={styles.btn}>
+              <Text style={styles.text} accessibilityLabel="Sign in" >Sign In</Text>  
+            </TouchableOpacity>
+        </View>
 
-              <View style={styles.divider_bar}></View> 
+        <View style={styles.divider_bar}></View> 
 
-              {/* Forgot Password link */}
-              <Text style={{color: '#0E4375'}}>Forgot password?</Text>
-          </View>
-      );
+        {/* Forgot Password link */}
+        <Text style={{color: '#0E4375'}}>Forgot password?</Text>
+      </View>
+    );
   }
 }
 
@@ -116,7 +113,6 @@ const styles = StyleSheet.create({
     height: 250,
     alignItems: 'center', 
     justifyContent: 'center',
-
   },
   input: {
     borderWidth: 2,
@@ -139,13 +135,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: '#2F1A0C',
     shadowOffset: {width: 1, height: 1},
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
     shadowRadius: 3,
   },
-  btnText: {
-    textAlign: 'center',
-    fontSize: 20,
-    width: 300,
+  text: {
     color: '#fff',
+    fontSize: 20,
+    textAlign: 'center',
   }
 });
