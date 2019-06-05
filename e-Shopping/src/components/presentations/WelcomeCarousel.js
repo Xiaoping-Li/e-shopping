@@ -40,15 +40,16 @@ class WelcomeCarousel extends React.Component {
         img: require('../../../assets/photo/r-red-eyed-tree-frog.png'),
       },
     ];
+
     return (
       <View style={styles.container}>
         <Carousel
           ref={(c) => { this._carousel = c; }}
           data={data}
           renderItem={this._renderItem}
-          sliderWidth={300}
+          sliderWidth={250}
           sliderHeight={250}
-          itemWidth={300}
+          itemWidth={250}
           itemHeight={200}
           autoplay={true}
           enableMomentum={false}
@@ -67,15 +68,19 @@ export default WelcomeCarousel;
 
 const styles = StyleSheet.create({
   container: {
-    width: 350,
-    height: 250,
-    backgroundColor: '#000',
+    width: 280,
+    height: 230,
+    backgroundColor: '#EF823F',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+    shadowColor: '#2F1A0C',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 3,
   },
   item: {
-    width: 300,
+    width: 250,
     height: 200,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   img: {
-    width: 300, 
+    width: 250, 
     height: 180, 
     borderRadius: 5
   },
