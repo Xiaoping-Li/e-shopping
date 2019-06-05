@@ -7,7 +7,7 @@ class WelcomeCarousel extends React.Component {
   _renderItem = ({item, index}) => {
     return (
       <View style={styles.item}>
-          <Image source={item.img} style={{width: 300, height: 180, borderRadius: 5}}/>
+          <Image source={item.img} style={styles.img}/>
       </View>
     );
   }
@@ -68,7 +68,7 @@ export default WelcomeCarousel;
 const styles = StyleSheet.create({
   container: {
     width: 350,
-    height: 300,
+    height: 250,
     backgroundColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
@@ -81,6 +81,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     borderRadius:  5,
-    marginTop: 30,
-  }
+    marginTop: 15,
+  },
+  img: {
+    width: 300, 
+    height: 180, 
+    borderRadius: 5
+  },
 });
