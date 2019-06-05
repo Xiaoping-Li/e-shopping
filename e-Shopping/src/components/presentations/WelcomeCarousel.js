@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Carousel from 'react-native-carousel';
+
 
 class WelcomeCarousel extends React.Component {
   render() {
@@ -9,18 +10,31 @@ class WelcomeCarousel extends React.Component {
         <Carousel
           width={375}
           animate={true}
-          delay={2000}
+          delay={3000}
           loop={true}
-          hideIndicators={true}
+          hideIndicators={false}
+          indicatorOffset={150}
+          indicatorAtBottom={true}
+          indicatorSize={15}
         >
           <View style={styles.container}>
-            <Text>Sign In</Text>
+            <Image width={300} height={300} source={require('../../../assets/photo/f-panda.png')} />
           </View>
+
           <View style={styles.container}>
-            <Text>Sign Up</Text>
+            <Image width={300} height={300} source={require('../../../assets/photo/a-clownfish.png')} />
+          </View> 
+
+          <View style={styles.container}>
+            <Image width={300} height={300} source={require('../../../assets/photo/r-green-snake.png')} />
           </View>
+
           <View style={styles.container}>
-            <Text>Sign Out</Text>
+            <Image width={300} height={300} source={require('../../../assets/photo/b-cockatiel-parrot.png')} />
+          </View>
+
+          <View style={styles.container}>
+            <Image width={300} height={300} source={require('../../../assets/photo/r-red-eyed-tree-frog.png')} />
           </View>
         </Carousel>
     
