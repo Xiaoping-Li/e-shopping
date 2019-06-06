@@ -1,12 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, AsyncStorage, } from 'react-native';
+import { View, Text, StyleSheet, } from 'react-native';
 
 class HomeScreen extends React.Component {
-  signOut = async () => {
-    AsyncStorage.clear();
-    this.props.navigation.navigate('AuthLoading');
-  }
-
   render() {
     const user = {
       name: 'Arya Stark',
@@ -16,10 +11,6 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Welcome to HomeScreen</Text>
-        <Button
-          title="Sign Out"
-          onPress={this.signOut}
-        />
       </View>
     );
   }

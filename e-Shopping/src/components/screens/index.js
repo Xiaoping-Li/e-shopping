@@ -7,6 +7,7 @@ import FluffyScreen from './FluffyScreen';
 import AquariumScreen from './AquariumScreen';
 import BirdScreen from './BirdScreen';
 import ReptileScreen from './ReptileScreen';
+import ProfileScreen from './ProfileScreen';
 
 export {
     HomeScreen,
@@ -18,4 +19,5 @@ export {
     AquariumScreen,
     BirdScreen,
     ReptileScreen,
+    ProfileScreen,
 }

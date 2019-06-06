@@ -16,6 +16,7 @@ import {
   AquariumScreen,
   BirdScreen,
   ReptileScreen,
+  ProfileScreen,
 } from './components/screens';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -27,6 +28,25 @@ export default class EShopping extends Component {
 }
 
 // React Navigation Structure
+const ProfileStackNavigator = createStackNavigator(
+  {
+    Profile: { 
+      screen: ProfileScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          headerLeft: (
+            <Icon
+              style={{ paddingLeft: 20}}
+              onPress={() => navigation.openDrawer()} 
+              name="md-menu" 
+              size={30} 
+            />
+          )
+        }  
+      }  
+    },
+  }
+);
 
 const FluffyStackNavigator = createStackNavigator(
   {
@@ -36,7 +56,7 @@ const FluffyStackNavigator = createStackNavigator(
         return {
           headerLeft: (
             <Icon
-              style={{ paddingLeft: 10}}
+              style={{ paddingLeft: 20}}
               onPress={() => navigation.openDrawer()} 
               name="md-menu" 
               size={30} 
@@ -56,7 +76,7 @@ const AquariumStackNavigator = createStackNavigator(
         return {
           headerLeft: (
             <Icon
-              style={{ paddingLeft: 10}}
+              style={{ paddingLeft: 20}}
               onPress={() => navigation.openDrawer()} 
               name="md-menu" 
               size={30} 
@@ -76,7 +96,7 @@ const BirdStackNavigator = createStackNavigator(
         return {
           headerLeft: (
             <Icon
-              style={{ paddingLeft: 10}}
+              style={{ paddingLeft: 20}}
               onPress={() => navigation.openDrawer()} 
               name="md-menu" 
               size={30} 
@@ -96,7 +116,7 @@ const ReptileStackNavigator = createStackNavigator(
         return {
           headerLeft: (
             <Icon
-              style={{ paddingLeft: 10}}
+              style={{ paddingLeft: 20}}
               onPress={() => navigation.openDrawer()} 
               name="md-menu" 
               size={30} 
@@ -147,9 +167,11 @@ const AppDrawerNavigator = createDrawerNavigator(
     Bird: { screen: BirdStackNavigator },
 
     Reptile: { screen: ReptileStackNavigator },
+
+    Profile: { screen: ProfileStackNavigator },
   }
 );
-
+  
 const AuthStackNavigator = createStackNavigator(
   {
     Welcome: WelcomeScreen,
