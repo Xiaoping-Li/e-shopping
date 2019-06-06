@@ -11,7 +11,7 @@ class HomeScreen extends React.Component {
         </View>
 
         <View>
-          <Categories />
+          <Categories navigation={this.props.navigation} />
         </View>
       </View>
     );

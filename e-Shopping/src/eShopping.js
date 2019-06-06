@@ -61,14 +61,7 @@ const FluffyStackNavigator = createStackNavigator(
       screen: FluffyScreen,
       navigationOptions: ({navigation}) => {
         return {
-          headerLeft: (
-            <Icon
-              style={{ paddingLeft: 20}}
-              onPress={() => navigation.openDrawer()} 
-              name="md-menu" 
-              size={30} 
-            />
-          )
+          header: null,
         }  
       }  
     }
@@ -81,14 +74,7 @@ const AquariumStackNavigator = createStackNavigator(
       screen: AquariumScreen,
       navigationOptions: ({navigation}) => {
         return {
-          headerLeft: (
-            <Icon
-              style={{ paddingLeft: 20}}
-              onPress={() => navigation.openDrawer()} 
-              name="md-menu" 
-              size={30} 
-            />
-          )
+          header: null,
         }  
       }   
     }
@@ -101,14 +87,7 @@ const BirdStackNavigator = createStackNavigator(
       screen: BirdScreen,
       navigationOptions: ({navigation}) => {
         return {
-          headerLeft: (
-            <Icon
-              style={{ paddingLeft: 20}}
-              onPress={() => navigation.openDrawer()} 
-              name="md-menu" 
-              size={30} 
-            />
-          )
+          header: null,
         }  
       }  
     }
@@ -121,14 +100,7 @@ const ReptileStackNavigator = createStackNavigator(
       screen: ReptileScreen,
       navigationOptions: ({navigation}) => {
         return {
-          headerLeft: (
-            <Icon
-              style={{ paddingLeft: 20}}
-              onPress={() => navigation.openDrawer()} 
-              name="md-menu" 
-              size={30} 
-            />
-          )
+          header: null,
         }  
       }   
     }
@@ -178,7 +150,7 @@ const AppDrawerNavigator = createDrawerNavigator(
 
     Bird: { screen: BirdStackNavigator },
 
-    Reptile: { screen: ReptileStackNavigator },
+    Fluffy: { screen: ReptileStackNavigator },
 
     Profile: { screen: ProfileStackNavigator },
 
