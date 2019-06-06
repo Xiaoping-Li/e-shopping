@@ -7,7 +7,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <Header />
+          <Header navigation={this.props.navigation} />
         </View>
 
         <View>

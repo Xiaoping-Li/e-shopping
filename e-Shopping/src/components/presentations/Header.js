@@ -22,6 +22,10 @@ class Header extends Component {
 
     toggleSearch = () => this.setState({ search: !this.state.search })
 
+    navigateToProfile = () => this.props.navigation.navigate('Profile')
+
+    navigateToCart = () => this.props.navigation.navigate('Cart')
+
     render() {
         const user = {
           name: 'Arya Stark',
@@ -41,13 +45,15 @@ class Header extends Component {
                             color="#0E4375"
                             name="user"
                             size={25}
-                            style={{marginRight: 25}} 
+                            style={{marginRight: 25}}
+                            onPress={this.navigateToProfile} 
                         />
 
                         <Icon
                             color="#0E4375"
                             name="shoppingcart"
-                            size={25} 
+                            size={25}
+                            onPress={this.navigateToCart} 
                         />
                     </View>
                 </View>
