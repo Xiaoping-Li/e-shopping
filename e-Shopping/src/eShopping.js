@@ -30,25 +30,81 @@ export default class EShopping extends Component {
 
 const FluffyStackNavigator = createStackNavigator(
   {
-    Fluffy: { screen: FluffyScreen },
+    Fluffy: { 
+      screen: FluffyScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          headerLeft: (
+            <Icon
+              style={{ paddingLeft: 10}}
+              onPress={() => navigation.openDrawer()} 
+              name="md-menu" 
+              size={30} 
+            />
+          )
+        }  
+      }  
+    },
   }
 );
 
 const AquariumStackNavigator = createStackNavigator(
   {
-    Aquarium: { screen: AquariumScreen },
+    Aquarium: { 
+      screen: AquariumScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          headerLeft: (
+            <Icon
+              style={{ paddingLeft: 10}}
+              onPress={() => navigation.openDrawer()} 
+              name="md-menu" 
+              size={30} 
+            />
+          )
+        }  
+      }   
+    },
   }
 );
 
 const BirdStackNavigator = createStackNavigator(
   {
-    Bird: { screen: BirdScreen },
+    Bird: { 
+      screen: BirdScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          headerLeft: (
+            <Icon
+              style={{ paddingLeft: 10}}
+              onPress={() => navigation.openDrawer()} 
+              name="md-menu" 
+              size={30} 
+            />
+          )
+        }  
+      }  
+    },
   }
 );
 
 const ReptileStackNavigator = createStackNavigator(
   {
-    Reptile: { screen: ReptileScreen },
+    Reptile: { 
+      screen: ReptileScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          headerLeft: (
+            <Icon
+              style={{ paddingLeft: 10}}
+              onPress={() => navigation.openDrawer()} 
+              name="md-menu" 
+              size={30} 
+            />
+          )
+        }  
+      }   
+    },
   }
 );
 
@@ -63,7 +119,21 @@ const HomeStackNavigator = createStackNavigator(
     Bird: { screen: BirdStackNavigator },
 
     Reptile: { screen: ReptileStackNavigator },
-  }
+  },
+  {
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        headerLeft: (
+          <Icon
+            style={{ paddingLeft: 20}}
+            onPress={() => navigation.openDrawer()} 
+            name="md-menu" 
+            size={30} 
+          />
+        )
+      };
+    }
+  },
 );
 
 const AppDrawerNavigator = createDrawerNavigator(
