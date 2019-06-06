@@ -3,9 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 
 class EditProfile extends Component {
   render() {
+
     return (
       <View style={styles.container}>
-        <Text>Welcome to BirdScreen</Text>
+        <Text onPress={() => this.props.toggleVisible()}>Welcome to EditProfile</Text>
       </View>
     );
   }
