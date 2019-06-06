@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
 
 class Categories extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Categories</Text>
-        <Text>Aquarium</Text>
-        <Text>Birds</Text>
-        <Text>Fluffy</Text>
-        <Text>Reptile</Text>
-      </View>
+      <Container>
+        <Header />
+        <Content>
+          <Card>
+            <CardItem>
+              <Text>Aquarium</Text>
+            </CardItem>
+
+            <CardItem>
+              <Text>Birds</Text>
+            </CardItem>
+
+            <CardItem>
+              <Text>Fluffy</Text>
+            </CardItem>
+
+            <CardItem>
+              <Text>Reptile</Text>
+            </CardItem>
+          </Card>
+        </Content>
+      </Container>
     );
   }
 }
