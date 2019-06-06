@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, } from 'react-native';
-import { Categories } from '../presentations'; 
+import { Categories, Header, } from '../presentations'; 
 
 class HomeScreen extends React.Component {
   render() {
@@ -12,10 +12,12 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <Image source={{uri: user.thumbnail}} style={{width: 20, height: 20, borderRadius: 10,}} />
-          <Text>{user.name}</Text>
+          <Header />
         </View>
-        <Categories />
+
+        <View>
+          <Categories />
+        </View>
       </View>
     );
   }
