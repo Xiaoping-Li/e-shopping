@@ -17,6 +17,7 @@ import {
   BirdScreen,
   ReptileScreen,
   ProfileScreen,
+  CartScreen,
 } from './components/screens';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -28,24 +29,30 @@ export default class EShopping extends Component {
 }
 
 // React Navigation Structure
+const CartStackNavigator = createStackNavigator(
+  {
+    Cart: { 
+      screen: CartScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null,
+        }  
+      }  
+    }
+  },
+);
+
 const ProfileStackNavigator = createStackNavigator(
   {
     Profile: { 
       screen: ProfileScreen,
       navigationOptions: ({navigation}) => {
         return {
-          headerLeft: (
-            <Icon
-              style={{ paddingLeft: 20}}
-              onPress={() => navigation.openDrawer()} 
-              name="md-menu" 
-              size={30} 
-            />
-          )
+          header: null,
         }  
-      }  
-    },
-  }
+      }   
+    }
+  },
 );
 
 const FluffyStackNavigator = createStackNavigator(
@@ -64,8 +71,8 @@ const FluffyStackNavigator = createStackNavigator(
           )
         }  
       }  
-    },
-  }
+    }
+  },
 );
 
 const AquariumStackNavigator = createStackNavigator(
@@ -84,8 +91,8 @@ const AquariumStackNavigator = createStackNavigator(
           )
         }  
       }   
-    },
-  }
+    }
+  },
 );
 
 const BirdStackNavigator = createStackNavigator(
@@ -104,8 +111,8 @@ const BirdStackNavigator = createStackNavigator(
           )
         }  
       }  
-    },
-  }
+    }
+  },
 );
 
 const ReptileStackNavigator = createStackNavigator(
@@ -124,8 +131,8 @@ const ReptileStackNavigator = createStackNavigator(
           )
         }  
       }   
-    },
-  }
+    }
+  },
 );
 
 const HomeStackNavigator = createStackNavigator(
@@ -139,10 +146,15 @@ const HomeStackNavigator = createStackNavigator(
     Bird: { screen: BirdStackNavigator },
 
     Reptile: { screen: ReptileStackNavigator },
+
+    Cart: { screen: CartStackNavigator },
+
+    Profile: { screen: ProfileStackNavigator },
   },
   {
     defaultNavigationOptions: ({navigation}) => {
       return {
+        gesturesEnabled: false, // When you slide the screen from left to right, only open drawerNavigator. Not open stackNavigator to HomeScreen
         headerLeft: (
           <Icon
             style={{ paddingLeft: 20}}
@@ -169,6 +181,8 @@ const AppDrawerNavigator = createDrawerNavigator(
     Reptile: { screen: ReptileStackNavigator },
 
     Profile: { screen: ProfileStackNavigator },
+
+    Cart: { screen: CartStackNavigator },
   }
 );
   
