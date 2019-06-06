@@ -129,10 +129,18 @@ const HomeStackNavigator = createStackNavigator(
         gesturesEnabled: false, // When you slide the screen from left to right, only open drawerNavigator. Not open stackNavigator to HomeScreen
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 20}}
+            style={{ paddingLeft: 20, color: "#0E4375" }}
             onPress={() => navigation.openDrawer()} 
             name="md-menu" 
             size={30} 
+          />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 20, color: "#0E4375" }}
+            onPress={() => navigation.navigate('Home')} 
+            name="ios-home" 
+            size={28} 
           />
         )
       };
