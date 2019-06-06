@@ -16,8 +16,11 @@ class Header extends Component {
         super();
         this.state = {
             species: '',
+            search: false,
         };
     }
+
+    toggleSearch = () => this.setState({ search: !this.state.search })
 
     render() {
         const user = {
@@ -61,14 +64,16 @@ class Header extends Component {
                         placeholder="Search"
                         value={this.state.species}
                         onChangeText={species => this.setState({species})}
-                        // style={styles.input}
+                        style={styles.input}
                     />
 
                     <TouchableOpacity 
-                        onPress={() => {}} 
+                        onPress={this.toggleSearch} 
                         // style={{fontSize: 20}}
                     >
-                        <Text>Search</Text>
+                        <Text style={this.state.search ? styles.cancel : styles.search}>
+                            {this.state.search ? "Cancel" : "Search"}
+                        </Text>
                     </TouchableOpacity>    
                 </View>
             </View>
@@ -79,44 +84,74 @@ class Header extends Component {
 export default Header;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    backgroundColor: '#fff',
-    flexDirection: 'row', 
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 120,
-    width: Dimensions.get('window').width, // get the width of the window
-    borderColor: '#B6C6D5',
-    borderBottomWidth: 2,
-    borderStyle: 'solid',
-    padding: 5,
-    shadowColor: '#6E8EAC',
-    shadowOffset: {width: 1, height: 1},
-    shadowOpacity: 1,
-    shadowRadius: 0.5,
-  },
-  headerIcons: {
-    backgroundColor: '#fff',
-    flexDirection: 'row', 
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 30,
-  },
-  thumbnail: {
-    width: 40, 
-    height: 40, 
-    borderRadius: 20,
-    marginLeft: 10,
-  },
-  username: {
-      fontSize: 20,
-      color: '#0E4375',
-      marginLeft: 10,
-  }
+        container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    // Header style
+    header: {
+        backgroundColor: '#fff',
+        flexDirection: 'row', 
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: 120,
+        width: Dimensions.get('window').width, // get the width of the window
+        borderColor: '#B6C6D5',
+        borderBottomWidth: 2,
+        borderStyle: 'solid',
+        padding: 5,
+        shadowColor: '#6E8EAC',
+        shadowOffset: {width: 1, height: 1},
+        shadowOpacity: 1,
+        shadowRadius: 0.5,
+    },
+    headerIcons: {
+        backgroundColor: '#fff',
+        flexDirection: 'row', 
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 30,
+    },
+    thumbnail: {
+        width: 40, 
+        height: 40, 
+        borderRadius: 20,
+        marginLeft: 10,
+    },
+    username: {
+        fontSize: 20,
+        color: '#0E4375',
+        marginLeft: 10,
+    },
+
+  // SearchBar style
+    searchBar: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#e0e0e0',
+        borderStyle: 'solid',
+        borderRadius: 30,
+        marginTop: 20,
+        padding: 5,
+        width: 350,
+    },
+    input: {
+        width: 200,
+        fontSize: 20,
+        marginLeft: 10,
+    },
+    search: {
+        fontSize: 20,
+        color: '#0E4375',
+    },
+    cancel: {
+        fontSize: 20,
+        color: '#FF3232',
+    }
 });
