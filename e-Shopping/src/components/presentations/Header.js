@@ -84,8 +84,7 @@ class Header extends Component {
 export default Header;
 
 const styles = StyleSheet.create({
-        container: {
-        flex: 1,
+    container: {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
@@ -97,16 +96,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 120,
         width: Dimensions.get('window').width, // get the width of the window
         borderColor: '#B6C6D5',
         borderBottomWidth: 2,
         borderStyle: 'solid',
         padding: 5,
-        shadowColor: '#6E8EAC',
-        shadowOffset: {width: 1, height: 1},
-        shadowOpacity: 1,
-        shadowRadius: 0.5,
+        shadowColor: '#121315',
+        shadowOffset: {width: 0.5, height: 0.5},
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
     },
     headerIcons: {
         backgroundColor: '#fff',
@@ -153,5 +151,5 @@ const styles = StyleSheet.create({
     cancel: {
         fontSize: 20,
         color: '#FF3232',
-    }
+    },
 });

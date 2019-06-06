@@ -1,40 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text } from 'native-base';
+import { 
+  StyleSheet,
+  View,
+  Text,
+  Image, 
+} from 'react-native';
 
 class Categories extends Component {
   render() {
-
     return (
-      <Container>
-        <Content>
-          <Card>
-            <CardItem>
-              <Body>
-                <Text>Aquarium</Text>
-              </Body>
-            </CardItem>
-
-            <CardItem>
-              <Body>
-                <Text>Birds</Text>
-              </Body>
-            </CardItem>
-
-            <CardItem>
-              <Body>
-                <Text>Fluffy</Text> 
-              </Body>
-            </CardItem>
-
-            <CardItem>
-              <Body>
-                <Text>Reptile</Text> 
-              </Body> 
-            </CardItem>
-          </Card>
-        </Content>
-      </Container>
+      <View>
+        <Text>Hello cards</Text>
+      </View>
     );
   }
 }
@@ -48,4 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  // card: {
+  //   flexWrap: 'nowrap',
+  // }
 });
