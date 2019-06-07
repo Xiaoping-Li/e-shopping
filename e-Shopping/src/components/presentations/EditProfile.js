@@ -32,34 +32,47 @@ class EditProfile extends Component {
             });
             if (!data.cancelled) {
                 this.setState({thumbnail: data.uri});
-                user.thumbnail = this.state.thumbnail;
             }
         } else {
             alert('Album permission denied! Please go to Settings to give permission manually');
         }   
     }
 
+    takePicture = async () => {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        if (status === 'granted') {
+            let data = await ImagePicker.launchCameraAsync({
+                allowsEditing: false,
+            });
+            if (!data.cancelled) {
+                this.setState({thumbnail: data.uri});
+            }
+        } else {
+            alert('Camera permission denied! Please go to Settings to give permission manually');
+        } 
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.form}>
+                <View style={[styles.form, styles.shadow]}>
                     <View style={styles.photo}>
                         <Text style={styles.title}>Profile Photo:</Text>
-                        <View style={styles.frame}>
+                        <View style={[styles.frame, styles.shadow, {shadowRadius: 1}]}>
                             <Image source={{uri: this.state.thumbnail}} style={styles.img} />
                         </View>
                         
                         <Icon
                             name='pencil-square-o'
                             size={35}
-                            style={[styles.shadow, {color: '#fff', marginLeft: 12, shadowRadius: 1}]}
+                            style={[styles.shadow, {color: '#fff', marginLeft: 12, shadowRadius: 0.5}]}
                             onPress={this.pickImage} 
                         />
                         <Icon
                             name='camera-retro'
                             size={30}
-                            style={[styles.shadow, {color: '#fff', marginLeft: 12, shadowRadius: 1}]}
-                            onPress={this.pickImage} 
+                            style={[styles.shadow, {color: '#fff', marginLeft: 12, shadowRadius: 0.5}]}
+                            onPress={this.takePicture} 
                         />
                     </View>
 
@@ -68,7 +81,7 @@ class EditProfile extends Component {
                         <TextInput
                             value={this.state.username}
                             onChangeText={username => this.setState({username})}
-                            style={[styles.input, styles.shadow, {shadowRadius: 1}]} 
+                            style={[styles.input, styles.shadow, {shadowRadius: 0.5}]} 
                         />
                     </View>
 
@@ -77,18 +90,18 @@ class EditProfile extends Component {
                         <TextInput
                             value={this.state.email}
                             onChangeText={email => this.setState({email})}
-                            style={[styles.input, styles.shadow, {shadowRadius: 1}]} 
+                            style={[styles.input, styles.shadow, {shadowRadius: 0.5}]} 
                         />
                     </View>
                 </View>
 
                 <View style={styles.btnContainer}>
                     <TouchableOpacity onPress={() => this.props.toggleVisible()}>
-                        <Text style={[styles.cancel, styles.shadow, {shadowRadius: 1}]}>Cancel</Text>
+                        <Text style={[styles.cancel, styles.shadow, {shadowRadius: 0.5}]}>Cancel</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.handleEdit}>
-                        <Text style={[styles.edit, styles.shadow, {shadowRadius: 1}]}>Edit</Text>
+                        <Text style={[styles.edit, styles.shadow, {shadowRadius: 0.5}]}>Edit</Text>
                     </TouchableOpacity>
                 </View>    
             </View>
