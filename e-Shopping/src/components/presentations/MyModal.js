@@ -5,7 +5,6 @@ import {
  } from 'react-native';
 
 class MyModal extends PureComponent {
-
     render() {
         return (
             <Modal 
