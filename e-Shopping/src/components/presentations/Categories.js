@@ -21,7 +21,7 @@ class Categories extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={this.navigateToAquarium} 
-          style={[styles.card, {backgroundColor: '#449bc6'}]}
+          style={[styles.card, styles.shadow, {backgroundColor: '#449bc6'}]}
         >
           <Image source={require("../../../assets/photo/3jellyfish.jpeg")} style={styles.img} />
           <Text style={styles.text}>Aquarium</Text>
@@ -29,7 +29,7 @@ class Categories extends Component {
 
         <TouchableOpacity
           onPress={this.navigateToBirds} 
-          style={[styles.card, {backgroundColor: '#F5C851'}]}
+          style={[styles.card, styles.shadow, {backgroundColor: '#F5C851'}]}
         >
           <Image source={require("../../../assets/photo/1parrot.jpeg")} style={styles.img} />
           <Text style={styles.text}>Birds</Text>
@@ -37,7 +37,7 @@ class Categories extends Component {
 
         <TouchableOpacity
           onPress={this.navigateToFluffy} 
-          style={[styles.card, {backgroundColor: '#EF823F'}]}
+          style={[styles.card, styles.shadow, {backgroundColor: '#EF823F'}]}
         >
           <Image source={require("../../../assets/photo/4panda.jpeg")} style={styles.img} />
           <Text style={styles.text}>Fluffy</Text>
@@ -45,7 +45,7 @@ class Categories extends Component {
 
         <TouchableOpacity
           onPress={this.navigateToReptile} 
-          style={[styles.card, {backgroundColor: '#5BBC93'}]}
+          style={[styles.card, styles.shadow, {backgroundColor: '#5BBC93'}]}
         >
           <Image source={require("../../../assets/photo/2iguana.png")} style={styles.img} />
           <Text style={styles.text}>Reptile</Text>
@@ -87,5 +87,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontFamily: 'Chalkboard SE',
     fontWeight: "600",
-  }
+  },
+  shadow: {
+    shadowColor: '#353535',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 3,
+}
 });
