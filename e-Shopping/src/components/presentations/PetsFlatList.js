@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity, Text, Image, } from 'react-native';
 import MyModal from './MyModal';
+import PetsCarousel from './PetsCarousel';
 
 
 class PetsFlatList extends PureComponent {
@@ -36,8 +37,9 @@ class PetsFlatList extends PureComponent {
                 /> 
 
                 <MyModal visible={this.state.visible}>
-                    <View style={{width: 300, height: 100}}>
-                    <Text onPress={this.toggleVisible} style={{fontSize: 20, color: '#fff'}}>I am here{this.state.activeIdx}</Text> 
+                    <View style={{width: 350, height: 350, backgroundColor: '#fff'}}>
+                        <Text onPress={this.toggleVisible} style={{fontSize: 20, color: '#000'}}>I am here{this.state.activeIdx}</Text> 
+                        <PetsCarousel data={this.props.data} idx={this.state.activeIdx}/>
                     </View>
                 </MyModal>
             </View>

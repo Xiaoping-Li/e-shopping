@@ -4,6 +4,7 @@ import Header from './Header';
 import EditProfile from './EditProfile';
 import MyModal from './MyModal';
 import PetsFlatList from './PetsFlatList';
+import PetsCarousel from './PetsCarousel';
 
 export {
     WelcomeCarousel,
@@ -12,4 +13,5 @@ export {
     EditProfile,
     MyModal,
     PetsFlatList,
+    PetsCarousel,
 }

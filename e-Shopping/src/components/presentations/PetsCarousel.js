@@ -28,6 +28,7 @@ class PetsCarousel extends React.Component {
           lockScrollWhileSnapping={true}
           enableSnap={true}
           layout={'stack'}
+          firstItem={this.props.idx}
         />
       </View>
     );
