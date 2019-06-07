@@ -1,31 +1,47 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity, Text, Image, } from 'react-native';
+import MyModal from './MyModal';
 
 
 class PetsFlatList extends PureComponent {
-  render() {
-    return (
-        <View style={styles.container}>
-            <FlatList
-                data={this.props.data}
-                renderItem={({item}) => {
-                    return (
-                        <TouchableOpacity
-                            style={[styles.card, styles.shadow]}
-                            onPress={() => {}}
-                        >
-                            <Image source={item.img} style={styles.img}/>
-                            <Text style={styles.text}>{item.name}</Text>
-                        </TouchableOpacity>
-                    );
-                }}
-                keyExtractor={(item) => item._id}
-                horizontal={false}
-                numColumns={2}
-            />
-        </View>
-    );
-  }
+    constructor() {
+        super();
+        this.state = {
+            visible: false,
+        };
+    }
+
+    toggleVisible = () => this.setState({ visible: !this.state.visible})
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    data={this.props.data}
+                    renderItem={({item}) => {
+                        return (
+                            <TouchableOpacity
+                                style={[styles.card, styles.shadow]}
+                                onPress={this.toggleVisible}
+                            >
+                                <Image source={item.img} style={styles.img}/>
+                                <Text style={styles.text}>{item.name}</Text>
+                            </TouchableOpacity>
+                        );
+                    }}
+                    keyExtractor={(item) => item._id}
+                    horizontal={false}
+                    numColumns={2}
+                />
+
+                <MyModal visible={this.state.visible}>
+                    <View style={{width: 300, height: 100}}>
+                       <Text onPress={this.toggleVisible} style={{fontSize: 20, color: '#fff'}}>I am here</Text> 
+                    </View>
+                </MyModal>
+            </View>
+        );
+    }
 }
 
 export default PetsFlatList;
