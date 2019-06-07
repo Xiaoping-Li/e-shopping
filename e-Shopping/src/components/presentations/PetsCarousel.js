@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from '@expo/vector-icons/AntDesign';
 
@@ -8,51 +8,61 @@ class PetsCarousel extends React.Component {
   _renderItem = ({item, index}) => {
     return (
         <View style={styles.item}>
-            <Icon
-                color="#0E4375"
-                name="back"
-                size={25}
-                style={{marginRight: 25}}
-                onPress={() => this.props.onToggle()} 
-            />
             <Image source={item.img} style={styles.img}/>
-            <Text>{item.name}</Text>
-            <Icon
-                color="#0E4375"
-                name="pay-circle-o1"
-                size={25}
-                style={{marginRight: 25}}
-                onPress={() => {}} 
-            />
-            <Icon
-                color="#0E4375"
-                name="shoppingcart"
-                size={25}
-                style={{marginRight: 25}}
-                onPress={() => {}} 
-            />
+            <Text style={styles.text}>Price: ${item.price}</Text>
+            <Text style={[styles.text, {fontFamily: 'Chalkboard SE',fontWeight: "600",}]}>{item.name}</Text>
+            <Text style={[styles.text, {textAlign: 'left'}]}>{item.desc}</Text>
+            <Text style={[styles.text, item.count > 0 ? {color: 'green'} : {color: 'red'}]}>{item.count > 0 ? 'In Stock' : 'Out of Stock'}</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                <TouchableOpacity onPress={() => {}}>
+                    <Icon
+                        color="#0E4375"
+                        name="pay-circle-o1"
+                        size={30}
+                        style={{marginRight: 50}} 
+                    />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => {}}>
+                    <Icon
+                        color="#0E4375"
+                        name="shoppingcart"
+                        size={30}
+                    />
+                </TouchableOpacity>
+                
+                
+            </View>
+            
         </View>
     );
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Carousel
-          ref={(c) => { this._carousel = c; }}
-          data={this.props.data}
-          renderItem={this._renderItem}
-          sliderWidth={250}
-          sliderHeight={250}
-          itemWidth={250}
-          itemHeight={200}
-          enableMomentum={false}
-          lockScrollWhileSnapping={true}
-          enableSnap={true}
-          layout={'stack'}
-          firstItem={this.props.idx}
-        />
-      </View>
+        <View style={[styles.container, {backgroundColor: this.props.color}]}>
+            <Icon
+                color="#fff"
+                name="back"
+                size={30}
+                style={{marginLeft: 250, marginTop: 10, marginBottom: 20}}
+                onPress={() => this.props.onToggle()} 
+            />
+            <Carousel
+                ref={(c) => { this._carousel = c; }}
+                data={this.props.data}
+                renderItem={this._renderItem}
+                sliderWidth={300}
+                sliderHeight={420}
+                itemWidth={300}
+                itemHeight={420}
+                enableMomentum={false}
+                lockScrollWhileSnapping={true}
+                enableSnap={true}
+                layout={'stack'}
+                firstItem={this.props.idx}
+            />
+        </View>
     );
   }
 }
@@ -61,30 +71,37 @@ export default PetsCarousel;
 
 const styles = StyleSheet.create({
   container: {
-    width: 280,
-    height: 230,
-    backgroundColor: '#EF823F',
+    width: 320,
+    height: 500,
+    backgroundColor: 'gray',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 10, 
+  },
+  item: {
+    width: 300,
+    height: 420,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:  5,
+  },
+  img: {
+    width: 240, 
+    height: 180, 
+    borderRadius: 5,
+  },
+  shadow: {
     shadowColor: '#2F1A0C',
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 1,
     shadowRadius: 3,
   },
-  item: {
-    width: 250,
-    height: 190,
-    backgroundColor: '#fff',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRadius:  5,
-    marginTop: 15,
-  },
-  img: {
-    width: 240, 
-    height: 180, 
+  text: {
+    color: '#0E4375',
+    width: 280,
+    textAlign: 'center',
     marginTop: 5,
-    borderRadius: 5,
-  },
+    marginBottom: 5,
+  }
 });

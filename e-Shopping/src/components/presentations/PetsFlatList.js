@@ -37,9 +37,13 @@ class PetsFlatList extends PureComponent {
                 /> 
 
                 <MyModal visible={this.state.visible}>
-                    <View style={{width: 350, height: 350, backgroundColor: '#fff'}}>
-                        <Text onPress={this.toggleVisible} style={{fontSize: 20, color: '#000'}}>I am here{this.state.activeIdx}</Text> 
-                        <PetsCarousel data={this.props.data} idx={this.state.activeIdx} onToggle={this.toggleVisible}/>
+                    <View style={{}}> 
+                        <PetsCarousel 
+                            data={this.props.data} 
+                            idx={this.state.activeIdx} 
+                            onToggle={this.toggleVisible}
+                            color={this.props.color}
+                        />
                     </View>
                 </MyModal>
             </View>
@@ -78,7 +82,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: "#000",
+    color: "#0E4375",
     marginTop: 20,
     fontFamily: 'Chalkboard SE',
     fontWeight: "600",
@@ -88,5 +92,12 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 5, height: 5},
     shadowOpacity: 1,
     shadowRadius: 5,
+  },
+  modal: {
+    width: 350, 
+    height: 550, 
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
