@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 
@@ -13,34 +13,6 @@ class WelcomeCarousel extends React.Component {
   }
 
   render() {
-    const data = [
-      {
-        name: 'panda',
-        nums: 10,
-        img: require('../../../assets/photo/f-panda.png'),
-      },
-      {
-        name: 'snake',
-        nums: 20,
-        img: require('../../../assets/photo/r-green-snake.png'),
-      },
-      {
-        name: 'clownfish',
-        nums: 10,
-        img: require('../../../assets/photo/a-clownfish.png'),
-      },
-      {
-        name: 'cockatiel parrot',
-        nums: 10,
-        img: require('../../../assets/photo/b-cockatiel-parrot.png'),
-      },
-      {
-        name: 'red eyed tree frog',
-        nums: 10,
-        img: require('../../../assets/photo/r-red-eyed-tree-frog.png'),
-      },
-    ];
-
     return (
       <View style={styles.container}>
         <Carousel
@@ -95,3 +67,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
+
+const data = [
+  {
+    name: 'panda',
+    img: require('../../../assets/photo/f-panda.png'),
+  },
+  {
+    name: 'snake',
+    img: require('../../../assets/photo/r-green-snake.png'),
+  },
+  {
+    name: 'clownfish',
+    img: require('../../../assets/photo/a-clownfish.png'),
+  },
+  {
+    name: 'cockatiel parrot',
+    img: require('../../../assets/photo/b-cockatiel-parrot.png'),
+  },
+  {
+    name: 'red eyed tree frog',
+    img: require('../../../assets/photo/r-red-eyed-tree-frog.png'),
+  },
+];
