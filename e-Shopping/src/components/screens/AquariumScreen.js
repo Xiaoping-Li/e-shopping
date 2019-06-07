@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, ImageBackground } from 'react-native';
 import { PetsFlatList } from '../presentations';
 
 class AquariumScreen extends React.Component {
-  
   render() {
     return (
       <ImageBackground 

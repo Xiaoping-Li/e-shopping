@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     borderStyle: 'solid',
     borderWidth: 1,
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: 'rgba(255,255,255,0.5)',
   },
   img: {
     width: 100,
@@ -81,17 +81,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   text: {
-    fontSize: 20,
     color: "#0E4375",
     marginTop: 20,
     fontFamily: 'Chalkboard SE',
     fontWeight: "600",
   },
   shadow: {
-    shadowColor: '#000',
-    shadowOffset: {width: 5, height: 5},
+    shadowColor: '#fff',
+    shadowOffset: {width: 1, height: 1},
     shadowOpacity: 1,
-    shadowRadius: 5,
+    shadowRadius: 2,
   },
   modal: {
     width: 350, 
