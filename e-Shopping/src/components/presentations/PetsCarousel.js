@@ -61,6 +61,7 @@ class PetsCarousel extends React.Component {
                 enableSnap={true}
                 layout={'stack'}
                 firstItem={this.props.idx}
+                loop={true}
             />
         </View>
     );
