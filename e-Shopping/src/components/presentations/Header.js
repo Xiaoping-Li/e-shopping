@@ -9,6 +9,7 @@ import {
     Dimensions, 
 } from 'react-native';
 import Icon from '@expo/vector-icons/AntDesign';
+import { LinearGradient } from 'expo';
 
 
 class Header extends Component {
@@ -33,16 +34,19 @@ class Header extends Component {
         };
     
         return (
-            <View style={styles.container}>
+            <LinearGradient 
+                colors={['#3E6890', '#0E4375', '#0B355D']} 
+                style={styles.container}
+            >
                 <View style={styles.header}>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center',}}>
-                        <Image source={{uri: user.thumbnail}} style={[styles.thumbnail, styles.shadow]} />
+                        <Image source={{uri: user.thumbnail}} style={[styles.thumbnail]} />
                         <Text style={styles.username}>{user.name}</Text>
                     </View>
                     
                     <View style={styles.headerIcons}>
                         <Icon
-                            color="#0E4375"
+                            color="#fff"
                             name="user"
                             size={25}
                             style={{marginRight: 25}}
@@ -50,7 +54,7 @@ class Header extends Component {
                         />
 
                         <Icon
-                            color="#0E4375"
+                            color="#fff"
                             name="shoppingcart"
                             size={25}
                             onPress={this.navigateToCart} 
@@ -75,14 +79,13 @@ class Header extends Component {
 
                     <TouchableOpacity 
                         onPress={this.toggleSearch} 
-                        // style={{fontSize: 20}}
                     >
                         <Text style={this.state.search ? styles.cancel : styles.search}>
                             {this.state.search ? "Cancel" : "Search"}
                         </Text>
                     </TouchableOpacity>    
                 </View>
-            </View>
+            </LinearGradient>
         );
       }
 }
@@ -91,29 +94,19 @@ export default Header;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     // Header style
     header: {
-        backgroundColor: '#fff',
         flexDirection: 'row', 
         alignItems: 'center',
         justifyContent: 'space-between',
         width: Dimensions.get('window').width, // get the width of the window
-        borderColor: '#B6C6D5',
-        borderBottomWidth: 2,
-        borderStyle: 'solid',
-        padding: 5,
-        shadowColor: '#121315',
-        shadowOffset: {width: 0.5, height: 0.5},
-        shadowOpacity: 0.8,
-        shadowRadius: 1,
+        marginTop: 10,
     },
     headerIcons: {
-        backgroundColor: '#fff',
         flexDirection: 'row', 
         alignItems: 'center',
         justifyContent: 'center',
@@ -124,10 +117,12 @@ const styles = StyleSheet.create({
         height: 40, 
         borderRadius: 20,
         marginLeft: 10,
+        borderColor: '#fff',
+        borderWidth: 2,
     },
     username: {
         fontSize: 20,
-        color: '#0E4375',
+        color: '#fff',
         marginLeft: 10,
     },
 
@@ -136,12 +131,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#082846',
         borderWidth: 1,
         borderColor: '#e0e0e0',
         borderStyle: 'solid',
         borderRadius: 30,
         marginTop: 20,
+        marginBottom: 10,
         padding: 5,
         width: 350,
     },
@@ -149,10 +145,11 @@ const styles = StyleSheet.create({
         width: 200,
         fontSize: 20,
         marginLeft: 10,
+        color: '#fff',
     },
     search: {
         fontSize: 20,
-        color: '#0E4375',
+        color: '#fff',
     },
     cancel: {
         fontSize: 20,
