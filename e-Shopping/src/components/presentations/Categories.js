@@ -14,7 +14,7 @@ class Categories extends Component {
 
   navigateToFluffy = () => this.props.navigation.navigate('Fluffy')
 
-  navigateToReptile = () => this.props.navigation.navigate('Fluffy')
+  navigateToReptile = () => this.props.navigation.navigate('Reptile')
 
   render() {
     return (
