@@ -23,7 +23,9 @@ class Categories extends Component {
           onPress={this.navigateToAquarium} 
           style={[styles.card, styles.shadow, {backgroundColor: '#449bc6'}]}
         >
-          <Image source={require("../../../assets/photo/3jellyfish.jpeg")} style={styles.img} />
+          <View style={styles.shadow}>
+            <Image source={require("../../../assets/photo/3jellyfish.jpeg")} style={styles.img} />
+          </View>
           <Text style={styles.text}>Aquarium</Text>
         </TouchableOpacity>
 
@@ -31,7 +33,9 @@ class Categories extends Component {
           onPress={this.navigateToBirds} 
           style={[styles.card, styles.shadow, {backgroundColor: '#F5C851'}]}
         >
-          <Image source={require("../../../assets/photo/1parrot.jpeg")} style={styles.img} />
+          <View style={styles.shadow}>
+            <Image source={require("../../../assets/photo/1parrot.jpeg")} style={styles.img} />
+          </View>
           <Text style={styles.text}>Birds</Text>
         </TouchableOpacity>
 
@@ -39,7 +43,9 @@ class Categories extends Component {
           onPress={this.navigateToFluffy} 
           style={[styles.card, styles.shadow, {backgroundColor: '#EF823F'}]}
         >
-          <Image source={require("../../../assets/photo/4panda.jpeg")} style={styles.img} />
+          <View style={styles.shadow}>
+            <Image source={require("../../../assets/photo/4panda.jpeg")} style={styles.img} />
+          </View>
           <Text style={styles.text}>Fluffy</Text>
         </TouchableOpacity>
 
@@ -47,7 +53,9 @@ class Categories extends Component {
           onPress={this.navigateToReptile} 
           style={[styles.card, styles.shadow, {backgroundColor: '#5BBC93'}]}
         >
-          <Image source={require("../../../assets/photo/2iguana.png")} style={styles.img} />
+          <View>
+            <Image source={require("../../../assets/photo/2iguana.png")} style={styles.img} />
+          </View>
           <Text style={styles.text}>Reptile</Text>
         </TouchableOpacity>   
       </View>
