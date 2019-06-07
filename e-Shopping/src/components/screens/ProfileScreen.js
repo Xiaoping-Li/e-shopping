@@ -53,7 +53,7 @@ class ProfileScreen extends Component {
                         </Modal>
 
                         <View style={[styles.profile, styles.shadow]}>
-                            <View style={styles.frame}>
+                            <View style={[styles.frame, styles.shadow, {shadowRadius: 1}]}>
                                 <Image source={{uri: user.thumbnail}} style={styles.img}/>
                             </View>
                             
