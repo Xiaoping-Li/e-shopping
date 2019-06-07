@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Categories, Header, } from '../presentations'; 
 
 class HomeScreen extends React.Component {

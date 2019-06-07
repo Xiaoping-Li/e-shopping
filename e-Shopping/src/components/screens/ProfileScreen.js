@@ -6,6 +6,7 @@ import {
     AsyncStorage,
     Image,
     Modal,
+    TouchableOpacity,
  } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
 import { EditProfile } from '../presentations';
@@ -64,14 +65,14 @@ class ProfileScreen extends Component {
                             </View>    
                         </View>
                         
-                        <View style={[styles.shadow, {marginRight: 12, shadowColor: '#681515', shadowRadius: 1}]}>
+                        <TouchableOpacity style={[styles.shadow, {marginRight: 12, shadowColor: '#681515', shadowRadius: 1}]}>
                             <Text onPress={this.signOut} style={styles.signOut}>Sign Out</Text>
-                        </View>    
+                        </TouchableOpacity>    
                     </View>
                     :
-                    <View style={[styles.shadow, {flex: 1, alignItems: 'center', justifyContent: 'center', shadowColor: '#681515', shadowRadius: 1}]}>
+                    <TouchableOpacity style={[styles.shadow, {flex: 1, alignItems: 'center', justifyContent: 'center', shadowColor: '#681515', shadowRadius: 1}]}>
                         <Text onPress={this.signOut} style={styles.signOut}>Sign Out</Text>
-                    </View>
+                    </TouchableOpacity>
                 }   
             </View>
         );
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
     },
     title: { 
         marginBottom: 5, 
-        color: '#fff'
+        color: '#fff',
+        fontWeight: 'bold',
     },
     uinfo: {
         fontSize: 20,
