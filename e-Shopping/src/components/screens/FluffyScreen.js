@@ -10,7 +10,11 @@ class FluffyScreen extends React.Component {
         imageStyle={{resizeMode: 'cover'}}
         source={require('../../../assets/photo/flower-field.jpeg')}
       >
-        <PetsFlatList data={pets} color="#EF823F"/>
+        <PetsFlatList 
+        data={pets} 
+        color="#EF823F"
+        modalColor="rgba(250,217,197,0.7)"
+        />
       </ImageBackground>
     );
   }

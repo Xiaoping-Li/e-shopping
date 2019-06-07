@@ -29,11 +29,8 @@ class PetsCarousel extends React.Component {
                         name="shoppingcart"
                         size={30}
                     />
-                </TouchableOpacity>
-                
-                
-            </View>
-            
+                </TouchableOpacity>  
+            </View>   
         </View>
     );
   }

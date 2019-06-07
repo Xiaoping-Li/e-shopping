@@ -10,7 +10,11 @@ class AquariumScreen extends React.Component {
         imageStyle={{resizeMode: 'cover'}}
         source={require('../../../assets/photo/sea-bubble.jpeg')}
       >
-        <PetsFlatList data={pets} color="#449bc6"/>
+        <PetsFlatList 
+          data={pets} 
+          color="#449bc6"
+          modalColor="rgba(198,225,237,0.7)"
+        />
       </ImageBackground>
     );
   }

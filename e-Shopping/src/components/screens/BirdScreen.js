@@ -10,7 +10,11 @@ class BirdScreen extends React.Component {
         imageStyle={{resizeMode: 'cover'}}
         source={require('../../../assets/photo/rain-forest.jpeg')}
       >
-        <PetsFlatList data={pets} color="#F5C851"/>
+        <PetsFlatList 
+          data={pets} 
+          color="#F5C851"
+          modalColor="rgba(252,238,202,0.7)"
+        />
       </ImageBackground>
     );
   }

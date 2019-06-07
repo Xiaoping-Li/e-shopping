@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { 
+import {
+    StyleSheet, 
     View, 
     Modal,
  } from 'react-native';
@@ -12,7 +13,7 @@ class MyModal extends PureComponent {
                 transparent={true}
                 visible={this.props.visible}
                 >
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(52,52,52,0.8)'}}>
+                    <View style={[styles.container, {backgroundColor: this.props.modalColor}]}>
                         {this.props.children}
                     </View>
             </Modal>
@@ -21,3 +22,12 @@ class MyModal extends PureComponent {
 }
 
 export default MyModal;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        backgroundColor: 'rgba(52,52,52,0.8)'
+    },
+});

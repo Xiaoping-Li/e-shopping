@@ -23,7 +23,7 @@ class PetsFlatList extends PureComponent {
                     renderItem={({item, index}) => {
                         return (
                             <TouchableOpacity
-                                style={[styles.card, styles.shadow]}
+                                style={[styles.card, styles.shadow, {backgroundColor: this.props.modalColor}]}
                                 onPress={() => this.toggleVisible(index)}
                             >
                                 <Image source={item.img} style={styles.img}/>
@@ -36,7 +36,10 @@ class PetsFlatList extends PureComponent {
                     numColumns={2}
                 /> 
 
-                <MyModal visible={this.state.visible}>
+                <MyModal 
+                  visible={this.state.visible}
+                  modalColor={this.props.modalColor}
+                >
                     <View style={{}}> 
                         <PetsCarousel 
                             data={this.props.data} 

@@ -10,7 +10,11 @@ class ReptileScreen extends React.Component {
         imageStyle={{resizeMode: 'cover'}}
         source={require('../../../assets/photo/reptile.jpeg')}
       >
-        <PetsFlatList data={pets} color="#5BBC93"/>
+        <PetsFlatList 
+        data={pets} 
+        color="#5BBC93"
+        modalColor="rgba(205,234,222,0.7)"
+        />
       </ImageBackground>
     );
   }
