@@ -39,7 +39,7 @@ class PetsFlatList extends PureComponent {
                 <MyModal visible={this.state.visible}>
                     <View style={{width: 350, height: 350, backgroundColor: '#fff'}}>
                         <Text onPress={this.toggleVisible} style={{fontSize: 20, color: '#000'}}>I am here{this.state.activeIdx}</Text> 
-                        <PetsCarousel data={this.props.data} idx={this.state.activeIdx}/>
+                        <PetsCarousel data={this.props.data} idx={this.state.activeIdx} onToggle={this.toggleVisible}/>
                     </View>
                 </MyModal>
             </View>

@@ -1,15 +1,37 @@
 import React from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import Icon from '@expo/vector-icons/AntDesign';
 
 
 class PetsCarousel extends React.Component {
   _renderItem = ({item, index}) => {
     return (
-      <View style={styles.item}>
-          <Image source={item.img} style={styles.img}/>
-          <Text>{item.name}</Text>
-      </View>
+        <View style={styles.item}>
+            <Icon
+                color="#0E4375"
+                name="back"
+                size={25}
+                style={{marginRight: 25}}
+                onPress={() => this.props.onToggle()} 
+            />
+            <Image source={item.img} style={styles.img}/>
+            <Text>{item.name}</Text>
+            <Icon
+                color="#0E4375"
+                name="pay-circle-o1"
+                size={25}
+                style={{marginRight: 25}}
+                onPress={() => {}} 
+            />
+            <Icon
+                color="#0E4375"
+                name="shoppingcart"
+                size={25}
+                style={{marginRight: 25}}
+                onPress={() => {}} 
+            />
+        </View>
     );
   }
 
