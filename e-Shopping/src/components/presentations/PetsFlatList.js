@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     borderStyle: 'solid',
     borderWidth: 1,
-    backgroundColor: 'rgba(255,255,255,0.5)',
+    backgroundColor: 'rgba(255,255,255,0.7)',
   },
   img: {
     width: 100,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   shadow: {
-    shadowColor: '#fff',
+    shadowColor: '#000',
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 1,
     shadowRadius: 2,
