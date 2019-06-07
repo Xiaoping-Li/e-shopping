@@ -36,7 +36,7 @@ class Header extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center',}}>
-                        <Image source={{uri: user.thumbnail}} style={styles.thumbnail} />
+                        <Image source={{uri: user.thumbnail}} style={[styles.thumbnail, styles.shadow]} />
                         <Text style={styles.username}>{user.name}</Text>
                     </View>
                     
@@ -158,4 +158,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#FF3232',
     },
+    // shadow: {
+    //     shadowColor: '#353535',
+    //     shadowOffset: {width: 1, height: 1},
+    //     shadowOpacity: 1,
+    //     shadowRadius: 2,
+    // }
 });
