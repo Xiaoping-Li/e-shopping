@@ -5,11 +5,11 @@ import {
     StyleSheet, 
     AsyncStorage,
     Image,
-    Modal,
     TouchableOpacity,
  } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
-import { EditProfile } from '../presentations';
+import { EditProfile, MyModal } from '../presentations';
+
 
 class ProfileScreen extends Component {
     constructor() {
@@ -44,13 +44,11 @@ class ProfileScreen extends Component {
                             onPress={this.toggleModalVisible} 
                         />
 
-                        <Modal
-                            visible={this.state.isVisible}
-                            animationType="fade"
-                            transparent={false}
-                        >
-                            <EditProfile toggleVisible={this.toggleModalVisible}/>
-                        </Modal>
+                        <MyModal visible={this.state.isVisible}>
+                            <View style={styles.modalChildren}>
+                                <EditProfile toggleVisible={this.toggleModalVisible}/>
+                            </View>
+                        </MyModal>
 
                         <View style={[styles.profile, styles.shadow]}>
                             <View style={[styles.frame, styles.shadow, {shadowRadius: 1}]}>
@@ -142,5 +140,11 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 1, height: 1},
         shadowOpacity: 1,
         shadowRadius: 5,
-    }
+    },
+    modalChildren: {
+        height: 450,
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 10,
+    },
 });

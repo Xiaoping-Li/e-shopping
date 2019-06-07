@@ -119,13 +119,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     form: {
-        width: 360,
+        width: 330,
         height: 300,
         alignItems: 'center', 
         justifyContent: 'center',
         borderColor: '#e2e2e2',
         borderRadius: 20,
         backgroundColor: '#F5C851',
+        marginTop: 20,
     },
     title: {
         color: '#fff',

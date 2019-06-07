@@ -158,10 +158,4 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#FF3232',
     },
-    // shadow: {
-    //     shadowColor: '#353535',
-    //     shadowOffset: {width: 1, height: 1},
-    //     shadowOpacity: 1,
-    //     shadowRadius: 2,
-    // }
 });
