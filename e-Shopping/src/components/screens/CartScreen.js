@@ -17,6 +17,12 @@ class CartScreen extends Component {
         <Text style={styles.header}>Shopping Cart</Text>
         {cart.length ?
           <View>
+            <View style={styles.tableHeader}>
+              <Text style={{width: 50}}></Text>
+              <Text style={{width: 130}}></Text>
+              <Text style={{width: 60, textAlign:'left', color: '#3E6890'}}>Price</Text>
+              <Text style={{width: 60, textAlign: 'right', color: '#3E6890'}}>Quantity</Text>
+            </View>
             <View style={styles.list}>
               <FlatList
                 data={cart}
@@ -97,6 +103,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: 300,
     height: 380,
+  },
+  tableHeader: {
+    width: 300,
+    flexDirection: 'row',
+    marginBottom: 5,
   },
   subTotal: {
     marginTop: 10,
