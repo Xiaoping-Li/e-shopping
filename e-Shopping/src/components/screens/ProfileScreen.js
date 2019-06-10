@@ -44,7 +44,10 @@ class ProfileScreen extends Component {
                             onPress={this.toggleModalVisible} 
                         />
 
-                        <MyModal visible={this.state.isVisible}>
+                        <MyModal 
+                            visible={this.state.isVisible}
+                            modalColor="rgba(252,238,202,0.9)"
+                        >
                             <View style={styles.modalChildren}>
                                 <EditProfile toggleVisible={this.toggleModalVisible}/>
                             </View>
