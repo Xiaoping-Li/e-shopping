@@ -72,6 +72,7 @@ class Header extends Component {
 
                     <TextInput
                         placeholder="Search"
+                        placeholderTextColor="#999999"
                         value={this.state.species}
                         onChangeText={species => this.setState({species})}
                         style={styles.input}
