@@ -18,9 +18,10 @@ class CartScreen extends Component {
         {cart.length ?
           <View>
             <View style={styles.tableHeader}>
+              <Text style={{width: 20}}></Text>
               <Text style={{width: 50}}></Text>
-              <Text style={{width: 130}}></Text>
-              <Text style={{width: 60, textAlign:'left', color: '#3E6890'}}>Price</Text>
+              <Text style={{width: 140}}></Text>
+              <Text style={{width: 50, textAlign:'left', color: '#3E6890'}}>Price</Text>
               <Text style={{width: 60, textAlign: 'right', color: '#3E6890'}}>Quantity</Text>
             </View>
             <View style={styles.list}>
@@ -73,12 +74,12 @@ const styles = StyleSheet.create({
   // Empty shopping cart
   empty: {
     fontSize: 20,
-    width: 300,
+    width: 320,
     color: '#0E4375',
     textAlign: 'left', 
   },
   header: {
-    width: 300,
+    width: 320,
     fontSize: 30,
     color: '#0E4375',
     textAlign: 'left',
@@ -101,30 +102,30 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    width: 300,
+    width: 320,
     height: 380,
   },
   tableHeader: {
-    width: 300,
+    width: 320,
     flexDirection: 'row',
     marginBottom: 5,
   },
   subTotal: {
     marginTop: 10,
-    width: 300,
+    width: 320,
     textAlign: 'right',
     fontSize: 20,
     color: '#0E4375',
   },
   btnContainer: {
-    width: 300,
+    width: 320,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection:'row',
     marginTop: 30,
   },
   btn: {
-    width: 140,
+    width: 150,
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
