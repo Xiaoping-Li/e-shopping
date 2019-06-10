@@ -9,6 +9,9 @@ import BirdScreen from './BirdScreen';
 import ReptileScreen from './ReptileScreen';
 import ProfileScreen from './ProfileScreen';
 import CartScreen from './CartScreen';
+import ShippingScreen from './ShippingScreen';
+import AddTaxScreen from './AddTaxScreen';
+import PaymentScreen from './PaymentScreen';
 
 export {
     HomeScreen,
@@ -22,4 +25,7 @@ export {
     ReptileScreen,
     ProfileScreen,
     CartScreen,
+    ShippingScreen,
+    AddTaxScreen,
+    PaymentScreen,
 }
