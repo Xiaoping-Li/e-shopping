@@ -6,13 +6,22 @@ import Icon from '@expo/vector-icons/AntDesign';
 
 class PetsCarousel extends React.Component {
   _renderItem = ({item, index}) => {
+    let stockInfo;
+    if (item.count > 10) {
+      stockInfo = <Text style={[styles.text,{color: 'green'}]}>In Stock</Text>
+    } else if (item.count > 0) {
+      stockInfo = <Text style={[styles.text,{color: 'red'}]}>Only {item.count} Left In Stock</Text>
+    } else {
+      stockInfo = <Text style={[styles.text,{color: '#000'}]}>Out Of Stock</Text>
+    }
+
     return (
         <View style={styles.item}>
             <Image source={item.img} style={styles.img}/>
             <Text style={styles.text}>Price: ${item.price}</Text>
             <Text style={[styles.text, {fontFamily: 'Chalkboard SE',fontWeight: "600",}]}>{item.name}</Text>
             <Text style={[styles.text, {textAlign: 'left'}]}>{item.desc}</Text>
-            <Text style={[styles.text, item.count > 0 ? {color: 'green'} : {color: 'red'}]}>{item.count > 0 ? 'In Stock' : 'Out of Stock'}</Text>
+            {stockInfo}
             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
                 <TouchableOpacity onPress={() => {}}>
                     <Icon

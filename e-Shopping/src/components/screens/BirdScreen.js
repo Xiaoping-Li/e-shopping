@@ -38,7 +38,7 @@ const pets = [
     name: 'Cockatiel Parrot',
     img: require('../../../assets/photo/b-cockatiel-parrot.png'),
     desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 10,
+    count: 5,
     price: 20,
   },
   {
@@ -46,7 +46,7 @@ const pets = [
     name: 'Corella',
     img: require('../../../assets/photo/b-corella.png'),
     desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 10,
+    count: 20,
     price: 20,
   },
   {
@@ -54,7 +54,7 @@ const pets = [
     name: 'Hummingbird',
     img: require('../../../assets/photo/b-hummingbird.png'),
     desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 10,
+    count: 0,
     price: 20,
   },
   {
