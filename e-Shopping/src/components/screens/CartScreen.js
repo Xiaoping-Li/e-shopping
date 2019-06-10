@@ -11,6 +11,8 @@ import { CartItem } from '../presentations';
 class CartScreen extends Component {
   navigateToHome = () => this.props.navigation.navigate('Home')
 
+  navigateToShipping = () => this.props.navigation.navigate('Shipping')
+
   render() {
     return (
       <View style={styles.container}>
@@ -41,7 +43,7 @@ class CartScreen extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => {}}
+                onPress={this.navigateToShipping}
                 style={styles.btn}
               >
                 <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Checkout</Text>
