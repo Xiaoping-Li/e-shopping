@@ -9,6 +9,7 @@ const PetSchema = new Schema({
     category: {
         type: String,
         enum: ['Aquarium', 'Bird', 'Fluffy', 'Reptile'],
+        required: true,
     },
     img: {
         type: String,
