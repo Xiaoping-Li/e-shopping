@@ -14,6 +14,10 @@ const OrderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'cart',
     },
+    token: {
+        type: String,
+        required: true,
+    },
     address: {
         recipient: {
             type: String,
