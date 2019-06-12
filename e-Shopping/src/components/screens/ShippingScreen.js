@@ -14,14 +14,14 @@ class ShippingScreen extends Component {
                 <View style={styles.btnContainer}>
                     <TouchableOpacity
                         onPress={this.navigateToCart}
-                        style={styles.btn}
+                        style={[styles.btn, styles.shadow, {marginRight: 10}]}
                     >
                         <Text style={styles.btnText}>Back</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={this.navigateToTax}
-                        style={styles.btn}
+                        style={[styles.btn, styles.shadow]}
                     >
                         <Text style={styles.btnText}>Continue</Text>
                     </TouchableOpacity>
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'center', 
         flexDirection: 'row',
+        marginTop: 100,
     },
     btnText: {
         color: '#0E4375',
@@ -56,8 +57,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F5C851',
-        borderRadius: 10,
-        marginLeft: 20,
+        borderRadius: 8,
+    },
+    shadow: {
         shadowColor: '#312810',
         shadowOffset: {width: 1, height: 1},
         shadowOpacity: 1,

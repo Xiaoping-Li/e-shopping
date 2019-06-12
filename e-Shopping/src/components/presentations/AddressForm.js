@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { 
     StyleSheet, 
-    FlatList, 
     View, 
     TouchableOpacity, 
     Text, 
-    Image, 
     TextInput,
     Dimensions 
 } from 'react-native';
@@ -145,5 +143,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
-    }
+    },
 });
