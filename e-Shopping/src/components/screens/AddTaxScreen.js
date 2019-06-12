@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 class AddTaxScreen extends Component {
+    constructor() {
+        super();
+        this.state = {
+            total: 20,
+        };
+    }
     navigateToShipping = () => this.props.navigation.navigate('Shipping')
 
     navigateToPayment = () => this.props.navigation.navigate('Payment')
@@ -22,7 +28,7 @@ class AddTaxScreen extends Component {
                         onPress={this.navigateToPayment}
                         style={styles.btn}
                     >
-                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Continue</Text>
+                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Pay ${this.state.total}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

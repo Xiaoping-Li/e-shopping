@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
+
 class PaymentScreen extends Component {
 
     navigateToTax = () => this.props.navigation.navigate('Tax')
