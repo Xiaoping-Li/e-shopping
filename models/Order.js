@@ -14,10 +14,6 @@ const OrderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'cart',
     },
-    address: {
-        type: String,
-        required: true,
-    },
     createAt: {
         type: Date,
         default: Date.now,

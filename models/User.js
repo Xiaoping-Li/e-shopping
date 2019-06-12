@@ -33,6 +33,17 @@ const UserSchema = new Schema({
             ref: 'cart'
         }
     ],
+    address: {
+        name: String,
+        street: String,
+        city: String,
+        state: String,
+        zip: String,
+        country: {
+            type: String,
+            default: 'US',
+        },
+    },
     creatAt: {
         type: Date,
         default: Date.now,
