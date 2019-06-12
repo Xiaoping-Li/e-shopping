@@ -34,15 +34,12 @@ const UserSchema = new Schema({
         }
     ],
     address: {
-        name: String,
+        recipient: String,
         street: String,
         city: String,
         state: String,
         zip: String,
-        country: {
-            type: String,
-            default: 'US',
-        },
+        country: String,
     },
     creatAt: {
         type: Date,

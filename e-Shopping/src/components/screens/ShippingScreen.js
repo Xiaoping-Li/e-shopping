@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { AddressForm } from '../presentations';
 
 class ShippingScreen extends Component {
     navigateToCart = () => this.props.navigation.navigate('Cart')
@@ -9,20 +10,20 @@ class ShippingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Shipping Page</Text>
-                <View style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'row',}}>
+                <AddressForm />
+                <View style={styles.btnContainer}>
                     <TouchableOpacity
                         onPress={this.navigateToCart}
                         style={styles.btn}
                     >
-                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Back</Text>
+                        <Text style={styles.btnText}>Back</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={this.navigateToTax}
                         style={styles.btn}
                     >
-                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Continue</Text>
+                        <Text style={styles.btnText}>Continue</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -38,6 +39,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    btnContainer: {
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        flexDirection: 'row',
+    },
+    btnText: {
+        color: '#0E4375',
+        fontWeight: '600', 
+        fontSize: 20
     },
     btn: {
         width: 150,

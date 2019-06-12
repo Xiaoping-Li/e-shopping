@@ -35,7 +35,7 @@ class Header extends Component {
     
         return (
             <LinearGradient 
-                colors={['#3E6890', '#0E4375', '#0B355D']} 
+                colors={['#6E8EAC', '#0E4375', '#0B355D']} 
                 style={styles.container}
             >
                 <View style={styles.header}>
