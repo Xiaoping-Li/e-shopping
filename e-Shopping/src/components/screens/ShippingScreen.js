@@ -14,7 +14,7 @@ class ShippingScreen extends Component {
                 <View style={styles.btnContainer}>
                     <TouchableOpacity
                         onPress={this.navigateToCart}
-                        style={[styles.btn, styles.shadow, {marginRight: 10}]}
+                        style={[styles.btn, styles.shadow]}
                     >
                         <Text style={styles.btnText}>Back</Text>
                     </TouchableOpacity>
