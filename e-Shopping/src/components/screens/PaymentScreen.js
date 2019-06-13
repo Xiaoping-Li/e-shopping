@@ -121,7 +121,7 @@ class PaymentScreen extends Component {
                         onPress={this.navigateToHome}
                         style={[styles.btn, styles.shadow]}
                     >
-                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Continue</Text>
+                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Shopping</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: '#90c2f2',
+        borderColor: '#1461aa',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     textInput: {
         fontSize: 20, 
         borderStyle: 'solid', 
-        borderColor: '#90c2f2', 
+        borderColor: '#1461aa', 
         borderWidth: 1, 
         marginVertical: 10, 
         padding: 5, 

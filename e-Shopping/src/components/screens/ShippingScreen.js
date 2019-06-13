@@ -41,10 +41,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     btnContainer: {
+        width: 320,
         alignItems: 'center', 
-        justifyContent: 'center', 
+        justifyContent: 'space-between', 
         flexDirection: 'row',
-        marginTop: 100,
+        marginTop: 50,
     },
     btnText: {
         color: '#0E4375',

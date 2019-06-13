@@ -5,7 +5,6 @@ import {
     TouchableOpacity, 
     Text, 
     TextInput,
-    Dimensions 
 } from 'react-native';
 import { LinearGradient } from 'expo';
 
@@ -30,13 +29,12 @@ class AddressForm extends Component {
                 >
                     <LinearGradient 
                         colors={['#6E8EAC', '#0E4375', '#0B355D']}
-                        style={[styles.btnContainer, {marginBottom: 15}]}    
+                        style={[styles.btnContainer, {marginBottom: 40}]}    
                     >
                         <Text style={{fontSize: 20, color: '#fff'}}>Use Default Address</Text>
                     </LinearGradient>
                 </TouchableOpacity>
                 
-
                 <TextInput
                     value={this.state.recipient}
                     onChangeText={recipient => this.setState({recipient})}
@@ -91,7 +89,7 @@ class AddressForm extends Component {
                 >
                     <LinearGradient 
                         colors={['#6E8EAC', '#0E4375', '#0B355D']}
-                        style={[styles.btnContainer, {marginTop: 20}]}    
+                        style={[styles.btnContainer, {marginTop: 40}]}    
                     >
                         <Text style={{fontSize: 20, color: '#fff'}}>Set As Default Address</Text>
                     </LinearGradient>
@@ -105,19 +103,23 @@ export default AddressForm;
 
 const styles = StyleSheet.create({
     container: {
+        width: 350,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    header: {
-        width: Dimensions.get('window').width - 10,
-        fontSize: 30,
-        color: '#0E4375',
-        textAlign: 'left',
-        marginBottom: 10,
+        justifyContent: 'center',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#1461aa',
+        borderRadius: 10,
+        paddingTop: 30,
+        paddingBottom: 30,
+        shadowColor: '#0a2f52',
+        shadowOffset: {width: 1, height: 1},
+        shadowOpacity: 1,
+        shadowRadius: 0.5,
     },
     outInput: {
-        width: Dimensions.get('window').width - 10,
+        width: 300,
         borderStyle: 'solid',
         borderColor:'#6E8EAC',
         borderBottomWidth: 1,
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     innerInput: {
-        width: Dimensions.get('window').width / 2 - 7.5,
+        width: 150,
         borderStyle: 'solid',
         borderColor:'#6E8EAC',
         borderBottomWidth: 1,
