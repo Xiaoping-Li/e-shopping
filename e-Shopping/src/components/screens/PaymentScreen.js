@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
+import { LinearGradient } from 'expo';
 
 const stripe = require('stripe-client')('pk_test_Aq8bxsorwswJFtcXo5SFk6O900za5qLhQu');
 const information = {
@@ -47,7 +48,7 @@ class PaymentScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.form}>
+                <View style={[styles.form, styles.shadow, {shadowRadius: 0.5, shadowColor: '#0a2f52'}]}>
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Credit Card</Text>
                     </View>
@@ -95,27 +96,30 @@ class PaymentScreen extends Component {
                             containerStyle={{width: 90}}
                         />
                     </View>
+
+                    <TouchableOpacity   
+                        onPress={() => {}}
+                    >
+                        <LinearGradient 
+                            colors={['#6E8EAC', '#0E4375', '#0B355D']}
+                            style={[styles.btnContainer, {marginBottom: 20}]}    
+                        >
+                            <Text style={{fontSize: 20, color: '#fff'}}>Pay</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
-                
 
-                <TouchableOpacity
-                    onPress={this.handlePay}
-                    style={styles.btn}
-                >
-                    <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Pay</Text>
-                </TouchableOpacity>
-
-                <View style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'row',}}>
+                <View style={{width: 320, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row',}}>
                     <TouchableOpacity
                         onPress={this.navigateToTax}
-                        style={styles.btn}
+                        style={[styles.btn, styles.shadow]}
                     >
                         <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Back</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={this.navigateToHome}
-                        style={styles.btn}
+                        style={[styles.btn, styles.shadow]}
                     >
                         <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Continue</Text>
                     </TouchableOpacity>
@@ -136,16 +140,18 @@ const styles = StyleSheet.create({
     },
     form: {
         width: 350,
+        backgroundColor: '#fff',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: '#90c2f2',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: 50,
     },
     headerContainer: {
         width: 300, 
-        borderBottomColor: '#000', 
+        borderBottomColor: '#1461aa', 
         borderBottomWidth: 1, 
         marginVertical: 20, 
         paddingBottom: 20
@@ -153,13 +159,13 @@ const styles = StyleSheet.create({
     header: {
         width: 300,
         fontSize: 30,
-        color: '#000',
+        color: '#0e4375',
         textAlign: 'center',
     },
     textInput: {
         fontSize: 20, 
         borderStyle: 'solid', 
-        borderColor: 'gray', 
+        borderColor: '#90c2f2', 
         borderWidth: 1, 
         marginVertical: 10, 
         padding: 5, 
@@ -171,6 +177,13 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'space-between',
     },
+    btnContainer: {
+        width: 300,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 8,
+    },
     btn: {
         width: 150,
         height: 45,
@@ -178,12 +191,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#F5C851',
         borderRadius: 10,
-        marginLeft: 20,
+    },
+    shadow: {
         shadowColor: '#312810',
         shadowOffset: {width: 1, height: 1},
         shadowOpacity: 1,
         shadowRadius: 3,
-    }
+    },
 });
 
 const monthData = [
