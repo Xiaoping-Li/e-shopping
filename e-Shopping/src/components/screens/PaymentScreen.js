@@ -47,44 +47,52 @@ class PaymentScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View>
-                   <Text>Credit Card</Text> 
-
-                   <TextInput
+                <View style={styles.form}>
+                    <View style={styles.headerContainer}>
+                        <Text style={styles.header}>Credit Card</Text>
+                    </View>
+                    
+                    <TextInput
                         value={this.state.name}
                         onChangeText={name => this.setState({name})}
-                        // style={styles.outInput}
+                        style={[{width: 300}, styles.textInput]}
                         placeholder="Cardholder's Name"
                         placeholderTextColor="#6E8EAC"
                     />
 
-                    <View>
+                    <View style={styles.rowContainer}>
                         <TextInput
                             value={this.state.number}
                             onChangeText={number => this.setState({number})}
-                            // style={styles.outInput}
-                            placeholder="Card Number (No dashes or spaces)"
+                            style={[{width: 200}, styles.textInput]}
+                            placeholder="Card Number"
                             placeholderTextColor="#6E8EAC"
                         />
 
                         <TextInput
                             value={this.state.cvc}
                             onChangeText={cvc => this.setState({cvc})}
-                            // style={styles.outInput}
+                            style={[{width: 90}, styles.textInput]}
                             placeholder="CVV"
                             placeholderTextColor="#6E8EAC"
                         />    
                     </View>
 
-                    <View>
+                    <View style={[{marginBottom: 20,}, styles.rowContainer]}>
                         <Dropdown
-                            lable="Month"
+                            label="Month"
                             data={monthData}
+                            value={this.state.exp_month}
+                            onChangeText={exp_month => this.setState({exp_month})}
+                            containerStyle={{width: 200}}
                         />
 
                         <Dropdown
-                            lable="Year"
+                            label="Year"
                             data={yearData}
+                            value={this.state.exp_year}
+                            onChangeText={exp_year => this.setState({exp_year})}
+                            containerStyle={{width: 90}}
                         />
                     </View>
                 </View>
@@ -125,6 +133,43 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    form: {
+        width: 350,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    headerContainer: {
+        width: 300, 
+        borderBottomColor: '#000', 
+        borderBottomWidth: 1, 
+        marginVertical: 20, 
+        paddingBottom: 20
+    },
+    header: {
+        width: 300,
+        fontSize: 30,
+        color: '#000',
+        textAlign: 'center',
+    },
+    textInput: {
+        fontSize: 20, 
+        borderStyle: 'solid', 
+        borderColor: 'gray', 
+        borderWidth: 1, 
+        marginVertical: 10, 
+        padding: 5, 
+        borderRadius: 5
+    },
+    rowContainer: {
+        width: 300, 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
     },
     btn: {
         width: 150,
