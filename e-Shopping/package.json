@@ -11,8 +11,10 @@
     "native-base": "^2.12.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-material-dropdown": "^0.11.1",
     "react-native-snap-carousel": "^3.8.0",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "stripe-client": "^1.1.5"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
