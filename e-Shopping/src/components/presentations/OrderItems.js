@@ -6,27 +6,36 @@ class OrderItems extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-            <FlatList
-                data={this.props.pets}
-                keyExtractor={(item, index) => 'key' + index}
-                renderItem={({item}) => {
-                    return (
+        <FlatList
+            data={this.props.pets}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({item}) => {
+                return (
+                    <View style={styles.rowContainer}>
                         <View>
-                            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Image source={item.img} style={{width: 30, height: 30, borderRadius: 5, marginRight: 30}}/>
-                                <Text>{item.name}</Text>
+                            <Image source={item.img} style={styles.img}/>   
+                        </View>
+
+                        <View>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text style={styles.left}>Name:</Text>
+                                <Text style={[styles.right, {color: '#0E4375'}]}>{item.name}</Text>
                             </View>
 
-                            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={{marginRight: 30}}>{item.price}</Text>
-                                <Text>{item.count}</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text style={styles.left}>Price:</Text>
+                                <Text style={styles.right}>${item.price / 100}</Text>
                             </View>
+
+                            <View style={{flexDirection: 'row'}}>
+                                <Text style={styles.left}>Count:</Text>
+                                <Text style={styles.right}>{item.count}</Text>
+                            </View>    
                         </View>
-                    );
-                }} 
-            />
-        </View>
+                    </View>
+                );
+            }} 
+        />
       </View>
     );
   }
@@ -39,6 +48,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginBottom: 10,
+  },
+  img: {
+    width: 50, 
+    height: 50, 
+    borderRadius: 5, 
+    marginRight: 30,
+  },
+  left: {
+    fontWeight: '600',
+    color: '#0E4375',
+    marginRight: 20,
+    textAlign: 'left',
+    width: 60,
+  },
+  right: {
+    fontWeight: '600',
+    color: 'red',
+    textAlign: 'right',
   },
 });

@@ -79,10 +79,11 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     tracking: {
+        width: 250,
         borderBottomWidth: 1.5,
         borderBottomColor: '#51A984',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingBottom: 10,
         marginBottom: 10,
@@ -97,7 +98,7 @@ const data = [
         cartID: [
             {
                 name: 'Panda',
-                img: require('../../../assets/photo/4panda.jpeg'),
+                img: require('../../../assets/photo/f-panda.png'),
                 count: 2,
                 price: 2000
             },
