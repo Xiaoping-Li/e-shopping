@@ -1,55 +1,92 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text, Image, FlatList, } from 'react-native';
+import { View, StyleSheet, Text, FlatList, Dimensions, } from 'react-native';
 import DropDownItem from 'react-native-drop-down-item';
 import UP_IMG from '../../../assets/photo/ic_arr_up.png';
 import DOWN_IMG from '../../../assets/photo/ic_arr_down.png'; 
 
+import { LinearGradient } from 'expo';
 import { OrderItems } from '../presentations';
 
 class OrderScreen extends PureComponent {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Orders' List</Text>
-
-        <View>
-            <FlatList
-                data={data}
-                keyExtractor={item => item._id}
-                renderItem={({item}) => 
-                    <DropDownItem
-                        key={item._id}
-                        contentVisible={false}
-                        invisibleImage={DOWN_IMG}
-                        visibleImage={UP_IMG}
-                        header={
-                            <View>
-                                <Text>{item.createAt}</Text>
-                            </View>
-                        }
-                    >
-                        <View>
-                           <Text>{item.status}</Text>
-                           <OrderItems pets={item.cartID} /> 
-                        </View>
-                    </DropDownItem>
-                } 
-            />
-        </View>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.container}>
+                <LinearGradient 
+                    // colors={['#F8D885', '#F5C851']}
+                    colors={['#8CD0B3','#5BBC93']} 
+                    style={styles.header}
+                >
+                    <Text style={styles.headerText}>Orders List</Text> 
+                </LinearGradient>
+        
+                <View>
+                    <FlatList
+                        data={data}
+                        keyExtractor={item => item._id}
+                        renderItem={({item}) => 
+                            <DropDownItem
+                                key={item._id}
+                                contentVisible={false}
+                                invisibleImage={DOWN_IMG}
+                                visibleImage={UP_IMG}
+                                header={
+                                    <View>
+                                        <Text style={styles.orderHeader}>{item.createAt}</Text>
+                                    </View>
+                                }
+                            >
+                                <View style={{flex: 1}}>
+                                    <View style={styles.tracking}>
+                                        <Text style={{fontWeight: '600', color: '#0E4375', marginRight: 30}}>Order Tracking:</Text>
+                                        <Text style={[item.status === "Delivered" ? {color: '#0E4375'} : {color: 'green'},{fontWeight: '600'}]}>{item.status}</Text>
+                                    </View>
+                                    <OrderItems pets={item.cartID} /> 
+                                </View>
+                            </DropDownItem>
+                        } 
+                    />
+                </View>
+            </View>
+        );
+    }
 }
 
 export default OrderScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    header: {
+        width: Dimensions.get('window').width, // get the width of the window
+        paddingVertical: 20,
+        marginBottom: 30,
+    },
+    headerText: {
+        fontSize: 30,
+        color: '#fff',
+        textAlign: 'center',
+    },
+    orderHeader: {
+        width: Dimensions.get('window').width,
+        textAlign: 'left',
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#0E4375',
+        padding: 10,
+    },
+    tracking: {
+        borderBottomWidth: 1.5,
+        borderBottomColor: '#51A984',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: 10,
+        marginBottom: 10,
+    },
 });
 
 const data = [

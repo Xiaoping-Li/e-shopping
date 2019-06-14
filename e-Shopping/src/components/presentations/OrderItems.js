@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text, Image, FlatList, } from 'react-native';
+import { View, StyleSheet, Text, Image, FlatList, Dimensions} from 'react-native';
 
 
 class OrderItems extends PureComponent {
