@@ -4,6 +4,8 @@ import DropDownItem from 'react-native-drop-down-item';
 import UP_IMG from '../../../assets/photo/ic_arr_up.png';
 import DOWN_IMG from '../../../assets/photo/ic_arr_down.png'; 
 
+import { OrderItems } from '../presentations';
+
 class OrderScreen extends PureComponent {
   render() {
     return (
@@ -26,7 +28,10 @@ class OrderScreen extends PureComponent {
                             </View>
                         }
                     >
-                        <Text>{item.status}</Text>
+                        <View>
+                           <Text>{item.status}</Text>
+                           <OrderItems pets={item.cartID} /> 
+                        </View>
                     </DropDownItem>
                 } 
             />

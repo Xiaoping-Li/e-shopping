@@ -7,6 +7,7 @@ import PetsFlatList from './PetsFlatList';
 import PetsCarousel from './PetsCarousel';
 import CartItem from './CartItem';
 import AddressForm from './AddressForm';
+import OrderItems from './OrderItems';
 
 
 export {
@@ -19,5 +20,5 @@ export {
     PetsCarousel,
     CartItem,
     AddressForm,
-
+    OrderItems,
 }
