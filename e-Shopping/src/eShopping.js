@@ -21,6 +21,7 @@ import {
   ShippingScreen,
   AddTaxScreen,
   PaymentScreen,
+  OrderScreen,
 } from './components/screens';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -32,6 +33,19 @@ export default class EShopping extends Component {
 }
 
 // React Navigation Structure
+const OrderStackNavigator = createStackNavigator(
+  {
+    Orders: { 
+      screen: OrderScreen,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null,
+        }  
+      }   
+    }
+  },
+);
+
 const CartStackNavigator = createStackNavigator(
   {
     Cart: { screen: CartScreen },
@@ -127,6 +141,8 @@ const HomeStackNavigator = createStackNavigator(
 
     Cart: { screen: CartStackNavigator },
 
+    Orders: { screen: OrderStackNavigator},
+
     Profile: { screen: ProfileStackNavigator },
   },
   {
@@ -158,17 +174,19 @@ const AppDrawerNavigator = createDrawerNavigator(
   {
     Home: { screen: HomeStackNavigator },
 
-    Fluffy: { screen: FluffyStackNavigator },
-
     Aquarium: { screen: AquariumStackNavigator },
 
     Bird: { screen: BirdStackNavigator },
 
-    Fluffy: { screen: ReptileStackNavigator },
+    Fluffy: { screen: FluffyStackNavigator },
 
-    Profile: { screen: ProfileStackNavigator },
+    Reptile: { screen: ReptileStackNavigator },
 
     Cart: { screen: CartStackNavigator },
+
+    Orders: { screen: OrderStackNavigator},
+
+    Profile: { screen: ProfileStackNavigator },
   }
 );
   

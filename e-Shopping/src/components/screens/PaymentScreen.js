@@ -38,7 +38,7 @@ class PaymentScreen extends Component {
     handlePay = async() => {
         const card = await stripe.createToken(information);
         const token = card.id;
-        console.log(card);
+        
     }
 
     navigateToTax = () => this.props.navigation.navigate('Tax')

@@ -12,6 +12,7 @@ import CartScreen from './CartScreen';
 import ShippingScreen from './ShippingScreen';
 import AddTaxScreen from './AddTaxScreen';
 import PaymentScreen from './PaymentScreen';
+import OrderScreen from './OrderScreen';
 
 export {
     HomeScreen,
@@ -28,4 +29,5 @@ export {
     ShippingScreen,
     AddTaxScreen,
     PaymentScreen,
+    OrderScreen,
 }
