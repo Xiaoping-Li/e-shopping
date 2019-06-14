@@ -17,6 +17,15 @@ server.use(cors({
 // Charge customer with token
 server.post('/payment', (req, res) => {
     return stripe
+        .charges
+        .create({
+            amount: req.body.amount,
+            currency: 'usd',
+            source: req.body.tokenId,
+            description: 'Test payment',
+        })
+        .then(result => res.status(200).json(result))
+        .catch(error => console.log(error));
 })
 
 server.listen(PORT, () => console.log(`server listen on ${PORT}`));
