@@ -16,13 +16,11 @@ server.use(cors({
 
 // Charge customer with token
 server.post('/payment', (req, res) => {
-    return stripe
-        .charges
-        .create({
+        return stripe.charges.create({
             amount: req.body.amount,
-            currency: 'usd',
-            source: req.body.tokenId,
-            description: 'Test payment',
+            currency: req.body.currency,
+            source: req.body.source,
+            description: req.body.description,
         })
         .then(result => res.status(200).json(result))
         .catch(error => console.log(error));

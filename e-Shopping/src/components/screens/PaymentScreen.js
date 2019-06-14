@@ -38,7 +38,7 @@ class PaymentScreen extends Component {
     handlePay = async() => {
         const card = await stripe.createToken(information);
         const token = card.id;
-        console.log(token);
+        console.log(card);
     }
 
     navigateToTax = () => this.props.navigation.navigate('Tax')
@@ -98,7 +98,7 @@ class PaymentScreen extends Component {
                     </View>
 
                     <TouchableOpacity   
-                        onPress={() => {}}
+                        onPress={this.handlePay}
                     >
                         <LinearGradient 
                             colors={['#6E8EAC', '#0E4375', '#0B355D']}
