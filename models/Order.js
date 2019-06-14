@@ -8,7 +8,7 @@ const OrderSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Pending', 'Shipping', 'Paying', 'Cancelled', 'Success'],
+        enum: ['Packaging', 'Delivering', 'Delivered'],
     },
     cartID: {
         type: Schema.Types.ObjectId,
@@ -16,6 +16,10 @@ const OrderSchema = new Schema({
     },
     token: {
         type: String,
+        required: true,
+    },
+    amount: {
+        type: Number,
         required: true,
     },
     address: {
