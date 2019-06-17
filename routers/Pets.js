@@ -18,6 +18,15 @@ PetsRouter.get('', (req, res) => {
         .catch(err => console.log(err));
 });
 
+PetsRouter.put('', (req, res) => {
+    const { id } = req.query;
+    const { count } = req.query;
+
+    Pets
+        .updateOne({_id: id}, { count: Number(count) })
+        .then(result => res.status(201).json(result))
+        .catch(err => console.log(err));
+});
 
 module.exports = PetsRouter;
 
