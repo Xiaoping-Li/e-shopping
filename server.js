@@ -70,6 +70,14 @@ server.post('/signin', (req, res) => {
         .catch(err => res.json({msg: "Failed to find the user"}));
 });
 
+// Sign Out User
+server.post('/signout', (req, res) => {
+    delete req.session.email;
+    delete req.user;
+    console.log(req);
+    res.json({success: true, msg: "User Sign Out", session: req.session});
+});
+
 // Using Routers
 server.use('/pets', PetsRouter);
 server.use('/users', UsersRouter);
