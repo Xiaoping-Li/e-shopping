@@ -17,7 +17,9 @@ class PetsCarousel extends React.Component {
 
     return (
         <View style={styles.item}>
-            <Image source={{uri: item.img}} style={styles.img}/>
+            <View style={styles.shadow}>
+              <Image source={{uri: item.img}} style={styles.img}/>
+            </View>
             <Text style={styles.text}>Price: ${item.price}</Text>
             <Text style={[styles.text, {fontFamily: 'Chalkboard SE',fontWeight: "600",}]}>{item.name}</Text>
             <View style={{height: 100, width: 280}}>
@@ -103,10 +105,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   shadow: {
-    shadowColor: '#2F1A0C',
+    shadowColor: '#000',
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 1,
-    shadowRadius: 3,
+    shadowRadius: 2,
   },
   text: {
     color: '#0E4375',
