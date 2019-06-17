@@ -9,6 +9,7 @@ import {
     AsyncStorage,
  } from 'react-native';
  import { Font } from 'expo';
+ import axios from 'axios';
 
 
 class SignUpScreen extends Component {
@@ -32,9 +33,31 @@ class SignUpScreen extends Component {
       this.setState({ fontLoaded: true });
     }
 
-    signUp = async () => {
-      await AsyncStorage.setItem('userToken', 'xiaoping');
-      this.props.navigation.navigate('App');
+    signUp = () => {
+      if (!this.state.email || !this.state.password || !this.state.rePassword) {
+        alert('All fields are required');
+        return;
+      }
+
+      if (this.state.password !== this.state.rePassword) {
+        alert('Passwords do not match. Please try again');
+      } else {
+        const user = {
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password,
+        };
+
+        axios
+          .post('http://192.168.0.107:5000/signup', user)
+          .then(result => {
+            this.navigateToSignin(); 
+          })
+          .catch(err => {
+            alert('Failed to sign you up! If you already have an account, log in directly!');
+            console.log(err);
+          });
+      }
     }
 
     navigateToSignin = () => {
@@ -86,18 +109,18 @@ class SignUpScreen extends Component {
                 
                 {/* Sign Up Button */}
                 <TouchableOpacity style={styles.btn} onPress={this.signUp} >
-                    <Text accessibilityLabel="Sign up" style={styles.text}>Sign Up</Text>
+                  <Text accessibilityLabel="Sign up" style={styles.text}>Sign Up</Text>
                 </TouchableOpacity>
                 
                 <View style={styles.divider_bar}></View> 
 
                 {/* Log In */}
                 <Text
-                    onPress={this.navigateToSignin}
-                    accessibilityLabel="Link to Sign In page"
-                    style={{color: '#0E4375'}}
+                  onPress={this.navigateToSignin}
+                  accessibilityLabel="Link to Sign In page"
+                  style={{color: '#0E4375'}}
                 >
-                    Already have an account? Log In
+                  Already have an account? Log In
                 </Text>
             </View>
         );
