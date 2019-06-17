@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
-const STRIPE_SECRET_KEY = require('./config/keys_dev').STRIPE_SECRET_KEY;
-const stripe = require('stripe')(STRIPE_SECRET_KEY);
+
+
 const Users = require('./models/User');
 
 const db = require('./config/keys_dev').mongoURI;
@@ -21,6 +21,7 @@ const PetsRouter = require('./routers/pets');
 const UsersRouter = require('./routers/Users');
 const OrdersRouter = require('./routers/Orders');
 const CartsRouter = require('./routers/Carts');
+const PaymentRouter = require('./routers/Payment');
 
 server.use(bodyParser.json());
 server.use(cors({
@@ -83,6 +84,7 @@ server.use('/pets', PetsRouter);
 server.use('/users', UsersRouter);
 server.use('/orders', OrdersRouter);
 server.use('/carts', CartsRouter);
+server.use('/payment', PaymentRouter);
 
 
 // Charge customer with token
