@@ -5,14 +5,17 @@ const OrderSchema = new Schema({
     userID: {
         type: Schema.Types.ObjectId,
         ref: 'user',
+        required: true,
     },
     status: {
         type: String,
         enum: ['Packaging', 'Delivering', 'Delivered'],
+        default: 'Packaging',
     },
     cartID: {
         type: Schema.Types.ObjectId,
         ref: 'cart',
+        required: true,
     },
     token: {
         type: String,
