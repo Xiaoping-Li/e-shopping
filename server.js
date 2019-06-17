@@ -2,8 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
+const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
 const STRIPE_SECRET_KEY = require('./config/keys_dev').STRIPE_SECRET_KEY;
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
+const Users = require('./models/User');
 
 const db = require('./config/keys_dev').mongoURI;
 
@@ -22,6 +27,22 @@ server.use(cors({
     origin: true,
     credentials: true,
 }));
+
+// Sign Up User
+server.post('/signup', (req, res) => {
+    bcrypt.hash(req.body.password, 11, (err, hashPW) => {
+        if (err) {
+            res.status(422).json({"error": err});
+        } else {
+            const user = req.body;
+            user.password = hashPW;
+            Users
+                .create(user)
+                .then(result => res.status(200).json({success: true, result}))
+                .catch(err => console.log(err));
+        }
+    });
+});
 
 // Using Routers
 server.use('/pets', PetsRouter);
