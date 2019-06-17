@@ -13,6 +13,7 @@ const server = express();
 
 // Import Routers
 const PetsRouter = require('./routers/pets');
+const UsersRouter = require('./routers/Users');
 
 server.use(bodyParser.json());
 server.use(cors({
@@ -22,6 +23,7 @@ server.use(cors({
 
 // Using Routers
 server.use('/pets', PetsRouter);
+server.use('/users', UsersRouter);
 
 
 
