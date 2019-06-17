@@ -1,6 +1,6 @@
 const express = require('express');
 const PaymentRouter = express.Router();
-const STRIPE_SECRET_KEY = require('./config/keys_dev').STRIPE_SECRET_KEY;
+const STRIPE_SECRET_KEY = require('../config/keys_dev').STRIPE_SECRET_KEY;
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
 
 PaymentRouter.post('', (req, res) => {

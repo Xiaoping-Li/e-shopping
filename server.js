@@ -6,10 +6,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
-
-
 const Users = require('./models/User');
-
 const db = require('./config/keys_dev').mongoURI;
 
 const PORT = process.env.PORT || 5000;
@@ -33,6 +30,16 @@ server.use(session({
     resave: false,
     saveUninitialized: false,
 }));
+
+// Middleware: Validate user for all the routers, except '/signin' and '/singup'
+server.use((req, res, next) => {
+    if (req.originalUrl === '/signin' || req.originalUrl === '/signup') return next();
+    if (!req.session.email) {
+        res.json({msg: "User is not logged in"});
+        return;
+    } 
+    next();
+});
 
 // Sign Up User
 server.post('/signup', (req, res) => {
@@ -75,7 +82,6 @@ server.post('/signin', (req, res) => {
 server.post('/signout', (req, res) => {
     delete req.session.email;
     delete req.user;
-    console.log(req);
     res.json({success: true, msg: "User Sign Out", session: req.session});
 });
 
@@ -89,14 +95,14 @@ server.use('/payment', PaymentRouter);
 
 // Charge customer with token
 server.post('/payment', (req, res) => {
-        return stripe.charges.create({
-            amount: req.body.amount,
-            currency: req.body.currency,
-            source: req.body.source,
-            description: req.body.description,
-        })
-        .then(result => res.status(200).json(result))
-        .catch(error => console.log(error));
+    return stripe.charges.create({
+        amount: req.body.amount,
+        currency: req.body.currency,
+        source: req.body.source,
+        description: req.body.description,
+    })
+    .then(result => res.status(200).json(result))
+    .catch(error => console.log(error));
 });
 
 
