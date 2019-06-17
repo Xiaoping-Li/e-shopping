@@ -17,7 +17,7 @@ class PetsCarousel extends React.Component {
 
     return (
         <View style={styles.item}>
-            <Image source={item.img} style={styles.img}/>
+            <Image source={{uri: item.img}} style={styles.img}/>
             <Text style={styles.text}>Price: ${item.price}</Text>
             <Text style={[styles.text, {fontFamily: 'Chalkboard SE',fontWeight: "600",}]}>{item.name}</Text>
             <Text style={[styles.text, {textAlign: 'left'}]}>{item.desc}</Text>

@@ -26,7 +26,7 @@ class PetsFlatList extends PureComponent {
                                 style={[styles.card, styles.shadow, {backgroundColor: this.props.modalColor}]}
                                 onPress={() => this.toggleVisible(index)}
                             >
-                              <View style={styles.shadow}><Image source={item.img} style={styles.img}/></View>
+                              <View style={styles.shadow}><Image source={{uri: item.img}} style={styles.img}/></View>
                               <Text style={styles.text}>{item.name}</Text>                              
                             </TouchableOpacity>   
                         );
