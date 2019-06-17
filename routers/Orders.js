@@ -1,6 +1,6 @@
 const express = require('express');
 const OrdersRouter = express.Router();
-const Orders = require('../models/User');
+const Orders = require('../models/Order');
 
 OrdersRouter.post('', (req, res) => {
     const { order } = req.body;

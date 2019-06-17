@@ -14,6 +14,8 @@ const server = express();
 // Import Routers
 const PetsRouter = require('./routers/pets');
 const UsersRouter = require('./routers/Users');
+const OrdersRouter = require('./routers/Orders');
+const CartsRouter = require('./routers/Carts');
 
 server.use(bodyParser.json());
 server.use(cors({
@@ -24,7 +26,8 @@ server.use(cors({
 // Using Routers
 server.use('/pets', PetsRouter);
 server.use('/users', UsersRouter);
-
+server.use('/orders', OrdersRouter);
+server.use('/carts', CartsRouter);
 
 
 // Charge customer with token
