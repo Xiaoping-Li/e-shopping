@@ -20,7 +20,7 @@ class PetsCarousel extends React.Component {
             <View style={styles.shadow}>
               <Image source={{uri: item.img}} style={styles.img}/>
             </View>
-            <Text style={styles.text}>Price: ${item.price}</Text>
+            <Text style={styles.text}>Price: ${(item.price / 100).toFixed(2)}</Text>
             <Text style={[styles.text, {fontFamily: 'Chalkboard SE',fontWeight: "600",}]}>{item.name}</Text>
             <View style={{height: 100, width: 280}}>
               <ScrollView>
