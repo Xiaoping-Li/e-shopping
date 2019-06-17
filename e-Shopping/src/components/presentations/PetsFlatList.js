@@ -5,53 +5,53 @@ import PetsCarousel from './PetsCarousel';
 
 
 class PetsFlatList extends PureComponent {
-    constructor() {
-        super();
-        this.state = {
-            visible: false,
-            activeIdx: 0,
-        };
-    }
+  constructor() {
+      super();
+      this.state = {
+          visible: false,
+          activeIdx: 0,
+      };
+  }
 
-    toggleVisible = (index) => this.setState({ visible: !this.state.visible, activeIdx: index})
+  toggleVisible = (index) => this.setState({ visible: !this.state.visible, activeIdx: index})
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <FlatList
-                    data={this.props.data}
-                    renderItem={({item, index}) => {
-                        return (
-                            <TouchableOpacity
-                                style={[styles.card, styles.shadow, {backgroundColor: this.props.modalColor}]}
-                                onPress={() => this.toggleVisible(index)}
-                            >
-                              <View style={styles.shadow}><Image source={{uri: item.img}} style={styles.img}/></View>
-                              <Text style={styles.text}>{item.name}</Text>                              
-                            </TouchableOpacity>   
-                        );
-                    }}
-                    keyExtractor={(item) => item._id}
-                    horizontal={false}
-                    numColumns={2}
-                /> 
-
-                <MyModal 
-                  visible={this.state.visible}
-                  modalColor={this.props.modalColor}
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+            data={this.props.data}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity
+                    style={[styles.card, styles.shadow, {backgroundColor: this.props.modalColor}]}
+                    onPress={() => this.toggleVisible(index)}
                 >
-                    <View style={{}}> 
-                        <PetsCarousel 
-                            data={this.props.data} 
-                            idx={this.state.activeIdx} 
-                            onToggle={this.toggleVisible}
-                            color={this.props.color}
-                        />
-                    </View>
-                </MyModal>
-            </View>
-        );
-    }
+                  <View style={styles.shadow}><Image source={{uri: item.img}} style={styles.img}/></View>
+                  <Text style={styles.text}>{item.name}</Text>                              
+                </TouchableOpacity>   
+              );
+            }}
+            keyExtractor={(item) => item._id}
+            horizontal={false} 
+            numColumns={2}
+        /> 
+
+        <MyModal 
+          visible={this.state.visible}
+          modalColor={this.props.modalColor}
+        >
+          <View style={{}}> 
+            <PetsCarousel 
+              data={this.props.data} 
+              idx={this.state.activeIdx} 
+              onToggle={this.toggleVisible}
+              color={this.props.color}
+            />
+          </View>
+        </MyModal>
+      </View>
+    );
+  }
 }
 
 
