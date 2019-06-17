@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from '@expo/vector-icons/AntDesign';
 
@@ -20,7 +20,11 @@ class PetsCarousel extends React.Component {
             <Image source={{uri: item.img}} style={styles.img}/>
             <Text style={styles.text}>Price: ${item.price}</Text>
             <Text style={[styles.text, {fontFamily: 'Chalkboard SE',fontWeight: "600",}]}>{item.name}</Text>
-            <Text style={[styles.text, {textAlign: 'left'}]}>{item.desc}</Text>
+            <View style={{height: 100, width: 280}}>
+              <ScrollView>
+                <Text style={{color: '#0E4375'}}>{item.desc}</Text>
+              </ScrollView>
+            </View>
             {stockInfo}
             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
                 <TouchableOpacity onPress={() => {}}>
