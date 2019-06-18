@@ -9,6 +9,10 @@ import {
   TouchableOpacity, 
 } from 'react-native';
 import { Font } from 'expo';
+import axios from 'axios';
+
+import globalStore from '../../../GlobalStore';
+import { action } from 'mobx';
 
 
 class SignInScreen extends Component {
@@ -30,9 +34,44 @@ class SignInScreen extends Component {
     this.setState({ fontLoaded: true });
   }
 
-  signIn = async () => {
-    await AsyncStorage.setItem('userToken', 'xiaoping');
-    this.props.navigation.navigate('App');
+  signIn = (e) => {
+    e.preventDefault();
+
+    if (!this.state.email || !this.state.password) {
+      alert('Email and password are required');
+      return;
+    }
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    axios
+      .post('http://192.168.0.107:5000/signin', user)
+      .then(result => {
+          if (result.data.success) {
+            const user = {};
+            user.username = result.data.user.username;
+            user.email = result.data.user.email;
+            user.thumbnail = result.data.user.thumbnail;
+            user._id = result.data.user._id;
+
+            AsyncStorage
+                .setItem('userToken', user._id)
+                .then(action(res => {
+                    globalStore.updateUser(user);
+                    this.props.navigation.navigate('App');
+                }))
+                .catch(err => alert('Signin Error!'));
+          } else {
+            alert('Error happens when try to sign you in! Please check email and password!');
+          }    
+      })
+      .catch(err => {
+        alert('Failed to sign you in! If you do not have an account, sign up first!');
+        console.log(err);
+      });
   }
     
   render() {

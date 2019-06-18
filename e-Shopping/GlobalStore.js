@@ -6,7 +6,7 @@ class GlobalStore {
         username: '',
         email: '',
         thumbnail: '',
-        userID: '',
+        _id: '',
     };
     updateUser = (updated) => this.user = updated;
 

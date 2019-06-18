@@ -6,7 +6,6 @@ import {
     TextInput,  
     ActivityIndicator,
     TouchableOpacity,
-    AsyncStorage,
  } from 'react-native';
  import { Font } from 'expo';
  import axios from 'axios';
@@ -61,7 +60,7 @@ class SignUpScreen extends Component {
     }
 
     navigateToSignin = () => {
-        this.props.navigation.navigate('SignIn');
+      this.props.navigation.navigate('SignIn');
     }
 
     render() {
