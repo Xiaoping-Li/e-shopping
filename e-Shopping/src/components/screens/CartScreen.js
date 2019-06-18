@@ -24,8 +24,7 @@ class CartScreen extends Component {
             <View style={styles.tableHeader}>
               <Text style={{width: 20}}></Text>
               <Text style={{width: 50}}></Text>
-              <Text style={{width: 140}}></Text>
-              <Text style={{width: 50, textAlign:'left', color: '#3E6890'}}>Price</Text>
+              <Text style={{width: 190}}></Text>
               <Text style={{width: 60, textAlign: 'right', color: '#3E6890'}}>Quantity</Text>
             </View>
             <View style={styles.list}>
@@ -141,38 +140,3 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   }
 });
-
-const cart = [
-  {
-    _id: '5793f6de-8948-11e9-bc42-526af7764f64',
-    name: 'Cockatiel Parrot',
-    img: require('../../../assets/photo/b-cockatiel-parrot.png'),
-    desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 5,
-    price: 20,
-  },
-  {
-    _id: '5793f936-8948-11e9-bc42-526af7764f64',
-    name: 'Hummingbird',
-    img: require('../../../assets/photo/b-hummingbird.png'),
-    desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 0,
-    price: 20,
-  },
-  {
-    _id: '5794005c-8948-11e9-bc42-526af7764f64',
-    name: 'Alpaca',
-    img: require('../../../assets/photo/f-alpaca.png'),
-    desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 10,
-    price: 20,
-  },
-  {
-    _id: '5793fc9c-8948-11e9-bc42-526af7764f66',
-    name: 'Koala',
-    img: require('../../../assets/photo/f-koala.png'),
-    desc: 'Choosing Anime produces unusual hair and eye colours, and choosing Unique produces unusual hair, eye AND skin colours. Choose simple or detailed for basic or more inclusive results respectively.',
-    count: 10,
-    price: 20,
-  },
-];

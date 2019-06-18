@@ -3,6 +3,10 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from 'rea
 import Carousel from 'react-native-snap-carousel';
 import Icon from '@expo/vector-icons/AntDesign';
 
+import {action} from 'mobx';
+import globalStore from '../../../GlobalStore';
+import axios from 'axios';
+
 
 class PetsCarousel extends React.Component {
   _renderItem = ({item, index}) => {
@@ -38,7 +42,7 @@ class PetsCarousel extends React.Component {
                     />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={() => this.addToCart(item)}>
                     <Icon
                         color="#0E4375"
                         name="shoppingcart"
@@ -48,6 +52,18 @@ class PetsCarousel extends React.Component {
             </View>   
         </View>
     );
+  }
+
+  addToCart = (pet) => {
+    axios
+      .put(`http://192.168.0.107:5000/carts/?id=${globalStore.cart._id}&petID=${pet._id}`)
+      .then(action(result => {
+        if (result.data.ok) {
+          globalStore.updatePets(pet);
+          alert("Add to Cart!");
+        }
+      }))
+      .catch(err => console.log("Add Pets To Cart Error: " + err));
   }
 
   render() {

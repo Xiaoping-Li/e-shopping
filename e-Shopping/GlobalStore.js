@@ -32,6 +32,7 @@ class GlobalStore {
         _id: '',
     };
     updateCart = (update) => this.cart = update;
+    updatePets = (pet) => this.cart.pets.push(pet);
 }
 
 decorate(
@@ -58,6 +59,7 @@ decorate(
         // Cart
         cart: observable,
         updateCart: action,
+        updatePets: action,
     }
 );
 

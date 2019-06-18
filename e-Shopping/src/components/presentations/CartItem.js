@@ -30,17 +30,19 @@ class CartItem extends Component {
                 
                 <View style={{width: 50}}>
                     <Image 
-                        source={this.props.pet.img}
+                        source={{uri: this.props.pet.img}}
                         style={styles.img} 
                     />
                 </View>
-                <View style={{width: 140}}>
+
+                <View style={{width: 185}}>
                     <Text style={styles.name}>{this.props.pet.name}</Text>
+                    <Text style={styles.price}>${(this.props.pet.price / 100).toFixed(2)}</Text>
                     <Text style={[styles.stock, this.props.pet.count > 0 ? {color: 'green'} : {color: 'red'}]}>
                         {this.props.pet.count > 0 ? "In Stock" : "Out Of Stock"}
                     </Text>
                 </View>
-                <Text style={styles.price}>${this.props.pet.price}</Text>
+                
                 <TextInput
                     value={this.state.quantity}
                     onChangeText={quantity => this.setState({quantity})}
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         flexDirection: 'row',
         marginTop: 5,
@@ -65,28 +67,27 @@ const styles = StyleSheet.create({
     },
     stock: {
         color: '#0E4375',
-        marginLeft: 5,
+        marginLeft: 5
     },
     name: {
         color: '#0E4375',
-        marginLeft: 5,
         fontWeight: '600',
+        marginLeft: 5
     },
     img: {
         width: 50,
         height: 50,
         borderRadius: 5,
     },
-    price: {
-        width:50, 
+    price: { 
         color: 'red',
-        textAlign: 'left'
+        marginLeft: 5
     },
     input: {
         borderColor: 'gray',
         borderWidth: 1,
         borderStyle: 'solid',
-        width: 50,
+        width: 60,
         textAlign: 'right'
     },
 });
