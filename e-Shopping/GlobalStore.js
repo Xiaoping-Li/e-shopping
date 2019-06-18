@@ -23,6 +23,9 @@ class GlobalStore {
     updateBirdCount = (update, idx) => this.bird[idx].count = update;
     updateFluffyCount = (update, idx) => this.fluffy[idx].count = update;
     updateReptileCount = (update, idx) => this.reptile[idx].count = update; 
+
+    // Carts
+    carts = {};
 }
 
 decorate(

@@ -5,10 +5,12 @@ const CartSchema = new Schema({
     userID: {
         type: Schema.Types.ObjectId,
         ref: 'user',
+        required: true,
     },
     status: {
         type: String,
-        enum: ['Pending', 'Cancelled', 'Success'],
+        enum: ['Pending', 'Success'],
+        default: 'Pending',
     },
     pets: [
         {
