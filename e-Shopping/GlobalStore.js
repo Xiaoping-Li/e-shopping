@@ -25,18 +25,27 @@ class GlobalStore {
     updateReptileCount = (update, idx) => this.reptile[idx].count = update; 
 
     // Carts
-    carts = {};
+    cart = {
+        userID: '',
+        status: '',
+        pets: [],
+        _id: '',
+    };
+    updateCart = (update) => this.cart = update;
 }
 
 decorate(
     GlobalStore,
     {
+        // User
         user: observable,
+        updateUser: action,
+
+        // Pets
         aquarium: observable,
         bird: observable,
         fluffy: observable,
         reptile: observable,
-        updateUser: action,
         initAquarium: action,
         initBird: action,
         initFluffy: action,
@@ -45,6 +54,10 @@ decorate(
         updateBirdCount: action,
         updateFluffyCount: action,
         updateReptileCount: action,
+
+        // Cart
+        cart: observable,
+        updateCart: action,
     }
 );
 

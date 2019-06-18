@@ -2,6 +2,8 @@ const express = require('express');
 const CartsRouter = express.Router();
 const Carts = require('../models/Cart');
 
+// If User has "Pending" cart, return this cart
+// Else create a "Pending" cart, and return the new created cart
 CartsRouter.get('', (req, res) => {
     const { userID } = req.query;
     Carts

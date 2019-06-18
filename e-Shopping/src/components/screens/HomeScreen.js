@@ -14,6 +14,7 @@ class HomeScreen extends React.Component {
     this.getBird();
     this.getFluffy();
     this.getReptile();
+    this.getCart();
   }
 
   getAquarium = () => {
@@ -24,7 +25,7 @@ class HomeScreen extends React.Component {
           globalStore.initAquarium(result.data);
         }
       }))
-      .catch(err => console.log(err));
+      .catch(err => console.log("getAquarium error: " + err));
   }
 
   getBird = () => {
@@ -35,7 +36,7 @@ class HomeScreen extends React.Component {
           globalStore.initBird(result.data);
         }
       }))
-      .catch(err => console.log(err));
+      .catch(err => console.log("getBird error: " + err));
   }
 
   getFluffy =() => {
@@ -46,7 +47,7 @@ class HomeScreen extends React.Component {
           globalStore.initFluffy(result.data);
         }
       }))
-      .catch(err => console.log(err));
+      .catch(err => console.log("getFluffy error: " + err));
   }
 
   getReptile = () => {
@@ -57,7 +58,21 @@ class HomeScreen extends React.Component {
           globalStore.initReptile(result.data);
         }
       }))
-      .catch(err => console.log(err));
+      .catch(err => console.log("getReptile error: " + err));
+  }
+
+  getCart = () => {
+    axios
+      .get(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}`)
+      .then(action(result => {
+        const update = {};
+        update._id = result.data[0]._id;
+        update.userID = globalStore.user._id;
+        update.pets = result.data[0].pets;
+        update.status = result.data[0].status;
+        globalStore.updateCart(update);
+      }))
+      .catch(err => console.log("getCart error: " + err));
   }
 
   render() {

@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { CartItem } from '../presentations';
 
+import globalStore from '../../../GlobalStore';
+
 class CartScreen extends Component {
   navigateToHome = () => this.props.navigation.navigate('Home')
 
@@ -17,7 +19,7 @@ class CartScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Shopping Cart</Text>
-        {cart.length ?
+        {globalStore.cart.pets.length ?
           <View>
             <View style={styles.tableHeader}>
               <Text style={{width: 20}}></Text>
@@ -28,7 +30,7 @@ class CartScreen extends Component {
             </View>
             <View style={styles.list}>
               <FlatList
-                data={cart}
+                data={globalStore.cart.pets}
                 keyExtractor={(item) => item._id} 
                 renderItem={({item}) => <CartItem pet={item} />} 
               />
