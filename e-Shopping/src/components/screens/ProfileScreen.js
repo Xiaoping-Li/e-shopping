@@ -68,7 +68,7 @@ class ProfileScreen extends Component {
                             
                             <View style={styles.infoFrame}>
                                 <Text style={styles.title}>User Name:</Text> 
-                                <Text style={[styles.uinfo, {marginBottom: 20}]}>{globalStore.user.name}</Text>
+                                <Text style={[styles.uinfo, {marginBottom: 20}]}>{globalStore.user.username}</Text>
                                 <Text style={styles.title}>Primary Email:</Text> 
                                 <Text style={styles.uinfo}>{globalStore.user.email}</Text> 
                             </View>    
