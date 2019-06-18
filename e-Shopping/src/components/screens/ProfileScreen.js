@@ -10,6 +10,10 @@ import {
 import Icon from '@expo/vector-icons/FontAwesome';
 import { EditProfile, MyModal } from '../presentations';
 
+import axios from 'axios';
+import globalStore from '../../../GlobalStore';
+import { action } from 'mobx';
+
 
 class ProfileScreen extends Component {
     constructor() {
@@ -19,10 +23,27 @@ class ProfileScreen extends Component {
         };
     }
 
-    signOut = async () => {
-        AsyncStorage.clear();
-        this.props.navigation.navigate('AuthLoading');
+    signOut = () => {
+        axios
+            .post('http://192.168.0.107:5000/signout')
+            .then(result => {
+                console.log(result.data);
+                if (result.data.success) {
+                    AsyncStorage
+                        .clear()
+                        .then(action(result => {
+                            globalStore.updateUser({username: '', email: '', thumbnail: '', _id: ''});
+                            this.props.navigation.navigate('AuthLoading');
+                        }))
+                        .catch(err => console.log(err));
+                }
+            })
+            .catch(err => console.log(err));
+
+            
     }
+
+    navigateOut = () => this.props.navigation.navigate("SignIn");
 
     toggleModalVisible = () => this.setState({ isVisible: !this.state.isVisible })
 
@@ -72,7 +93,7 @@ class ProfileScreen extends Component {
                     </View>
                     :
                     <TouchableOpacity style={[styles.shadow, {flex: 1, alignItems: 'center', justifyContent: 'center', shadowColor: '#681515', shadowRadius: 1}]}>
-                        <Text onPress={this.signOut} style={styles.signOut}>Sign Out</Text>
+                        <Text onPress={this.navigateOut} style={styles.signOut}>Sign Out</Text>
                     </TouchableOpacity>
                 }   
             </View>
