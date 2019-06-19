@@ -16,41 +16,69 @@ CartsRouter.get('', (req, res) => {
         .catch(err => console.log(err));
 });
 
-// CartsRouter.post('', (req, res) => {
-//     const cart = req.body;
-//     Carts
-//         .create(cart)
-//         .then(result => {
-//             res.status(200).json(result);
-//             console.log(result);
-//         })
-//         .catch(err => console.log(err));
-// });
-
 CartsRouter.put('', (req, res) => {
-    const { id } = req.query;
     const { userID } = req.query;
     const { petID } = req.query;
     const { status } = req.query;
-    const amount  = Number(req.query.amount);
-    const { cartItemID } = req.query;
+    const newQuantity  = Number(req.body.new);
+    const oldQuantity = Number(req.body.old);
 
-    if (amount && cartItemID) {
+    if (newQuantity || newQuantity === 0) {
+        // Update cart item quantity with newQuantity
         Carts
             .updateOne(
-                {_id: id, 'pets._id': cartItemID},
-                { $set: { 'pets.$.amount': amount }}
+                { userID, status: "Pending", "pets._id": petID },
+                {$set: {
+                    updatedAt: new Date(),
+                    "pets.$.quantity": newQuantity,
+                    }
+                }
             )
             .then(result => {
-                res.status(201).json(result);
-                console.log(result);
+                // If have enough in stock, update reserved quantity in Pets
+                const delta = newQuantity - oldQuantity;
+                return Pets
+                    .updateOne(
+                        {
+                            _id: petID,
+                            "reserved.userID": userID,
+                            count: { $gte: delta }
+                        },
+                        {
+                            $inc: { count: -delta },
+                            $set: {
+                                "reserved.$.quantity": newQuantity,
+                                updatedAt: new Date()
+                            }
+                        }
+                    );
+            })
+            .then(result => {
+                // If no enough in stock, corresponding "reserved" will not be modified
+                // In this case, rollback the update of cart item with oldQuantity
+                if (result.n === 0) {
+                    return Carts
+                        .updateOne(
+                            { userID, status: "Pending", "pets._id": petID },
+                            {$set: {
+                                updatedAt: new Date(),
+                                "pets.$.quantity": oldQuantity,
+                                }
+                            }
+                        )
+                        .then(result => res.status(201).json({"msg": "Not enough in stock", result}))
+                } else {
+                    return res.status(201).json({success: true, result});
+                }
             })
             .catch(err => console.log(err));
+
     } else if (status) {
         Carts
-            .updateOne({_id: id}, { status })
+            .updateOne({userID, status: "Pending"}, { status })
             .then(result => res.status(201).json(result))
             .catch(err => console.log(err));
+
     } else if (petID) {
         // Push pet to cart, if cart doesn't exist, create one first
         Carts
@@ -58,7 +86,7 @@ CartsRouter.put('', (req, res) => {
                 {userID, status: 'Pending'}, 
                 { 
                     $set: { updatedAt: new Date()},
-                    $push: { pets: { pet: petID }}
+                    $push: { pets: { _id: petID, pet: petID }}
                 },
                 { upsert: true}
             )

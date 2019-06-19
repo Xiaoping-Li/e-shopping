@@ -21,18 +21,6 @@ const UserSchema = new Schema({
         type: String,
         default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6HFhpwNrwiye9Qp_o5StOPngPZTTq-If5Fksap0fCCYUE5kusg',
     },
-    orders: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'order'
-        }
-    ],
-    carts: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'cart'
-        }
-    ],
     address: {
         recipient: String,
         street: String,

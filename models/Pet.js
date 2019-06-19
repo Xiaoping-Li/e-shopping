@@ -39,6 +39,10 @@ const PetSchema = new Schema({
                 default: Date.now,
             },
             quantity: Number,
+            updatedAt: {
+                type: Date,
+                default: Date.now,
+            },
         }
     ],
     createAt: {
