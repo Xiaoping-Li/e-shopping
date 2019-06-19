@@ -32,7 +32,7 @@ class GlobalStore {
         _id: '',
     };
     updateCart = (update) => this.cart = update;
-    updatePets = (pet) => this.cart.pets.push(pet);
+    updatePets = (pet) => this.cart.pets.push({pet: pet, amount: 1});
 }
 
 decorate(

@@ -9,13 +9,15 @@ import {
 } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
 
+import globalStore from '../../../GlobalStore';
+
 class CartItem extends Component {
-    constructor() {
-        super();
-        this.state = {
-            quantity: '1',
-        };
-    }
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         quantity: '1',
+    //     };
+    // }
     render() {
         return (
             <View style={styles.container}>
@@ -30,21 +32,21 @@ class CartItem extends Component {
                 
                 <View style={{width: 50}}>
                     <Image 
-                        source={{uri: this.props.pet.img}}
+                        source={{uri: this.props.pet.pet.img}}
                         style={styles.img} 
                     />
                 </View>
 
                 <View style={{width: 185}}>
-                    <Text style={styles.name}>{this.props.pet.name}</Text>
-                    <Text style={styles.price}>${(this.props.pet.price / 100).toFixed(2)}</Text>
-                    <Text style={[styles.stock, this.props.pet.count > 0 ? {color: 'green'} : {color: 'red'}]}>
+                    <Text style={styles.name}>{this.props.pet.pet.name}</Text>
+                    <Text style={styles.price}>${(this.props.pet.pet.price / 100).toFixed(2)}</Text>
+                    <Text style={[styles.stock, this.props.pet.pet.count > 0 ? {color: 'green'} : {color: 'red'}]}>
                         {this.props.pet.count > 0 ? "In Stock" : "Out Of Stock"}
                     </Text>
                 </View>
                 
                 <TextInput
-                    value={this.state.quantity}
+                    value={this.props.pet.amount}
                     onChangeText={quantity => this.setState({quantity})}
                     style={styles.input} 
                 />

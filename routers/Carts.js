@@ -8,7 +8,7 @@ CartsRouter.get('', (req, res) => {
     const { userID } = req.query;
     Carts
         .find({userID, status: "Pending"})
-        .populate('pets', '_id name img price count')
+        .populate('pets.pet', '_id name img price count')
         .then(cart => {
             if (cart.length) {
                 res.status(200).json(cart);
@@ -35,19 +35,30 @@ CartsRouter.put('', (req, res) => {
     const { id } = req.query;
     const { petID } = req.query;
     const { status } = req.query;
+    const amount  = Number(req.query.amount);
 
-    if (petID) {
+    if (amount) {
         Carts
-            .updateOne({_id: id}, { $push: { pets: petID }})
-            .then(result => res.status(201).json(result))
+            .update(
+                {_id: id, 'pets': { $elemMatch: { _id: petID }}},
+                { $set: { 'pets.$.amount': amount }}
+            )
+            .then(result => {
+                // res.status(201).json(result);
+                console.log(result)
+            })
             .catch(err => console.log(err));
     } else if (status) {
         Carts
             .updateOne({_id: id}, { status })
             .then(result => res.status(201).json(result))
             .catch(err => console.log(err));
-    }
-    
+    } else if (petID) {
+        Carts
+            .updateOne({_id: id}, { $push: { pets: { pet: petID } }})
+            .then(result => res.status(201).json(result))
+            .catch(err => console.log(err));
+    }    
 });
 
 module.exports = CartsRouter;

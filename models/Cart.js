@@ -14,9 +14,15 @@ const CartSchema = new Schema({
     },
     pets: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'pet',
-        }
+            pet: {
+                type: Schema.Types.ObjectId,
+                ref: 'pet',
+            },
+            amount: {
+                type: Number,
+                default: 1,
+            } 
+        }   
     ],
     createAt: {
         type: Date,

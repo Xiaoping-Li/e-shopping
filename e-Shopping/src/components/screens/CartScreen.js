@@ -30,7 +30,7 @@ class CartScreen extends Component {
             <View style={styles.list}>
               <FlatList
                 data={globalStore.cart.pets}
-                keyExtractor={(item) => item._id} 
+                keyExtractor={(item) => item.pet._id} 
                 renderItem={({item}) => <CartItem pet={item} />} 
               />
             </View>
