@@ -18,7 +18,7 @@ const CartSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: 'pet',
             },
-            amount: {
+            quantity: {
                 type: Number,
                 default: 1,
             } 

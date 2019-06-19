@@ -1,6 +1,7 @@
 const express = require('express');
 const CartsRouter = express.Router();
 const Carts = require('../models/Cart');
+const Pets = require('../models/Pet');
 
 // If "pending" cart exist, populate pets info
 // Else return empty cart
@@ -51,6 +52,7 @@ CartsRouter.put('', (req, res) => {
             .then(result => res.status(201).json(result))
             .catch(err => console.log(err));
     } else if (petID) {
+        // Push pet to cart, if cart doesn't exist, create one first
         Carts
             .updateOne(
                 {userID, status: 'Pending'}, 
@@ -60,6 +62,23 @@ CartsRouter.put('', (req, res) => {
                 },
                 { upsert: true}
             )
+            .then(result => {
+                if (result.ok) {
+                    // Reserve 1 pet for the user, update Pets with the new reservation
+                    const quantity = 1;
+                    return Pets
+                        .updateOne(
+                            { 
+                                _id: petID, 
+                                count: { $gte: quantity }
+                            },
+                            { 
+                                $inc: { count: -quantity},
+                                $push: {reserved: { userID, quantity }}
+                            }
+                        )
+                }
+            })
             .then(result => res.status(201).json(result))
             .catch(err => console.log(err));
     }    
