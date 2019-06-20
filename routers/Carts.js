@@ -3,6 +3,13 @@ const CartsRouter = express.Router();
 const Carts = require('../models/Cart');
 const Pets = require('../models/Pet');
 
+// CartsRouter.get('', (req, res) => {
+//     Carts
+//         .find()
+//         .then(result => res.status(200).json(result))
+//         .catch(err => console.log(err));
+// });
+
 // If "pending" cart exist, populate pets info
 // Else return empty cart
 CartsRouter.get('', (req, res) => {
@@ -131,13 +138,36 @@ CartsRouter.put('', (req, res) => {
             .then(result => res.status(201).json(result))
             .catch(err => console.log("Error when try to add pet to cart: " + err));
     } else if (status) {
-        // When change status to success, removed all the cart items from reserved list
+        // When change status to success, removed all the cart items from reserved list 
         Carts
             .find({userID, status: "Pending"})
             .then(cart => {
-                const pets = cart.pets;
-                
+                const petsPromises = cart[0].pets.map(item => {
+                    const id = item._id;
+                    return Pets
+                        .updateOne(
+                            {
+                                _id: id,
+                                "reserved.userID": userID,
+                            },
+                            {
+                                $pull: { reserved: { userID }}
+                            }
+                        )
+                });
+
+                return Promise.all(petsPromises);   
             })
+            .then(result => {
+                return Carts.updateOne(
+                        { userID, status: 'Pending' }, 
+                        { 
+                            status: 'Success',
+                            $set: { updatedAt: new Date()}, 
+                        }
+                    );
+            })
+            .then(result => res.status(201).json(result))
             .catch(err => console.log("Error when try to change cart status: " + err));
 
     }     
