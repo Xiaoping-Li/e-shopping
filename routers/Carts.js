@@ -3,12 +3,6 @@ const CartsRouter = express.Router();
 const Carts = require('../models/Cart');
 const Pets = require('../models/Pet');
 
-// CartsRouter.get('', (req, res) => {
-//     Carts
-//         .find()
-//         .then(result => res.status(200).json(result))
-//         .catch(err => console.log(err));
-// });
 
 // If "pending" cart exist, populate pets info
 // Else return empty cart

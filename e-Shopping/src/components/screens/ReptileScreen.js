@@ -16,6 +16,7 @@ class ReptileScreen extends React.Component {
         data={globalStore.reptile} 
         color="#5BBC93"
         modalColor="rgba(205,234,222,0.7)"
+        navigate={this.props.navigation.navigate}
         />
       </ImageBackground>
     );

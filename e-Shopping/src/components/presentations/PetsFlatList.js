@@ -1,19 +1,24 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity, Text, Image, } from 'react-native';
 import MyModal from './MyModal';
 import PetsCarousel from './PetsCarousel';
 
+import {observer} from 'mobx-react/native';
+import globalStore from '../../../GlobalStore';
 
-class PetsFlatList extends PureComponent {
+@observer
+class PetsFlatList extends Component {
   constructor() {
       super();
       this.state = {
-          visible: false,
           activeIdx: 0,
       };
   }
 
-  toggleVisible = (index) => this.setState({ visible: !this.state.visible, activeIdx: index})
+  toggleVisible = (index) => {
+    this.setState({activeIdx: index});
+    globalStore.togglepetsCarousleVisibility();
+  }
 
   render() {
     return (
@@ -37,7 +42,7 @@ class PetsFlatList extends PureComponent {
         /> 
 
         <MyModal 
-          visible={this.state.visible}
+          visible={globalStore.petsCarousleVisible}
           modalColor={this.props.modalColor}
         >
           <View style={{}}> 
@@ -46,6 +51,7 @@ class PetsFlatList extends PureComponent {
               idx={this.state.activeIdx} 
               onToggle={this.toggleVisible}
               color={this.props.color}
+              navigate={this.props.navigate}
             />
           </View>
         </MyModal>

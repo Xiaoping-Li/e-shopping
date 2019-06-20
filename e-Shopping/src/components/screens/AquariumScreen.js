@@ -17,6 +17,7 @@ class AquariumScreen extends React.Component {
           data={globalStore.aquarium} 
           color="#449bc6"
           modalColor="rgba(198,225,237,0.7)"
+          navigate={this.props.navigation.navigate}
         />
       </ImageBackground>
     );

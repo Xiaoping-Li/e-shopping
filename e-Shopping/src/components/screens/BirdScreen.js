@@ -16,6 +16,7 @@ class BirdScreen extends React.Component {
           data={globalStore.bird} 
           color="#F5C851"
           modalColor="rgba(252,238,202,0.7)"
+          navigate={this.props.navigation.navigate}
         />
       </ImageBackground>
     );

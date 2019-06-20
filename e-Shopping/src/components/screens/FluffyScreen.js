@@ -16,6 +16,7 @@ class FluffyScreen extends React.Component {
         data={globalStore.fluffy} 
         color="#EF823F"
         modalColor="rgba(250,217,197,0.7)"
+        navigate={this.props.navigation.navigate}
         />
       </ImageBackground>
     );

@@ -33,7 +33,7 @@ class PetsCarousel extends React.Component {
             </View>
             {stockInfo}
             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={this.navigateToShoppingCart}>
                     <Icon
                         color="#0E4375"
                         name="pay-circle-o1"
@@ -42,7 +42,7 @@ class PetsCarousel extends React.Component {
                     />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => this.addToCart(item)}>
+                <TouchableOpacity onPress={() => this.addToCart(item, index)}>
                     <Icon
                         color="#0E4375"
                         name="shoppingcart"
@@ -54,16 +54,40 @@ class PetsCarousel extends React.Component {
     );
   }
 
-  addToCart = (pet) => {
+  addToCart = (pet, index) => {
+    if (pet.count === 0) {
+      alert("This pet is out of stock! Please check back later! Thank you!");
+      return;
+    }
+
     axios
-      .put(`http://192.168.0.107:5000/carts/?id=${globalStore.cart._id}&petID=${pet._id}`)
+      .put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&petID=${pet._id}`)
       .then(action(result => {
         if (result.data.ok) {
           globalStore.updatePets(pet);
+          switch (pet.category) {
+            case "Aquarium":
+              globalStore.updateAquariumCount(1, index);
+              break;
+            case "Bird":
+              globalStore.updateBirdCount(1, index);
+              break;
+            case "Fluffy":
+              globalStore.updateFluffyCount(1, index);
+              break;
+            case "Reptile":
+              globalStore.updateReptileCount(1, index);
+              break;
+          }
           alert("Add to Cart!");
         }
       }))
       .catch(err => console.log("Add Pets To Cart Error: " + err));
+  }
+
+  navigateToShoppingCart = () => {
+    globalStore.togglepetsCarousleVisibility();
+    this.props.navigate("Cart");  
   }
 
   render() {

@@ -19,10 +19,18 @@ class GlobalStore {
     initBird = list => this.bird = list;
     initFluffy = list => this.fluffy = list;
     initReptile = list => this.reptile = list;
-    updateAquariumCount = (update, idx) => this.aquarium[idx].count = update; 
-    updateBirdCount = (update, idx) => this.bird[idx].count = update;
-    updateFluffyCount = (update, idx) => this.fluffy[idx].count = update;
-    updateReptileCount = (update, idx) => this.reptile[idx].count = update; 
+    updateAquariumCount = (update, idx) => {
+        this.aquarium[idx].count -= update
+    }; 
+    updateBirdCount = (update, idx) => {
+        this.bird[idx].count -= update
+    };
+    updateFluffyCount = (update, idx) => {
+        this.fluffy[idx].count -= update
+    };
+    updateReptileCount = (update, idx) => {
+        this.reptile[idx].count -= update
+    }; 
 
     // Carts
     cart = {
@@ -32,7 +40,11 @@ class GlobalStore {
         _id: '',
     };
     updateCart = (update) => this.cart = update;
-    updatePets = (pet) => this.cart.pets.push({pet: pet, amount: 1});
+    updatePets = (pet) => this.cart.pets.push({pet: pet, quantity: 1, _id: pet._id});
+
+    // Carousel visible
+    petsCarousleVisible = false;
+    togglepetsCarousleVisibility = () => this.petsCarousleVisible = !this.petsCarousleVisible;
 }
 
 decorate(
@@ -60,6 +72,10 @@ decorate(
         cart: observable,
         updateCart: action,
         updatePets: action,
+
+        // Carousel
+        petsCarousleVisible: observable,
+        togglepetsCarousleVisibility: action,
     }
 );
 
