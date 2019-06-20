@@ -23,7 +23,7 @@ CartsRouter.put('', (req, res) => {
     const newQuantity  = Number(req.body.new);
     const oldQuantity = Number(req.body.old);
 
-    if (newQuantity || newQuantity === 0) {
+    if (newQuantity && oldQuantity) {
         // Update cart item quantity with newQuantity
         Carts
             .updateOne(
@@ -73,12 +73,30 @@ CartsRouter.put('', (req, res) => {
             })
             .catch(err => console.log(err));
 
-    } else if (status) {
+    } else if (newQuantity === 0) {
         Carts
-            .updateOne({userID, status: "Pending"}, { status })
-            .then(result => res.status(201).json(result))
-            .catch(err => console.log(err));
-
+            .updateOne(
+                { userID, status: "Pending" },
+                { 
+                    $set: { updatedAt: new Date()},
+                    $pull: { pets: { _id: petID }}
+                }
+            )
+            .then(result => {
+                return Pets
+                    .updateOne(
+                        {
+                            _id: petID,
+                            "reserved.userID": userID,
+                        },
+                        {
+                            $inc: { count: oldQuantity },
+                            $pull: { reserved: { userID }}
+                        }
+                    );
+            })
+            .then(result => res.status(201).json({msg: "Rollback pet from cart and reserved list", result}))
+            .catch(err => console.log("Errors when remove cart item: " + err))
     } else if (petID) {
         // Push pet to cart, if cart doesn't exist, create one first
         Carts
@@ -108,8 +126,14 @@ CartsRouter.put('', (req, res) => {
                 }
             })
             .then(result => res.status(201).json(result))
-            .catch(err => console.log(err));
-    }    
+            .catch(err => console.log("Error when try to add pet to cart: " + err));
+    } else if (status) {
+        Carts
+            .updateOne({userID, status: "Pending"}, { status })
+            .then(result => res.status(201).json(result))
+            .catch(err => console.log("Error when try to change cart status: " + err));
+
+    }     
 });
 
 module.exports = CartsRouter;
