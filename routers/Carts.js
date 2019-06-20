@@ -19,7 +19,7 @@ CartsRouter.get('', (req, res) => {
 CartsRouter.put('', (req, res) => {
     const { userID } = req.query;
     const { petID } = req.query;
-    const { status } = req.query;
+    const { status } = req.body;
     const newQuantity  = Number(req.body.new);
     const oldQuantity = Number(req.body.old);
 
@@ -74,6 +74,9 @@ CartsRouter.put('', (req, res) => {
             .catch(err => console.log(err));
 
     } else if (newQuantity === 0) {
+        // If newQuantity = 0, means user remove the item from cart 
+        // 1. Remove the item from cart list
+        // 2. Add reserved "oldQuantity" to pet.count, and remove the item from pet.reserved list
         Carts
             .updateOne(
                 { userID, status: "Pending" },
@@ -128,9 +131,13 @@ CartsRouter.put('', (req, res) => {
             .then(result => res.status(201).json(result))
             .catch(err => console.log("Error when try to add pet to cart: " + err));
     } else if (status) {
+        // When change status to success, removed all the cart items from reserved list
         Carts
-            .updateOne({userID, status: "Pending"}, { status })
-            .then(result => res.status(201).json(result))
+            .find({userID, status: "Pending"})
+            .then(cart => {
+                const pets = cart.pets;
+                
+            })
             .catch(err => console.log("Error when try to change cart status: " + err));
 
     }     

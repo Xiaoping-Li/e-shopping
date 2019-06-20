@@ -9,7 +9,7 @@ const CartSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Pending', 'Success'],
+        enum: ['Pending', 'Success', 'Expired'],
         default: 'Pending',
     },
     pets: [
