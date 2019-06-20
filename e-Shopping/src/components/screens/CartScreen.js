@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import { CartItem } from '../presentations';
 
+import {observer} from 'mobx-react/native';
 import globalStore from '../../../GlobalStore';
 
+@observer
 class CartScreen extends Component {
   navigateToHome = () => this.props.navigation.navigate('Home')
 

@@ -41,13 +41,13 @@ class CartItem extends Component {
                     <Text style={styles.name}>{this.props.pet.pet.name}</Text>
                     <Text style={styles.price}>${(this.props.pet.pet.price / 100).toFixed(2)}</Text>
                     <Text style={[styles.stock, this.props.pet.pet.count > 0 ? {color: 'green'} : {color: 'red'}]}>
-                        {this.props.pet.count > 0 ? "In Stock" : "Out Of Stock"}
+                        {this.props.pet.pet.count > 0 ? "In Stock" : "Out Of Stock"}
                     </Text>
                 </View>
                 
                 <TextInput
-                    value={this.props.pet.amount}
-                    onChangeText={quantity => this.setState({quantity})}
+                    value={this.props.pet.quantity.toString()}
+                    onChangeText={() => {}}
                     style={styles.input} 
                 />
             </View>

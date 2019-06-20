@@ -3,11 +3,12 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from 'rea
 import Carousel from 'react-native-snap-carousel';
 import Icon from '@expo/vector-icons/AntDesign';
 
+import {observer} from 'mobx-react/native';
 import {action} from 'mobx';
 import globalStore from '../../../GlobalStore';
 import axios from 'axios';
 
-
+@observer
 class PetsCarousel extends React.Component {
   _renderItem = ({item, index}) => {
     let stockInfo;
@@ -57,6 +58,11 @@ class PetsCarousel extends React.Component {
   addToCart = (pet, index) => {
     if (pet.count === 0) {
       alert("This pet is out of stock! Please check back later! Thank you!");
+      return;
+    }
+
+    if (globalStore.cart.pets.filter(item => item._id === pet._id).length) {
+      alert("This Pet is already in your shopping cart!");
       return;
     }
 
