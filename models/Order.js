@@ -9,46 +9,25 @@ const OrderSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Packaging', 'Delivering', 'Delivered'],
-        default: 'Packaging',
+        enum: ['Pending','Packaging', 'Delivering', 'Delivered'],
+        default: 'Pending',
     },
     cartID: {
         type: Schema.Types.ObjectId,
         ref: 'cart',
         required: true,
     },
-    token: {
-        type: String,
-        required: true,
-    },
-    subTotal: {
-        type: Number,
-        required: true,
-    },
+    token: String,
+    subTotal: Number,
     address: {
-        recipient: {
-            type: String,
-            required: true,
-        },
-        street: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        state: {
-            type: String,
-            required: true,
-        },
-        zip: {
-            type: String,
-            required: true,
-        },
+        recipient: String,
+        street: String,
+        city: String,
+        state: String,
+        zip: String,
         country: {
             type: String,
-            required: true,
+            default: "US",
         },
     },
     createAt: {

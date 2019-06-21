@@ -7,6 +7,7 @@ import {
   TouchableOpacity, 
 } from 'react-native';
 import { CartItem } from '../presentations';
+import axios from 'axios';
 
 import {action} from 'mobx';
 import {observer} from 'mobx-react/native';
@@ -16,7 +17,30 @@ import globalStore from '../../../GlobalStore';
 class CartScreen extends Component {
   navigateToHome = () => this.props.navigation.navigate('Home')
 
-  navigateToShipping = () => this.props.navigation.navigate('Shipping')
+  handleCheckout = () => {
+    const userID = globalStore.user._id;
+    const cartID = globalStore.cart._id;
+    const order = {
+      userID,
+      cartID,
+      token: '',
+      subTotal: globalStore.subTotal,
+      address: {
+        recipient: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+      }
+    };
+
+    axios
+      .post('http://192.168.0.107:5000/orders', order)
+      .then(result => {
+        if (result.data.userID === userID) this.props.navigation.navigate('Shipping');
+      })
+      .catch(err => console.log("Error when create order: " + err));  
+  }
 
   render() {
     return (
@@ -47,7 +71,7 @@ class CartScreen extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={this.navigateToShipping}
+                onPress={this.handleCheckout}
                 style={styles.btn}
               >
                 <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Checkout</Text>
