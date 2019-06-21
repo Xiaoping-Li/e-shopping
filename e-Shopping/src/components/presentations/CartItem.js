@@ -17,6 +17,60 @@ import {observer} from 'mobx-react/native';
 
 @observer
 class CartItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            quantity: this.props.pet.quantity.toString()
+        };
+    }
+
+    handleChange = () => {
+        // Validate the input type could convert to number
+        if (isNaN(this.state.quantity)) {
+            alert("Please Only Enter Numbers");
+        } else if (Number(this.state.quantity) === 0) {
+            // If input convert to number 0, then delete the pet from list
+            this.deletePet();
+        } else {
+            // If modified quantity smaller than or equal to number in stock
+            this.updateQuantity();
+        }
+    }
+
+    updateQuantity = () => {
+        const petID = this.props.pet._id; 
+        const info = {
+            new: Number(this.state.quantity),
+            old: this.props.pet.quantity,
+        };
+
+        axios
+            .put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&petID=${petID}`, info)
+            .then(action(result => {
+                if (result.data.msg) {
+                    this.setState({quantity: info.old.toString()});
+                    alert("Not enough pets left in stock for your update. Please check back later!");
+                } else if (result.data.success) {
+                    globalStore.updatePetQuantity(petID, info.new);
+                    switch (this.props.pet.pet.category) {
+                        case "Aquarium":
+                        globalStore.updateAquariumCount(info.new-info.old, petID);
+                        break;
+                        case "Bird":
+                        globalStore.updateBirdCount(info.new-info.old, petID);
+                        break;
+                        case "Fluffy":
+                        globalStore.updateFluffyCount(info.new-info.old, petID);
+                        break;
+                        case "Reptile":
+                        globalStore.updateReptileCount(info.new-info.old, petID);
+                        break;
+                    }
+                }
+            }))
+            .catch(err => console.log("Error when update pet quantities: " + err));
+    }
+
     deletePet = () => {
         const petID = this.props.pet._id;
         const info = {
@@ -49,6 +103,8 @@ class CartItem extends Component {
             .catch(err => console.log("Error when try to delete pet from cart: " + err));
     }
 
+
+
     render() {
         return (
             <View style={styles.container}>
@@ -77,8 +133,9 @@ class CartItem extends Component {
                 </View>
                 
                 <TextInput
-                    value={this.props.pet.quantity.toString()}
-                    onChangeText={() => {}}
+                    value={this.state.quantity}
+                    onChangeText={quantity => this.setState({quantity})}
+                    onEndEditing={this.handleChange}
                     style={styles.input} 
                 />
             </View>

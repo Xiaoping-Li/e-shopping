@@ -21,7 +21,7 @@ const OrderSchema = new Schema({
         type: String,
         required: true,
     },
-    amount: {
+    subTotal: {
         type: Number,
         required: true,
     },
@@ -54,7 +54,11 @@ const OrderSchema = new Schema({
     createAt: {
         type: Date,
         default: Date.now,
-    }
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const OrderModel = mongoose.model('order', OrderSchema);

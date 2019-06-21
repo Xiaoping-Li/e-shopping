@@ -1,4 +1,4 @@
-import { observable, decorate, action } from 'mobx';
+import { observable, decorate, action, computed } from 'mobx';
 
 class GlobalStore {
     // User
@@ -36,6 +36,7 @@ class GlobalStore {
         this.reptile[idx].count -= update
     }; 
 
+
     // Carts
     cart = {
         status: '',
@@ -49,6 +50,10 @@ class GlobalStore {
     initPets = pets => this.pets = pets;
     addPet = (pet) => this.pets.push({pet: pet, quantity: 1, _id: pet._id});
     removePet = petID => this.pets = this.pets.filter(pet => pet._id !== petID);
+    updatePetQuantity = (petID, value) => {
+        const idx = this.pets.findIndex(item => item._id === petID);
+        this.pets[idx].quantity = value;
+    };
    
 
     // Carousel visible
@@ -84,6 +89,7 @@ decorate(
         initCart: action,
         addPet: action,
         removePet: action,
+        updatePetQuantity: action,
 
         // Carousel
         petsCarousleVisible: observable,
