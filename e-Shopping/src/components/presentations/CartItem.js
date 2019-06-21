@@ -12,10 +12,10 @@ import axios from 'axios';
 
 import globalStore from '../../../GlobalStore';
 import {action} from 'mobx';
-// import {observer} from 'mobx-react/native';
+import {observer} from 'mobx-react/native';
 
 
-// @observer
+@observer
 class CartItem extends Component {
     deletePet = () => {
         const petID = this.props.pet._id;
@@ -27,9 +27,9 @@ class CartItem extends Component {
         axios
             .put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&petID=${petID}`, info)
             .then(action(result => {
-                if (result.data.ok) {
+                if (result.data.result.ok) {
                     globalStore.removePet(petID);
-                    switch (pet.category) {
+                    switch (this.props.pet.pet.category) {
                         case "Aquarium":
                         globalStore.updateAquariumCount(-info.old, petID);
                         break;
@@ -47,7 +47,6 @@ class CartItem extends Component {
                 }
             }))
             .catch(err => console.log("Error when try to delete pet from cart: " + err));
-
     }
 
     render() {
@@ -72,8 +71,8 @@ class CartItem extends Component {
                 <View style={{width: 185}}>
                     <Text style={styles.name}>{this.props.pet.pet.name}</Text>
                     <Text style={styles.price}>${(this.props.pet.pet.price / 100).toFixed(2)}</Text>
-                    <Text style={[styles.stock, this.props.pet.pet.count > 0 ? {color: 'green'} : {color: 'red'}]}>
-                        {this.props.pet.pet.count > 0 ? "In Stock" : "Out Of Stock"}
+                    <Text style={[styles.stock, this.props.pet.pet.count > 10 ? {color: 'green'} : {color: 'red'}]}>
+                        {this.props.pet.pet.count > 10 ? "In Stock" : `Only ${this.props.pet.pet.count} Left`}
                     </Text>
                 </View>
                 

@@ -4,11 +4,10 @@ import { Categories, Header, } from '../presentations';
 
 import axios from 'axios';
 
-import {observer} from 'mobx-react/native';
 import {action} from 'mobx';
 import globalStore from '../../../GlobalStore';
 
-@observer
+
 class HomeScreen extends React.Component {
   componentDidMount = () => {
     this.getAquarium();
