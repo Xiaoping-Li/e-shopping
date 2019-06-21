@@ -97,7 +97,6 @@ class CartItem extends Component {
                         globalStore.updateReptileCount(-info.old, petID);
                         break;
                     }
-                    alert("Remove pet from Cart!");
                 }
             }))
             .catch(err => console.log("Error when try to delete pet from cart: " + err));

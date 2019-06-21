@@ -54,6 +54,13 @@ class GlobalStore {
         const idx = this.pets.findIndex(item => item._id === petID);
         this.pets[idx].quantity = value;
     };
+    get subTotal() {
+        let total = 0;
+        for (let i = 0; i < this.pets.length; i++) {
+            total += this.pets[i].quantity * this.pets[i].pet.price;
+        }
+        return total;
+    };
    
 
     // Carousel visible
@@ -90,6 +97,7 @@ decorate(
         addPet: action,
         removePet: action,
         updatePetQuantity: action,
+        subTotal: computed,
 
         // Carousel
         petsCarousleVisible: observable,

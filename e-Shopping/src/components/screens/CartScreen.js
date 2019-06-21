@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import { CartItem } from '../presentations';
 
-
-
 import {action} from 'mobx';
 import {observer} from 'mobx-react/native';
 import globalStore from '../../../GlobalStore';
@@ -39,7 +37,7 @@ class CartScreen extends Component {
                 renderItem={({item}) => <CartItem pet={item} />} 
               />   
             </View>
-            <Text style={styles.subTotal}>Subtotal (1 item): <Text style={{color: 'red'}}>$15.99</Text></Text>
+            <Text style={styles.subTotal}>Subtotal: <Text style={{color: 'red'}}>${(globalStore.subTotal/100).toFixed(2)}</Text></Text>
             <View style={styles.btnContainer}>
               <TouchableOpacity
                 onPress={this.navigateToHome}
