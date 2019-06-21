@@ -21,7 +21,7 @@ class CartScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Shopping Cart</Text>
-        {globalStore.cart.pets.length ?
+        {globalStore.pets.length ?
           <View>
             <View style={styles.tableHeader}>
               <Text style={{width: 20}}></Text>
@@ -31,10 +31,10 @@ class CartScreen extends Component {
             </View>
             <View style={styles.list}>
               <FlatList
-                data={globalStore.cart.pets}
-                keyExtractor={(item) => item.pet._id} 
+                data={globalStore.pets.slice()}
+                keyExtractor={(item) => item._id} 
                 renderItem={({item}) => <CartItem pet={item} />} 
-              />
+              />   
             </View>
             <Text style={styles.subTotal}>Subtotal (1 item): <Text style={{color: 'red'}}>$15.99</Text></Text>
             <View style={styles.btnContainer}>

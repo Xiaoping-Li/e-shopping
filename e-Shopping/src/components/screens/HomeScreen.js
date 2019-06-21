@@ -63,15 +63,22 @@ class HomeScreen extends React.Component {
   }
 
   getCart = () => {
+    const userID = globalStore.user._id;
     axios
-      .get(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}`)
+      .get(`http://192.168.0.107:5000/carts/?userID=${userID}`)
       .then(action(result => {
-        const update = {};
-        update._id = result.data[0]._id;
-        update.userID = globalStore.user._id;
-        update.pets = result.data[0].pets;
-        update.status = result.data[0].status;
-        globalStore.updateCart(update);
+        if (result.data[0]) {
+          const cart = {
+            status: '',
+            _id: '',
+          };
+          const pets = result.data[0].pets;
+          cart._id = result.data[0]._id;
+          cart.status = result.data[0].status;
+
+          globalStore.initCart(cart);
+          globalStore.initPets(pets);
+        } 
       }))
       .catch(err => console.log("getCart error: " + err));
   }

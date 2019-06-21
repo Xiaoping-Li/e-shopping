@@ -19,28 +19,37 @@ class GlobalStore {
     initBird = list => this.bird = list;
     initFluffy = list => this.fluffy = list;
     initReptile = list => this.reptile = list;
-    updateAquariumCount = (update, idx) => {
+    updateAquariumCount = (update, petID) => {
+        const idx = this.aquarium.findIndex(pet => pet._id === petID);
         this.aquarium[idx].count -= update
     }; 
-    updateBirdCount = (update, idx) => {
+    updateBirdCount = (update, petID) => {
+        const idx = this.bird.findIndex(pet => pet._id === petID);
         this.bird[idx].count -= update
     };
-    updateFluffyCount = (update, idx) => {
+    updateFluffyCount = (update, petID) => {
+        const idx = this.fluffy.findIndex(pet => pet._id === petID);
         this.fluffy[idx].count -= update
     };
-    updateReptileCount = (update, idx) => {
+    updateReptileCount = (update, petID) => {
+        const idx = this.reptile.findIndex(pet => pet._id === petID);
         this.reptile[idx].count -= update
     }; 
 
     // Carts
     cart = {
-        userID: '',
         status: '',
-        pets: [],
         _id: '',
     };
-    updateCart = (update) => this.cart = update;
-    updatePets = (pet) => this.cart.pets.push({pet: pet, quantity: 1, _id: pet._id});
+    pets = [];
+    initCart = (cart) => {
+        this.cart._id = cart._id;
+        this.cart.status = cart.status;
+    };
+    initPets = pets => this.pets = pets;
+    addPet = (pet) => this.pets.push({pet: pet, quantity: 1, _id: pet._id});
+    removePet = petID => this.pets = this.pets.filter(pet => pet._id !== petID);
+   
 
     // Carousel visible
     petsCarousleVisible = false;
@@ -70,8 +79,11 @@ decorate(
 
         // Cart
         cart: observable,
-        updateCart: action,
-        updatePets: action,
+        pets: observable,
+        initPets: action,
+        initCart: action,
+        addPet: action,
+        removePet: action,
 
         // Carousel
         petsCarousleVisible: observable,

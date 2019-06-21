@@ -43,7 +43,7 @@ class PetsCarousel extends React.Component {
                     />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => this.addToCart(item, index)}>
+                <TouchableOpacity onPress={() => this.addToCart(item)}>
                     <Icon
                         color="#0E4375"
                         name="shoppingcart"
@@ -55,13 +55,13 @@ class PetsCarousel extends React.Component {
     );
   }
 
-  addToCart = (pet, index) => {
+  addToCart = (pet) => {
     if (pet.count === 0) {
       alert("This pet is out of stock! Please check back later! Thank you!");
       return;
     }
 
-    if (globalStore.cart.pets.filter(item => item._id === pet._id).length) {
+    if (globalStore.pets.filter(item => item._id === pet._id).length) {
       alert("This Pet is already in your shopping cart!");
       return;
     }
@@ -70,19 +70,19 @@ class PetsCarousel extends React.Component {
       .put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&petID=${pet._id}`)
       .then(action(result => {
         if (result.data.ok) {
-          globalStore.updatePets(pet);
+          globalStore.addPet(pet);
           switch (pet.category) {
             case "Aquarium":
-              globalStore.updateAquariumCount(1, index);
+              globalStore.updateAquariumCount(1, pet._id);
               break;
             case "Bird":
-              globalStore.updateBirdCount(1, index);
+              globalStore.updateBirdCount(1, pet._id);
               break;
             case "Fluffy":
-              globalStore.updateFluffyCount(1, index);
+              globalStore.updateFluffyCount(1, pet._id);
               break;
             case "Reptile":
-              globalStore.updateReptileCount(1, index);
+              globalStore.updateReptileCount(1, pet._id);
               break;
           }
           alert("Add to Cart!");

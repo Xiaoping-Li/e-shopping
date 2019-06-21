@@ -8,20 +8,52 @@ import {
   TextInput, 
 } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
+import axios from 'axios';
 
 import globalStore from '../../../GlobalStore';
+import {action} from 'mobx';
+// import {observer} from 'mobx-react/native';
 
+
+// @observer
 class CartItem extends Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         quantity: '1',
-    //     };
-    // }
+    deletePet = () => {
+        const petID = this.props.pet._id;
+        const info = {
+            new: 0,
+            old: this.props.pet.quantity,
+        };
+
+        axios
+            .put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&petID=${petID}`, info)
+            .then(action(result => {
+                if (result.data.ok) {
+                    globalStore.removePet(petID);
+                    switch (pet.category) {
+                        case "Aquarium":
+                        globalStore.updateAquariumCount(-info.old, petID);
+                        break;
+                        case "Bird":
+                        globalStore.updateBirdCount(-info.old, petID);
+                        break;
+                        case "Fluffy":
+                        globalStore.updateFluffyCount(-info.old, petID);
+                        break;
+                        case "Reptile":
+                        globalStore.updateReptileCount(-info.old, petID);
+                        break;
+                    }
+                    alert("Remove pet from Cart!");
+                }
+            }))
+            .catch(err => console.log("Error when try to delete pet from cart: " + err));
+
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={this.deletePet}>
                     <Icon
                         color="red"
                         name="remove"
