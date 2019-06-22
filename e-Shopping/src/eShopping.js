@@ -57,6 +57,7 @@ const CartStackNavigator = createStackNavigator(
     defaultNavigationOptions: ({navigation}) => {
       return {
         header: null,
+        gesturesEnabled: false,
       }
     }
   },
