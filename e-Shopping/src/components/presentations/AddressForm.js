@@ -37,7 +37,8 @@ class AddressForm extends Component {
                 
                 <TextInput
                     value={this.state.recipient}
-                    onChangeText={recipient => this.setState({recipient})}
+                    // onChangeText={recipient => this.setState({recipient})}
+                    onChange={this.props.onChange}
                     style={styles.outInput}
                     placeholder="Recipient Name"
                     placeholderTextColor="#6E8EAC"

@@ -61,6 +61,10 @@ class GlobalStore {
         }
         return total;
     };
+
+    //Pending order: pending cart  ---> 1 to 1 relation
+    pendingOrder = "";
+    updateOrderID = (id) => this.pendingOrder = id;
    
 
     // Carousel visible
@@ -98,6 +102,10 @@ decorate(
         removePet: action,
         updatePetQuantity: action,
         subTotal: computed,
+
+        // Pending Order
+        pendingOrder: observable,
+        updateOrderID: action,
 
         // Carousel
         petsCarousleVisible: observable,

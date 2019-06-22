@@ -34,12 +34,21 @@ class CartScreen extends Component {
       }
     };
 
-    axios
-      .post('http://192.168.0.107:5000/orders', order)
-      .then(result => {
-        if (result.data.userID === userID) this.props.navigation.navigate('Shipping');
-      })
-      .catch(err => console.log("Error when create order: " + err));  
+    if (globalStore.pendingOrder === "") {
+      axios
+        .post('http://192.168.0.107:5000/orders', order)
+        .then(result => {
+          if (result.data.userID === userID) {
+            globalStore.updateOrderID(result.data._id);
+            this.props.navigation.navigate('Shipping');
+          }
+        })
+        .catch(err => console.log("Error when create order: " + err)); 
+    } else {
+      this.props.navigation.navigate('Shipping');
+    }
+
+     
   }
 
   render() {

@@ -3,6 +3,24 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { AddressForm } from '../presentations';
 
 class ShippingScreen extends Component {
+    constructor() {
+        super();
+        this.state = {
+            address: {
+                recipient: '',
+                street: '',
+                city: '',
+                state: '',
+                zip: '',
+                country: '',
+            }
+        };
+    }
+
+    handleChange = (event) => {
+        console.log(event.nativeEvent);
+    }
+
     navigateToCart = () => this.props.navigation.navigate('Cart')
 
     navigateToTax = () => this.props.navigation.navigate('Tax')
@@ -10,7 +28,10 @@ class ShippingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <AddressForm />
+                <AddressForm
+                    address={this.state.address}
+                    onChange={this.handleChange} 
+                />
                 <View style={styles.btnContainer}>
                     <TouchableOpacity
                         onPress={this.navigateToCart}
