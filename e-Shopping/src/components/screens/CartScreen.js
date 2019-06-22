@@ -46,9 +46,7 @@ class CartScreen extends Component {
         .catch(err => console.log("Error when create order: " + err)); 
     } else {
       this.props.navigation.navigate('Shipping');
-    }
-
-     
+    }   
   }
 
   render() {

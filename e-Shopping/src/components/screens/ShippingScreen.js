@@ -7,11 +7,17 @@ class ShippingScreen extends Component {
         super();
         this.state = {
             address: {
+                // target: 2077
                 recipient: '',
+                // target: 2077
                 street: '',
+                // target: 2077
                 city: '',
+                // target: 2077
                 state: '',
+                // target: 2077
                 zip: '',
+                // target: 2077
                 country: '',
             }
         };

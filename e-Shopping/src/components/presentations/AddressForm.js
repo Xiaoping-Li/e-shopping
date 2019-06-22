@@ -45,7 +45,8 @@ class AddressForm extends Component {
                 />
                 <TextInput
                     value={this.state.street}
-                    onChangeText={street => this.setState({street})}
+                    // onChangeText={street => this.setState({street})}
+                    onChange={this.props.onChange}
                     style={styles.outInput}
                     placeholder="Street Address"
                     placeholderTextColor="#6E8EAC"
@@ -54,14 +55,16 @@ class AddressForm extends Component {
                 <View style={styles.inputContainer}>
                     <TextInput
                         value={this.state.city}
-                        onChangeText={city => this.setState({city})}
+                        // onChangeText={city => this.setState({city})}
+                        onChange={this.props.onChange}
                         style={[styles.innerInput, {marginRight: 5}]}
                         placeholder="City"
                         placeholderTextColor="#6E8EAC"
                     />
                     <TextInput
                         value={this.state.state}
-                        onChangeText={state => this.setState({state})}
+                        // onChangeText={state => this.setState({state})}
+                        onChange={this.props.onChange}
                         style={styles.innerInput}
                         placeholder="State"
                         placeholderTextColor="#6E8EAC"
@@ -71,14 +74,16 @@ class AddressForm extends Component {
                 <View style={styles.inputContainer}>
                     <TextInput
                         value={this.state.zip}
-                        onChangeText={zip => this.setState({zip})}
+                        // onChangeText={zip => this.setState({zip})}
+                        onChange={this.props.onChange}
                         style={[styles.innerInput, {marginRight: 5}]}
                         placeholder="Zip Code"
                         placeholderTextColor="#6E8EAC"
                     />
                     <TextInput
                         value={this.state.country}
-                        onChangeText={country => this.setState({country})}
+                        // onChangeText={country => this.setState({country})}
+                        onChange={this.props.onChange}
                         style={styles.innerInput}
                         placeholder="Country"
                         placeholderTextColor="#6E8EAC"

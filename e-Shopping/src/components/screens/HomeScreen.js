@@ -82,6 +82,16 @@ class HomeScreen extends React.Component {
       .catch(err => console.log("getCart error: " + err));
   }
 
+  getPendingOrderID = () => {
+    const userID = globalStore.user._id;
+    axios
+      .get(`http://192.168.0.107:5000/orders/?userID=${userID}&status=Pending`)
+      then(action(result => {
+        if (reslut.data._id) globalStore.updateOrderID(result.data._id);
+      }))
+      .catch(err => console.log("Error when get pending order ID: " + err));
+  }
+
   render() {
     return (
       <View style={styles.container}>
