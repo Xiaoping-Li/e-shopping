@@ -6,25 +6,37 @@ class ShippingScreen extends Component {
     constructor() {
         super();
         this.state = {
-            address: {
-                // target: 2077
-                recipient: '',
-                // target: 2077
-                street: '',
-                // target: 2077
-                city: '',
-                // target: 2077
-                state: '',
-                // target: 2077
-                zip: '',
-                // target: 2077
-                country: '',
-            }
+            recipient: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+            country: '',  
         };
     }
 
-    handleChange = (event) => {
-        console.log(event.nativeEvent);
+    handleRecipientChange = (recipient) => {
+        this.setState({recipient});
+    }
+
+    handleStreetChange = (street) => {
+        this.setState({street});
+    }
+
+    handleCityChange = (city) => {
+        this.setState({city});
+    }
+
+    handleStateChange = (state) => {
+        this.setState({state});
+    }
+
+    handleZipChange = (zip) => {
+        this.setState({zip});
+    }
+
+    handleCountryChange = (country) => {
+        this.setState({country});
     }
 
     navigateToCart = () => this.props.navigation.navigate('Cart')
@@ -35,8 +47,18 @@ class ShippingScreen extends Component {
         return (
             <View style={styles.container}>
                 <AddressForm
-                    address={this.state.address}
-                    onChange={this.handleChange} 
+                    recipient={this.state.recipient}
+                    street={this.state.street}
+                    city={this.state.city}
+                    state={this.state.state}
+                    zip={this.state.zip}
+                    country={this.state.country}
+                    onRecipientChange={this.handleRecipientChange} 
+                    onStreetChange={this.handleStreetChange}
+                    onCityChange={this.handleCityChange}
+                    onStateChange={this.handleStateChange}
+                    onZipChange={this.handleZipChange}
+                    onCountryChange={this.handleCountryChange}
                 />
                 <View style={styles.btnContainer}>
                     <TouchableOpacity

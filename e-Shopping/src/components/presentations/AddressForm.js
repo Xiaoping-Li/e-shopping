@@ -10,17 +10,7 @@ import { LinearGradient } from 'expo';
 
 
 class AddressForm extends Component {
-    constructor() {
-        super();
-        this.state = {
-            recipient: '',
-            street: '',
-            city: '',
-            state: '',
-            zip: '',
-            country: '',
-        };
-    }
+
     render () {
         return (
             <View style={styles.container}>
@@ -36,17 +26,15 @@ class AddressForm extends Component {
                 </TouchableOpacity>
                 
                 <TextInput
-                    value={this.state.recipient}
-                    // onChangeText={recipient => this.setState({recipient})}
-                    onChange={this.props.onChange}
+                    value={this.props.recipient}
+                    onChangeText={recipient => this.props.onChange(recipient)}
                     style={styles.outInput}
                     placeholder="Recipient Name"
                     placeholderTextColor="#6E8EAC"
                 />
                 <TextInput
-                    value={this.state.street}
-                    // onChangeText={street => this.setState({street})}
-                    onChange={this.props.onChange}
+                    value={this.props.street}
+                    onChangeText={street => this.props.onStreetChange(street)}
                     style={styles.outInput}
                     placeholder="Street Address"
                     placeholderTextColor="#6E8EAC"
@@ -54,17 +42,15 @@ class AddressForm extends Component {
 
                 <View style={styles.inputContainer}>
                     <TextInput
-                        value={this.state.city}
-                        // onChangeText={city => this.setState({city})}
-                        onChange={this.props.onChange}
+                        value={this.props.city}
+                        onChangeText={city => this.props.onCityChange(city)}
                         style={[styles.innerInput, {marginRight: 5}]}
                         placeholder="City"
                         placeholderTextColor="#6E8EAC"
                     />
                     <TextInput
-                        value={this.state.state}
-                        // onChangeText={state => this.setState({state})}
-                        onChange={this.props.onChange}
+                        value={this.props.state}
+                        onChangeText={state => this.props.onStateChange(state)}
                         style={styles.innerInput}
                         placeholder="State"
                         placeholderTextColor="#6E8EAC"
@@ -73,17 +59,15 @@ class AddressForm extends Component {
 
                 <View style={styles.inputContainer}>
                     <TextInput
-                        value={this.state.zip}
-                        // onChangeText={zip => this.setState({zip})}
-                        onChange={this.props.onChange}
+                        value={this.props.zip}
+                        onChangeText={zip => this.props.onZipChange(zip)}
                         style={[styles.innerInput, {marginRight: 5}]}
                         placeholder="Zip Code"
                         placeholderTextColor="#6E8EAC"
                     />
                     <TextInput
-                        value={this.state.country}
-                        // onChangeText={country => this.setState({country})}
-                        onChange={this.props.onChange}
+                        value={this.props.country}
+                        onChangeText={country => this.props.onCountryChange(country)}
                         style={styles.innerInput}
                         placeholder="Country"
                         placeholderTextColor="#6E8EAC"

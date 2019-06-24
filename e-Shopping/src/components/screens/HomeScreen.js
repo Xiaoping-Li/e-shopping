@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Categories, Header, } from '../presentations';
+import { Categories, Header } from '../presentations';
 
 import axios from 'axios';
 
