@@ -51,12 +51,8 @@ class SignInScreen extends Component {
       .post('http://192.168.0.107:5000/signin', user)
       .then(result => {
           if (result.data.success) {
-            const user = {};
-            user.username = result.data.user.username;
-            user.email = result.data.user.email;
-            user.thumbnail = result.data.user.thumbnail;
-            user._id = result.data.user._id;
-
+            const user = Object.assign({}, result.data.user);
+            
             AsyncStorage
                 .setItem('userToken', user._id)
                 .then(action(res => {

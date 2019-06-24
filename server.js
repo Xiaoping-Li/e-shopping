@@ -70,7 +70,10 @@ server.post('/signin', (req, res) => {
                     if (!result) throw new Error();
                     req.session.email = req.body;
                     req.user = user;
-                    delete req.user.password;
+                    // user.password cound not be deleted, change to undefined to hide the password
+                    req.user.password = undefined;
+                    req.user.creatAt = undefined;
+                    req.user.__v = undefined;
                     res.json({success: true, user: req.user});
                 })
                 .catch(err => res.json({msg: "Failed when comparing password"}));
