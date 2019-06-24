@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { AddressForm } from '../presentations';
+import axios from 'axios';
+import globalStore from '../../../GlobalStore';
+import {action} from 'mobx';
+
 
 class ShippingScreen extends Component {
     constructor() {
@@ -13,6 +17,49 @@ class ShippingScreen extends Component {
             zip: '',
             country: '',  
         };
+    }
+
+    handleUseDefault = () => {
+        if (!globalStore.user.address) {
+            alert("You haven't set default shipping address yet!");
+            return;
+        }
+        this.setState({
+            recipient: globalStore.user.address.recipient,
+            street: globalStore.user.address.street,
+            city: globalStore.user.address.city,
+            state: globalStore.user.address.state,
+            zip: globalStore.user.address.zip,
+            country: globalStore.user.address.country, 
+        });
+    }
+
+    handleSetDefault = () => {
+        const userID = globalStore.user._id;
+        if (this.state.recipient === '' || this.state.street === '' || this.state.city === '' || this.state.state === '' || this.state.zip === '' || this.state.country === '') {
+            alert('All fields are required');
+            return;
+        }
+
+        const address = {
+            recipient: this.state.recipient,
+            street: this.state.street,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            country: this.state.country, 
+        };
+
+        axios
+            .put(`http://192.168.0.107:5000/users/?id=${userID}`, address)
+            .then(action(result => {
+                if (result.data.ok) {
+                    globalStore.updateAddress(address);
+                    console.log(globalStore.user.address);
+                    alert("Set this address as your default address");
+                }
+            }))
+            .catch(err => console.log("Error when try to update user address: " + err));
     }
 
     handleRecipientChange = (recipient) => {
@@ -59,6 +106,8 @@ class ShippingScreen extends Component {
                     onStateChange={this.handleStateChange}
                     onZipChange={this.handleZipChange}
                     onCountryChange={this.handleCountryChange}
+                    onSetDefaultChange={this.handleSetDefault}
+                    onUseDefaultChange={this.handleUseDefault}
                 />
                 <View style={styles.btnContainer}>
                     <TouchableOpacity

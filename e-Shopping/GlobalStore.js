@@ -7,9 +7,9 @@ class GlobalStore {
         email: '',
         thumbnail: '',
         _id: '',
-        address: {},
     };
     updateUser = (updated) => this.user = updated;
+    updateAddress = (address) => this.user.address = Object.assign({}, address);
 
     // Pets 'Aquarium', 'Bird', 'Fluffy', 'Reptile'
     aquarium = [];

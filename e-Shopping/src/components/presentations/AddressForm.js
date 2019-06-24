@@ -15,7 +15,7 @@ class AddressForm extends Component {
         return (
             <View style={styles.container}>
                 <TouchableOpacity   
-                    onPress={() => {}}
+                    onPress={this.props.onUseDefaultChange}
                 >
                     <LinearGradient 
                         colors={['#6E8EAC', '#0E4375', '#0B355D']}
@@ -27,7 +27,7 @@ class AddressForm extends Component {
                 
                 <TextInput
                     value={this.props.recipient}
-                    onChangeText={recipient => this.props.onChange(recipient)}
+                    onChangeText={recipient => this.props.onRecipientChange(recipient)}
                     style={styles.outInput}
                     placeholder="Recipient Name"
                     placeholderTextColor="#6E8EAC"
@@ -75,7 +75,7 @@ class AddressForm extends Component {
                 </View>
 
                 <TouchableOpacity   
-                    onPress={() => {}}
+                    onPress={this.props.onSetDefaultChange}
                 >
                     <LinearGradient 
                         colors={['#6E8EAC', '#0E4375', '#0B355D']}
