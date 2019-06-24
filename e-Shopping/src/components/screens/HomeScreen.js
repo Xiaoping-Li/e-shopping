@@ -15,6 +15,7 @@ class HomeScreen extends React.Component {
     this.getFluffy();
     this.getReptile();
     this.getCart();
+    this.getPendingOrderID();
   }
 
   getAquarium = () => {
