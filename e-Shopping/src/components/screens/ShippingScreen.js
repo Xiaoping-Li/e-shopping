@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { AddressForm } from '../presentations';
 import axios from 'axios';
 import globalStore from '../../../GlobalStore';
@@ -109,7 +109,7 @@ class ShippingScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
                 <AddressForm
                     recipient={this.state.recipient}
                     street={this.state.street}
@@ -141,7 +141,7 @@ class ShippingScreen extends Component {
                         <Text style={styles.btnText}>Continue</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

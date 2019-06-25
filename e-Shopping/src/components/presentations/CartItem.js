@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput, 
+  KeyboardAvoidingView,
 } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
 import axios from 'axios';
@@ -102,11 +103,9 @@ class CartItem extends Component {
             .catch(err => console.log("Error when try to delete pet from cart: " + err));
     }
 
-
-
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
                 <TouchableOpacity onPress={this.deletePet}>
                     <Icon
                         color="red"
@@ -137,7 +136,7 @@ class CartItem extends Component {
                     onEndEditing={this.handleChange}
                     style={styles.input} 
                 />
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

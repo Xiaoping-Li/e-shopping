@@ -6,7 +6,8 @@ import {
   TextInput,
   AsyncStorage, 
   ActivityIndicator,
-  TouchableOpacity, 
+  TouchableOpacity,
+  KeyboardAvoidingView, 
 } from 'react-native';
 import { Font } from 'expo';
 import axios from 'axios';
@@ -72,7 +73,7 @@ class SignInScreen extends Component {
     
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         {/* App Header */}
         {this.state.fontLoaded ? 
           <Text style={styles.header}>Pets e-Shopping</Text>    
@@ -110,7 +111,7 @@ class SignInScreen extends Component {
 
         {/* Forgot Password link */}
         <Text style={{color: '#0E4375'}}>Forgot password?</Text>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

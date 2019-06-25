@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Image,
     TextInput,
+    KeyboardAvoidingView
 } from 'react-native';
 import { Permissions, ImagePicker } from 'expo';
 import Icon from '@expo/vector-icons/FontAwesome';
@@ -57,7 +58,7 @@ class EditProfile extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={[styles.form, styles.shadow]}>
+                <KeyboardAvoidingView style={[styles.form, styles.shadow]} behavior="padding">
                     <View style={styles.photo}>
                         <Text style={styles.title}>Profile Photo:</Text>
                         <View style={[styles.frame, styles.shadow, {shadowRadius: 1}]}>
@@ -95,7 +96,7 @@ class EditProfile extends Component {
                             style={[styles.input, styles.shadow, {shadowRadius: 0.5}]} 
                         />
                     </View>
-                </View>
+                </KeyboardAvoidingView>
 
                 <View style={styles.btnContainer}>
                     <TouchableOpacity onPress={() => this.props.toggleVisible()}>

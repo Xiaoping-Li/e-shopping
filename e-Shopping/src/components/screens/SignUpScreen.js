@@ -6,6 +6,7 @@ import {
     TextInput,  
     ActivityIndicator,
     TouchableOpacity,
+    KeyboardAvoidingView,
  } from 'react-native';
  import { Font } from 'expo';
  import axios from 'axios';
@@ -65,7 +66,7 @@ class SignUpScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
                 {/* App Header */}
                 {this.state.fontLoaded ? 
                   <Text style={styles.header}>Pets e-Shopping</Text>    
@@ -121,7 +122,7 @@ class SignUpScreen extends Component {
                 >
                   Already have an account? Log In
                 </Text>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

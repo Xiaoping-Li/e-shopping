@@ -4,7 +4,8 @@ import {
     StyleSheet, 
     Text, 
     TouchableOpacity,
-    TextInput, 
+    TextInput,
+    KeyboardAvoidingView 
 } from 'react-native';
 import axios from 'axios';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -92,7 +93,7 @@ class PaymentScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
                 <View style={[styles.form, styles.shadow, {shadowRadius: 0.5, shadowColor: '#0a2f52'}]}>
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Credit Card</Text>
@@ -181,7 +182,7 @@ class PaymentScreen extends Component {
                         </TouchableOpacity>  
                     </View>
                 }  
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
