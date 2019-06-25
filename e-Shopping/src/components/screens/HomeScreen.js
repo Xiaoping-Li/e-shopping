@@ -88,8 +88,11 @@ class HomeScreen extends React.Component {
     axios
       .get(`http://192.168.0.107:5000/orders/?userID=${userID}&status=Pending`)
       .then(action(result => {
-        console.log(result.data)
-        if (result.data) globalStore.updateOrderID(result.data._id);
+        if (result.data) {
+          globalStore.updateOrderID(result.data._id);
+        } else {
+          globalStore.updateOrderID("");
+        }
       }))
       .catch(err => console.log("Error when get pending order ID: " + err));
   }

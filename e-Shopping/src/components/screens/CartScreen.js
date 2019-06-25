@@ -23,15 +23,7 @@ class CartScreen extends Component {
     const order = {
       userID,
       cartID,
-      token: '',
       subTotal: globalStore.subTotal,
-      address: {
-        recipient: '',
-        street: '',
-        city: '',
-        state: '',
-        zip: '',
-      }
     };
 
     if (globalStore.pendingOrder === "") {
