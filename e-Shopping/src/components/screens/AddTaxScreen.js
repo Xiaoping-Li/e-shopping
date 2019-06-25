@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import globalStore from '../../../GlobalStore';
+import axios from 'axios';
 
 class AddTaxScreen extends Component {
-    constructor() {
-        super();
-        this.state = {
-            total: 290.65,
-        };
-    }
     navigateToShipping = () => this.props.navigation.navigate('Shipping')
 
-    navigateToPayment = () => this.props.navigation.navigate('Payment')
+    submitTotal = () => {
+        const orderID = globalStore.pendingOrder;
+        const update = (globalStore.subTotal/100) + Number(((globalStore.subTotal/100) * 0.095).toFixed(2)) + 20; 
+
+        axios
+            .put(`http://192.168.0.107:5000/orders/?id=${orderID}&total=${update}`)
+            .then(result => {
+                if (result.data.ok) this.props.navigation.navigate('Payment');;
+            })
+            .catch(err => console.log("Error when try to update order address: " + err));
+        
+    }
 
     render() {
+        const total = (globalStore.subTotal/100) + Number(((globalStore.subTotal/100) * 0.095).toFixed(2)) + 20;
         return (
             <View style={styles.container}>
                 <View style={styles.summary}>
@@ -22,12 +30,12 @@ class AddTaxScreen extends Component {
 
                     <View style={styles.rowContainer}>
                         <Text style={styles.left}>Item Total:</Text>
-                        <Text style={styles.right}>$250.00</Text>
+                        <Text style={styles.right}>${globalStore.subTotal/100}</Text>
                     </View>
 
                     <View style={styles.rowContainer}>
                         <Text style={styles.left}>Tax:</Text>
-                        <Text style={styles.right}>$20.65</Text>
+                        <Text style={styles.right}>${Number(((globalStore.subTotal/100) * 0.095).toFixed(2))}</Text>
                     </View>
 
                     <View style={[styles.rowContainer, {borderBottomColor: '#1461aa', borderBottomWidth: 1, paddingBottom: 20, marginBottom: 20}]}>
@@ -35,7 +43,7 @@ class AddTaxScreen extends Component {
                         <Text style={styles.right}>$20.00</Text>
                     </View>
 
-                    <Text style={[styles.right, {width: 300}]}>Total $290.65</Text>    
+                    <Text style={[styles.right, {width: 300}]}>Total ${total}</Text>    
                 </View>
 
                 <View style={styles.btnContainer}>
@@ -47,10 +55,10 @@ class AddTaxScreen extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={this.navigateToPayment}
+                        onPress={() => this.submitTotal(total)}
                         style={[styles.btn, styles.shadow]}
                     >
-                        <Text style={styles.btnText}>Pay ${this.state.total}</Text>
+                        <Text style={styles.btnText}>Pay ${total}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

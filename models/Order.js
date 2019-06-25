@@ -19,6 +19,7 @@ const OrderSchema = new Schema({
     },
     token: String,
     subTotal: Number,
+    total: Number,
     address: {
         recipient: String,
         street: String,

@@ -102,7 +102,6 @@ class ShippingScreen extends Component {
         axios
             .put(`http://192.168.0.107:5000/orders/?id=${orderID}`, address)
             .then(result => {
-                console.log(result.data)
                 if (result.data.ok) this.props.navigation.navigate('Tax');
             })
             .catch(err => console.log("Error when try to update order address: " + err));    
