@@ -88,7 +88,25 @@ class ShippingScreen extends Component {
 
     navigateToCart = () => this.props.navigation.navigate('Cart')
 
-    navigateToTax = () => this.props.navigation.navigate('Tax')
+    submitAddress = () => {
+        const address = {
+            recipient: this.state.recipient,
+            street: this.state.street,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            country: this.state.country, 
+        };
+        const orderID = globalStore.pendingOrder;
+
+        axios
+            .put(`http://192.168.0.107:5000/orders/?id=${orderID}`, address)
+            .then(result => {
+                console.log(result.data)
+                if (result.data.ok) this.props.navigation.navigate('Tax');
+            })
+            .catch(err => console.log("Error when try to update order address: " + err));    
+    }
 
     render() {
         return (
@@ -118,7 +136,7 @@ class ShippingScreen extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={this.navigateToTax}
+                        onPress={this.submitAddress}
                         style={[styles.btn, styles.shadow]}
                     >
                         <Text style={styles.btnText}>Continue</Text>
