@@ -35,6 +35,7 @@ class PaymentScreen extends Component {
             exp_year: '',
             cvc: '',
             name: '',
+            paid: false,
         }
     }
 
@@ -71,39 +72,19 @@ class PaymentScreen extends Component {
             .post('http://192.168.0.107:5000/payments', charge)
             .then(result => {
                 if (result.data.paid) {
+                    this.setState({paid: true});
                     const cartStatusPromise = axios.put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&status=Success`);
                     const orderStatusPromise = axios.put(`http://192.168.0.107:5000/orders/?id=${globalStore.order._id}&status=Packaging`);
                     return Promise.all([cartStatusPromise, orderStatusPromise]);
                 }
             })
             .then(result => {
-                console.log(result)
-                // const newCartPromise = axios.get(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}`)
-                //     .then(action(result => {
-                //         if (result.data[0]) {
-                //         const cart = {
-                //             status: '',
-                //             _id: '',
-                //         };
-                //         const pets = result.data[0].pets;
-                //         cart._id = result.data[0]._id;
-                //         cart.status = result.data[0].status;
-
-                //         globalStore.initCart(cart);
-                //         globalStore.initPets(pets);
-                //         } 
-                //     }));
-
-                // const newOrderPromise = axios.get(`http://192.168.0.107:5000/orders/?userID=${globalStore.user._id}&status=Pending`)
-                //     .then(action(result => {
-                //         if (result.data) {
-                //             globalStore.updateOrderID(result.data._id);
-                //         } else {
-                //             globalStore.updateOrderID("");
-                //         }
-                //     }));
-
-                // return Promise.all([newCartPromise, newOrderPromise]);
+                if (result[0].data.ok && result[1].data.ok) {
+                    globalStore.initCart({});
+                    globalStore.initPets([]);
+                    globalStore.updateOrderID('');
+                    globalStore.updateTotal(0);   
+                }
             })
             .catch(err => console.log("Error when try to charge order: " + err));
     }
@@ -176,21 +157,33 @@ class PaymentScreen extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{width: 320, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row',}}>
-                    <TouchableOpacity
-                        onPress={this.navigateToTax}
-                        style={[styles.btn, styles.shadow]}
-                    >
-                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Back</Text>
-                    </TouchableOpacity>
+                {!this.state.paid ?
+                    <View style={{width: 320, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row',}}>
+                
+                        <TouchableOpacity
+                            onPress={this.navigateToTax}
+                            style={[styles.btn, styles.shadow]}
+                        >
+                            <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Back</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity
-                        onPress={this.navigateToHome}
-                        style={[styles.btn, styles.shadow]}
-                    >
-                        <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Shopping</Text>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity
+                            onPress={this.navigateToHome}
+                            style={[styles.btn, styles.shadow]}
+                        >
+                            <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Shopping</Text>
+                        </TouchableOpacity>  
+                    </View>
+                    :
+                    <View style={{width: 300, alignItems: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity
+                            onPress={this.navigateToHome}
+                            style={[styles.btn, styles.shadow, {width: 300}]}
+                        >
+                            <Text style={{color: '#0E4375', fontWeight: '600', fontSize: 20}}>Shopping</Text>
+                        </TouchableOpacity>  
+                    </View>
+                }  
             </View>
         );
     }
