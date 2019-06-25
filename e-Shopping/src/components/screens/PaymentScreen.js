@@ -14,18 +14,15 @@ import {action} from 'mobx';
 
 
 const stripe = require('stripe-client')('pk_test_Aq8bxsorwswJFtcXo5SFk6O900za5qLhQu');
-const information = {
-    card: {
-        number: '4242424242424242',
-        exp_month: '02',
-        exp_year: '21',
-        cvc: '999',
-        name: 'leela lee'
-    }
-};
-
-
-
+// const information = {
+//     card: {
+//         number: '4242424242424242',
+//         exp_month: '02',
+//         exp_year: '21',
+//         cvc: '999',
+//         name: 'leela lee'
+//     }
+// };
 class PaymentScreen extends Component {
     constructor() {
         super();
@@ -40,20 +37,20 @@ class PaymentScreen extends Component {
     }
 
     handlePay = async() => {
-        // if (!this.state.number.length || !this.state.exp_month.length || !this.state.exp_year.length || !this.state.cvc.length || !this.state.name.length) {
-        //     alert("All fields are required!");
-        //     return;
-        // }
+        if (!this.state.number.length || !this.state.exp_month.length || !this.state.exp_year.length || !this.state.cvc.length || !this.state.name.length) {
+            alert("All fields are required!");
+            return;
+        }
 
-        // const information = {
-        //     card: {
-        //         number: this.state.number,
-        //         exp_month: this.state.exp_month,
-        //         exp_year: this.state.exp_year,
-        //         cvc: this.state.cvc,
-        //         name: this.state.name,
-        //     }
-        // };
+        const information = {
+            card: {
+                number: this.state.number,
+                exp_month: this.state.exp_month,
+                exp_year: this.state.exp_year,
+                cvc: this.state.cvc,
+                name: this.state.name,
+            }
+        };
 
         const card = await stripe.createToken(information);
         const token = card.id;
@@ -78,14 +75,14 @@ class PaymentScreen extends Component {
                     return Promise.all([cartStatusPromise, orderStatusPromise]);
                 }
             })
-            .then(result => {
+            .then(action(result => {
                 if (result[0].data.ok && result[1].data.ok) {
                     globalStore.initCart({});
                     globalStore.initPets([]);
                     globalStore.updateOrderID('');
                     globalStore.updateTotal(0);   
                 }
-            })
+            }))
             .catch(err => console.log("Error when try to charge order: " + err));
     }
 
