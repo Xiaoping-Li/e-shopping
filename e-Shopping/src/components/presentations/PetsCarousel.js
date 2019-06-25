@@ -55,7 +55,27 @@ class PetsCarousel extends React.Component {
     );
   }
 
+  updatePet = (pet) => {
+    globalStore.addPet(pet);
+    switch (pet.category) {
+      case "Aquarium":
+        globalStore.updateAquariumCount(1, pet._id);
+        break;
+      case "Bird":
+        globalStore.updateBirdCount(1, pet._id);
+        break;
+      case "Fluffy":
+        globalStore.updateFluffyCount(1, pet._id);
+        break;
+      case "Reptile":
+        globalStore.updateReptileCount(1, pet._id);
+        break;
+    }
+    alert("Add to Cart!");
+  }
+
   addToCart = (pet) => {
+    const userID = globalStore.user._id;
     if (pet.count === 0) {
       alert("This pet is out of stock! Please check back later! Thank you!");
       return;
@@ -67,25 +87,26 @@ class PetsCarousel extends React.Component {
     }
 
     axios
-      .put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&petID=${pet._id}`)
+      .put(`http://192.168.0.107:5000/carts/?userID=${userID}&petID=${pet._id}`)
       .then(action(result => {
         if (result.data.ok) {
-          globalStore.addPet(pet);
-          switch (pet.category) {
-            case "Aquarium":
-              globalStore.updateAquariumCount(1, pet._id);
-              break;
-            case "Bird":
-              globalStore.updateBirdCount(1, pet._id);
-              break;
-            case "Fluffy":
-              globalStore.updateFluffyCount(1, pet._id);
-              break;
-            case "Reptile":
-              globalStore.updateReptileCount(1, pet._id);
-              break;
+          // If no exist pending cartID, create one and update cartID here
+          if (!globalStore.cart._id) {
+            axios
+            .get(`http://192.168.0.107:5000/carts/?userID=${userID}`)
+            .then(action(result => {
+              const cart = {
+                status: '',
+                _id: '',
+              };
+              
+              cart._id = result.data._id;
+              cart.status = result.data.status;
+              globalStore.initCart(cart);  
+            }))
+            .catch(err => console.log("Error when init cartID and Add Pet: " + err));
           }
-          alert("Add to Cart!");
+          this.updatePet(pet);   
         }
       }))
       .catch(err => console.log("Add Pets To Cart Error: " + err));

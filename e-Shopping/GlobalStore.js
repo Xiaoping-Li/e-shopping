@@ -39,15 +39,9 @@ class GlobalStore {
 
 
     // Carts
-    cart = {
-        status: '',
-        _id: '',
-    };
+    cart = {};
     pets = [];
-    initCart = (cart) => {
-        this.cart._id = cart._id;
-        this.cart.status = cart.status;
-    };
+    initCart = (cart) => this.cart = Object.assign({}, cart);
     initPets = pets => this.pets = pets;
     addPet = (pet) => this.pets.push({pet: pet, quantity: 1, _id: pet._id});
     removePet = petID => this.pets = this.pets.filter(pet => pet._id !== petID);
@@ -64,8 +58,12 @@ class GlobalStore {
     };
 
     //Pending order: pending cart  ---> 1 to 1 relation
-    pendingOrder = "";
-    updateOrderID = (id) => this.pendingOrder = id;
+    order = {
+        _id: '',
+        total: 0,
+    };
+    updateOrderID = (id) => this.order._id = id;
+    updateTotal = (total) => this.order.total = total;
    
 
     // Carousel visible
@@ -105,8 +103,9 @@ decorate(
         subTotal: computed,
 
         // Pending Order
-        pendingOrder: observable,
+        order: observable,
         updateOrderID: action,
+        updateTotal: action,
 
         // Carousel
         petsCarousleVisible: observable,

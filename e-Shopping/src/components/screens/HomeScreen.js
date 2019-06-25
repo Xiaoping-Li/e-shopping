@@ -67,14 +67,14 @@ class HomeScreen extends React.Component {
     axios
       .get(`http://192.168.0.107:5000/carts/?userID=${userID}`)
       .then(action(result => {
-        if (result.data[0]) {
+        if (result.data) {
           const cart = {
             status: '',
             _id: '',
           };
-          const pets = result.data[0].pets;
-          cart._id = result.data[0]._id;
-          cart.status = result.data[0].status;
+          const pets = result.data.pets;
+          cart._id = result.data._id;
+          cart.status = result.data.status;
 
           globalStore.initCart(cart);
           globalStore.initPets(pets);

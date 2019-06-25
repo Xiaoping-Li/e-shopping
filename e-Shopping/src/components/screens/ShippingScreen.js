@@ -97,7 +97,7 @@ class ShippingScreen extends Component {
             zip: this.state.zip,
             country: this.state.country, 
         };
-        const orderID = globalStore.pendingOrder;
+        const orderID = globalStore.order._id;
 
         axios
             .put(`http://192.168.0.107:5000/orders/?id=${orderID}`, address)

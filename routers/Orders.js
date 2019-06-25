@@ -28,22 +28,26 @@ OrdersRouter.post('', (req, res) => {
 OrdersRouter.put('', (req, res) => {
     const { id } = req.query;
     const { total } = req.query;
+    const { status } = req.query;
     const address = req.body;
-    
-    
-    if (total) {
+      
+    if (status) {
+        Orders
+            .updateOne({ _id: id }, { status })
+            .then(result => res.status(200).json(result))
+            .catch(err => console.log("Error when try to update order status: " + err));
+    } else if (total) {
         Orders
             .updateOne({ _id: id }, { total })
             .then(result => res.status(200).json(result))
-            .catch(err => console.log("Error when try to update order address: " + err));
+            .catch(err => console.log("Error when try to update order total amount: " + err));
         
-    } else {
+    } else if (address) {
         Orders
             .updateOne({ _id: id }, { address })
             .then(result => res.status(200).json(result))
             .catch(err => console.log("Error when try to update order address: " + err));
-    }
-    
+    }   
 })
 
 

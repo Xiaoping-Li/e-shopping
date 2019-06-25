@@ -93,7 +93,7 @@ server.use('/pets', PetsRouter);
 server.use('/users', UsersRouter);
 server.use('/orders', OrdersRouter);
 server.use('/carts', CartsRouter);
-server.use('/payment', PaymentRouter);
+server.use('/payments', PaymentRouter);
 
 
 // Charge customer with token

@@ -9,7 +9,7 @@ const Pets = require('../models/Pet');
 CartsRouter.get('', (req, res) => {
     const { userID } = req.query;
     Carts
-        .find({userID, status: "Pending"})
+        .findOne({userID, status: "Pending"})
         .populate('pets.pet', '_id name img price count')
         .then(cart => {
             res.status(200).json(cart);   
@@ -20,7 +20,7 @@ CartsRouter.get('', (req, res) => {
 CartsRouter.put('', (req, res) => {
     const { userID } = req.query;
     const { petID } = req.query;
-    const { status } = req.body;
+    const { status } = req.query;
     const newQuantity  = Number(req.body.new);
     const oldQuantity = Number(req.body.old);
 

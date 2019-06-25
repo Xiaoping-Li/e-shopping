@@ -6,9 +6,12 @@ import {
     TouchableOpacity,
     TextInput, 
 } from 'react-native';
-
+import axios from 'axios';
 import { Dropdown } from 'react-native-material-dropdown';
 import { LinearGradient } from 'expo';
+import globalStore from '../../../GlobalStore';
+import {action} from 'mobx';
+
 
 const stripe = require('stripe-client')('pk_test_Aq8bxsorwswJFtcXo5SFk6O900za5qLhQu');
 const information = {
@@ -17,7 +20,7 @@ const information = {
         exp_month: '02',
         exp_year: '21',
         cvc: '999',
-        name: 'Billy Joe'
+        name: 'leela lee'
     }
 };
 
@@ -36,9 +39,73 @@ class PaymentScreen extends Component {
     }
 
     handlePay = async() => {
+        // if (!this.state.number.length || !this.state.exp_month.length || !this.state.exp_year.length || !this.state.cvc.length || !this.state.name.length) {
+        //     alert("All fields are required!");
+        //     return;
+        // }
+
+        // const information = {
+        //     card: {
+        //         number: this.state.number,
+        //         exp_month: this.state.exp_month,
+        //         exp_year: this.state.exp_year,
+        //         cvc: this.state.cvc,
+        //         name: this.state.name,
+        //     }
+        // };
+
         const card = await stripe.createToken(information);
         const token = card.id;
-        
+
+        const charge ={
+            amount: globalStore.order.total,
+            currency: 'usd',
+            source: token,
+            description: `charge for ${globalStore.user.email}`,
+            metadata: {
+                orderID: globalStore.order._id,
+            }
+        };
+
+        axios
+            .post('http://192.168.0.107:5000/payments', charge)
+            .then(result => {
+                if (result.data.paid) {
+                    const cartStatusPromise = axios.put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&status=Success`);
+                    const orderStatusPromise = axios.put(`http://192.168.0.107:5000/orders/?id=${globalStore.order._id}&status=Packaging`);
+                    return Promise.all([cartStatusPromise, orderStatusPromise]);
+                }
+            })
+            .then(result => {
+                console.log(result)
+                // const newCartPromise = axios.get(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}`)
+                //     .then(action(result => {
+                //         if (result.data[0]) {
+                //         const cart = {
+                //             status: '',
+                //             _id: '',
+                //         };
+                //         const pets = result.data[0].pets;
+                //         cart._id = result.data[0]._id;
+                //         cart.status = result.data[0].status;
+
+                //         globalStore.initCart(cart);
+                //         globalStore.initPets(pets);
+                //         } 
+                //     }));
+
+                // const newOrderPromise = axios.get(`http://192.168.0.107:5000/orders/?userID=${globalStore.user._id}&status=Pending`)
+                //     .then(action(result => {
+                //         if (result.data) {
+                //             globalStore.updateOrderID(result.data._id);
+                //         } else {
+                //             globalStore.updateOrderID("");
+                //         }
+                //     }));
+
+                // return Promise.all([newCartPromise, newOrderPromise]);
+            })
+            .catch(err => console.log("Error when try to charge order: " + err));
     }
 
     navigateToTax = () => this.props.navigation.navigate('Tax')
@@ -202,40 +269,40 @@ const styles = StyleSheet.create({
 
 const monthData = [
     {
-        value: '1 - January'
+        value: '01'
     },
     {
-        value: '2 - February'
+        value: '02'
     },
     {
-        value: '3 - March'
+        value: '03'
     },
     {
-        value: '4 - April'
+        value: '04'
     },
     {
-        value: '5 - May'
+        value: '05'
     },
     {
-        value: '6 - June'
+        value: '06'
     },
     {
-        value: '7 - July'
+        value: '07'
     },
     {
-        value: '8 - August'
+        value: '08'
     },
     {
-        value: '9 - September'
+        value: '09'
     },
     {
-        value: '10 - October'
+        value: '10'
     },
     {
-        value: '11 - November'
+        value: '11'
     },
     {
-        value: '12 - December'
+        value: '12'
     },
 ];
 

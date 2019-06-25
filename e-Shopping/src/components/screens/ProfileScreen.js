@@ -28,6 +28,10 @@ class ProfileScreen extends Component {
             .clear()
             .then(action(result => {
                 globalStore.updateUser({username: '', email: '', thumbnail: '', _id: ''});
+                globalStore.initCart({});
+                globalStore.initPets([]);
+                globalStore.updateOrderID('');
+                globalStore.updateTotal(0);
 
                 axios
                     .post('http://192.168.0.107:5000/signout')

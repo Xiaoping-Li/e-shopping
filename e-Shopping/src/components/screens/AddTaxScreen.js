@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import globalStore from '../../../GlobalStore';
+import {action} from 'mobx';
 import axios from 'axios';
 
 class AddTaxScreen extends Component {
     navigateToShipping = () => this.props.navigation.navigate('Shipping')
 
     submitTotal = () => {
-        const orderID = globalStore.pendingOrder;
-        const update = globalStore.subTotal + Number((globalStore.subTotal * 0.095).toFixed(2)) + 2000; 
+        const orderID = globalStore.order._id;
+        const update = globalStore.subTotal + Math.round(globalStore.subTotal * 0.095) + 2000; 
 
         axios
             .put(`http://192.168.0.107:5000/orders/?id=${orderID}&total=${update}`)
-            .then(result => {
-                if (result.data.ok) this.props.navigation.navigate('Payment');;
-            })
+            .then(action(result => {
+                if (result.data.ok) {
+                    globalStore.updateTotal(update);
+                    this.props.navigation.navigate('Payment');
+                }
+            }))
             .catch(err => console.log("Error when try to update order address: " + err));
         
     }

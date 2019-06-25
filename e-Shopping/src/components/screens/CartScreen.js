@@ -26,7 +26,7 @@ class CartScreen extends Component {
       subTotal: globalStore.subTotal,
     };
 
-    if (globalStore.pendingOrder === "") {
+    if (globalStore.order._id === "") {
       axios
         .post('http://192.168.0.107:5000/orders', order)
         .then(action(result => {
