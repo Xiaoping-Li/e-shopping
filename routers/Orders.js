@@ -31,14 +31,15 @@ OrdersRouter.put('', (req, res) => {
     const address = req.body;
     
     
-    if (address) {
-        Orders
-            .updateOne({ _id: id }, { address })
-            .then(result => res.status(200).json(result))
-            .catch(err => console.log("Error when try to update order address: " + err));
-    } else if (total) {
+    if (total) {
         Orders
             .updateOne({ _id: id }, { total })
+            .then(result => res.status(200).json(result))
+            .catch(err => console.log("Error when try to update order address: " + err));
+        
+    } else {
+        Orders
+            .updateOne({ _id: id }, { address })
             .then(result => res.status(200).json(result))
             .catch(err => console.log("Error when try to update order address: " + err));
     }

@@ -8,7 +8,7 @@ class AddTaxScreen extends Component {
 
     submitTotal = () => {
         const orderID = globalStore.pendingOrder;
-        const update = (globalStore.subTotal/100) + Number(((globalStore.subTotal/100) * 0.095).toFixed(2)) + 20; 
+        const update = globalStore.subTotal + Number((globalStore.subTotal * 0.095).toFixed(2)) + 2000; 
 
         axios
             .put(`http://192.168.0.107:5000/orders/?id=${orderID}&total=${update}`)
