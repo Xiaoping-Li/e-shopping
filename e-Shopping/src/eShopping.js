@@ -22,6 +22,7 @@ import {
   AddTaxScreen,
   PaymentScreen,
   OrderScreen,
+  SendPWEmailScreen,
 } from './components/screens';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -196,6 +197,7 @@ const AuthStackNavigator = createStackNavigator(
     Welcome: WelcomeScreen,
     SignIn: SignInScreen,
     SignUp: SignUpScreen,
+    SendEmail: SendPWEmailScreen,
   }
 );
 
