@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
 const Users = require('./models/User');
 const db = require('./config/keys_dev').mongoURI;
-const email = require('./config/keys_dev').MAILER_EMAIL;
+const Email = require('./config/keys_dev').MAILER_EMAIL;
 const pass = require('./config/keys_dev').MAILER_PASSWORD;
 
 // Import Routers
@@ -42,20 +42,17 @@ server.use(session({
 
 // Send email to reset password
 server.get('/reset_password', (req, res) => {
-    const email = req.body;
+    const { email } = req.body;
     Users
-        .findOne(email)
+        .findOne({email})
         .then(user => {
             if (user) {
                 const transporter = nodemailer.createTransport({
-                    service: 'gmail',
+                    service: 'Gmail',
                     auth: {
-                        user: email,
+                        user: Email,
                         pass: pass,
                     },
-                    tls: {
-                        rejectUnauthorized: false,
-                    }
                 });
 
                 const mailOptions = {
@@ -69,7 +66,7 @@ server.get('/reset_password', (req, res) => {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log(info);
+                        res.status(200).json(info);
                     }
                 })
             } else {

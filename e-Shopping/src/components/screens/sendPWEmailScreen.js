@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
+import axios from 'axios';
 
 class SendPWEmailScreen extends Component {
   constructor(props) {
@@ -15,6 +16,14 @@ class SendPWEmailScreen extends Component {
     this.state = {
       email: ''
     };
+  }
+
+  sendEmail = () => {
+    const email = this.state.email;
+    axios 
+      .get(`http://192.168.0.107:5000/reset_password`, email)
+      .then()
+      .catch(err => console.log("Error when send reset password email: " + err));
   }
 
   render() {
