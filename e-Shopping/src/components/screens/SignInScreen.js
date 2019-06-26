@@ -70,6 +70,8 @@ class SignInScreen extends Component {
         console.log(err);
       });
   }
+
+  navigateToSendEmail = () => this.props.navigation.navigate("SendEmail")
     
   render() {
     return (
@@ -110,7 +112,10 @@ class SignInScreen extends Component {
         <View style={styles.divider_bar}></View> 
 
         {/* Forgot Password link */}
-        <Text style={{color: '#0E4375'}}>Forgot password?</Text>
+        <TouchableOpacity onPress={this.navigateToSendEmail}>
+          <Text style={{color: '#0E4375'}}>Forgot password?</Text>
+        </TouchableOpacity>
+        
       </KeyboardAvoidingView>
     );
   }
