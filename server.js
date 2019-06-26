@@ -12,6 +12,8 @@ const nodemailer = require('nodemailer');
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
 const Users = require('./models/User');
 const db = require('./config/keys_dev').mongoURI;
+const email = require('./config/keys_dev').MAILER_EMAIL;
+const pass = require('./config/keys_dev').MAILER_PASSWORD;
 
 // Import Routers
 const PetsRouter = require('./routers/pets');
@@ -37,6 +39,31 @@ server.use(session({
     resave: false,
     saveUninitialized: false,
 }));
+
+// Send email to reset password
+server.get('/reset_password', (req, res) => {
+    const email = req.body;
+    Users
+        .findOne(email)
+        .then(user => {
+            if (user) {
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: email,
+                        pass: pass,
+                    }
+                });
+
+                const mailOptions = {
+                    from: 'Pets e-Shopping',
+                    to: ''
+                };
+            }
+            // res.status(200).json(user);
+        })
+        .catch(err => console.log("Error when varify email of reseting pw: " + err));
+});
 
 // Middleware: Validate user for all the routers, except '/signin' and '/singup'
 server.use((req, res, next) => {
