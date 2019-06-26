@@ -49,6 +49,14 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+const handlebarsOptions = {
+    viewEngine: 'handlebars',
+    viewPath: path.resolve('./views'),
+    extName: '.html'
+};
+
+transporter.use('compile', hbs(handlebarsOptions));
+
 
 // Send email to reset password
 server.get('/reset_password', (req, res) => {
