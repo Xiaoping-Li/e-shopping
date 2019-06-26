@@ -33,7 +33,7 @@ class SendPWEmailScreen extends Component {
             <Icon
               color="#F08E52"
               name="send"
-              size={30} 
+              size={35} 
               style={styles.shadow}
             />
           </TouchableOpacity>  
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#F08E52',
     fontSize: 20,
-    padding: 5,
+    padding: 10,
     width: 300,
     marginRight: 10,
     borderRadius: 10,
