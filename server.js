@@ -12,8 +12,8 @@ const nodemailer = require('nodemailer');
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
 const Users = require('./models/User');
 const db = require('./config/keys_dev').mongoURI;
-const Email = require('./config/keys_dev').MAILER_EMAIL;
-const pass = require('./config/keys_dev').MAILER_PASSWORD;
+const EMAIL = require('./config/keys_dev').MAILER_EMAIL;
+const PASSWORD = require('./config/keys_dev').MAILER_PASSWORD;
 
 // Import Routers
 const PetsRouter = require('./routers/pets');
@@ -40,6 +40,16 @@ server.use(session({
     saveUninitialized: false,
 }));
 
+// Reusable part for send email
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: EMAIL,
+        pass: PASSWORD,
+    },
+});
+
+
 // Send email to reset password
 server.get('/reset_password', (req, res) => {
     const { email } = req.body;
@@ -47,21 +57,12 @@ server.get('/reset_password', (req, res) => {
         .findOne({email})
         .then(user => {
             if (user) {
-                const transporter = nodemailer.createTransport({
-                    service: 'Gmail',
-                    auth: {
-                        user: Email,
-                        pass: pass,
-                    },
-                });
-
                 const mailOptions = {
                     from: 'Pets e-Shopping',
                     to: email,
                     subject: 'Reset password link',
                     html: `<p>Please click the link to reset your password</p>`,
                 };
-
                 transporter.sendMail(mailOptions, (err, info) => {
                     if (err) {
                         console.log(err);
