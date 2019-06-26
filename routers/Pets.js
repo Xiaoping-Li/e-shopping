@@ -1,6 +1,6 @@
 const express = require('express');
-const PetsRouter = express.Router();
 const Pets = require('../models/Pet');
+const PetsRouter = express.Router();
 
 PetsRouter.post('', (req, res) => {
     const pet = req.body;

@@ -4,14 +4,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+// Import nodemailer and express-handlebars
+const hbs = require('nodemailer-express-handlebars');
+const path = require('path');
+const nodemailer = require('nodemailer');
 
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
 const Users = require('./models/User');
 const db = require('./config/keys_dev').mongoURI;
-
-const PORT = process.env.PORT || 5000;
-
-const server = express();
 
 // Import Routers
 const PetsRouter = require('./routers/pets');
@@ -20,6 +20,13 @@ const OrdersRouter = require('./routers/Orders');
 const CartsRouter = require('./routers/Carts');
 const PaymentRouter = require('./routers/Payment');
 
+const PORT = process.env.PORT || 5000;
+
+const server = express();
+
+
+// Setup some middleware
+server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(cors({
     origin: true,

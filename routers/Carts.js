@@ -1,8 +1,7 @@
 const express = require('express');
-const CartsRouter = express.Router();
 const Carts = require('../models/Cart');
 const Pets = require('../models/Pet');
-
+const CartsRouter = express.Router();
 
 // If "pending" cart exist, populate pets info
 // Else return empty cart
