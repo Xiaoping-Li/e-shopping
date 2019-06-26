@@ -60,7 +60,7 @@ server.get('/reset_password', (req, res) => {
 
                 const mailOptions = {
                     from: 'Pets e-Shopping',
-                    to: '',
+                    to: email,
                     subject: 'Reset password link',
                     html: `<p>Please click the link to reset your password</p>`,
                 };
