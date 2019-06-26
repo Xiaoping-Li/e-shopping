@@ -13,6 +13,7 @@ import ShippingScreen from './ShippingScreen';
 import AddTaxScreen from './AddTaxScreen';
 import PaymentScreen from './PaymentScreen';
 import OrderScreen from './OrderScreen';
+import SendPWEmailScreen from './SendPWEmailScreen';
 
 export {
     HomeScreen,
@@ -30,4 +31,5 @@ export {
     AddTaxScreen,
     PaymentScreen,
     OrderScreen,
+    SendPWEmailScreen,
 }
