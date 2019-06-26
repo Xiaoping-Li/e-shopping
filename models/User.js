@@ -32,7 +32,9 @@ const UserSchema = new Schema({
     creatAt: {
         type: Date,
         default: Date.now,
-    }
+    },
+    reset_password_token: String,
+    reset_password_expires: Date,
 },
 {runSettersOnQuery: true});
 
