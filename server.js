@@ -52,15 +52,29 @@ server.get('/reset_password', (req, res) => {
                     auth: {
                         user: email,
                         pass: pass,
+                    },
+                    tls: {
+                        rejectUnauthorized: false,
                     }
                 });
 
                 const mailOptions = {
                     from: 'Pets e-Shopping',
-                    to: ''
+                    to: '',
+                    subject: 'Reset password link',
+                    html: `<p>Please click the link to reset your password</p>`,
                 };
-            }
-            // res.status(200).json(user);
+
+                transporter.sendMail(mailOptions, (err, info) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(info);
+                    }
+                })
+            } else {
+              res.status(200).json({msg: "User not found"});  
+            }  
         })
         .catch(err => console.log("Error when varify email of reseting pw: " + err));
 });
