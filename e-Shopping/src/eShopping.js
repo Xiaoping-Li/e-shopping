@@ -30,7 +30,8 @@ import Icon from '@expo/vector-icons/Ionicons';
 
 export default class EShopping extends Component {
   render() {
-    return <AppContainer />;
+    const prefix = Expo.Linking.makeUrl('/');
+    return <AppContainer uriPrefix={prefix}/>;
   }
 }
 
@@ -199,14 +200,20 @@ const AuthStackNavigator = createStackNavigator(
     SignIn: SignInScreen,
     SignUp: SignUpScreen,
     SendEmail: SendPWEmailScreen,
-    ResetPW: ResetPWScreen,
+    ResetPW: {
+      screen: ResetPWScreen,
+      path: 'reset_password/',
+    },
   }
 );
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    Auth: AuthStackNavigator,
+    Auth: {
+      screen: AuthStackNavigator,
+      path: '',
+    },
     App: AppDrawerNavigator,
   }
 );
