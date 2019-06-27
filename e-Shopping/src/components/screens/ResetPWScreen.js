@@ -21,6 +21,8 @@ class ResetPWScreen extends Component {
     };
   }
 
+  navigateToSignIn = () => this.props.navigation.navigate("SignIn");
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -44,7 +46,7 @@ class ResetPWScreen extends Component {
             style={[styles.input, styles.shadow]}
           />
 
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={this.navigateToSignIn}>
             <Icon
               color="#F08E52"
               name="send"

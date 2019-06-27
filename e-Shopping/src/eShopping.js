@@ -23,6 +23,7 @@ import {
   PaymentScreen,
   OrderScreen,
   SendPWEmailScreen,
+  ResetPWScreen,
 } from './components/screens';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -198,6 +199,7 @@ const AuthStackNavigator = createStackNavigator(
     SignIn: SignInScreen,
     SignUp: SignUpScreen,
     SendEmail: SendPWEmailScreen,
+    ResetPW: ResetPWScreen,
   }
 );
 

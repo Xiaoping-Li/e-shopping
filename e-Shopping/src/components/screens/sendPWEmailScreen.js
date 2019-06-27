@@ -26,6 +26,8 @@ class SendPWEmailScreen extends Component {
       .catch(err => console.log("Error when send reset password email: " + err));
   }
 
+  navigateToResetPW = () => this.props.navigation.navigate("ResetPW");
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -38,7 +40,7 @@ class SendPWEmailScreen extends Component {
             style={[styles.input, styles.shadow]}
           />
 
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={this.navigateToResetPW}>
             <Icon
               color="#F08E52"
               name="send"
