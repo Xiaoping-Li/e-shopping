@@ -6,8 +6,10 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 // Import nodemailer and express-handlebars
 const hbs = require('nodemailer-express-handlebars');
+const exphbs = require('express-handlebars');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const SESSION_SECRET = require('./config/keys_dev').SESSION_SECRET;
 const Users = require('./models/User');
@@ -40,6 +42,9 @@ server.use(session({
     saveUninitialized: false,
 }));
 
+server.engine('handlebars', exphbs());
+server.set('view engine', 'handlebars');
+
 // Reusable part for send email
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -49,40 +54,78 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const handlebarsOptions = {
-    viewEngine: 'handlebars',
-    viewPath: path.resolve('./views'),
-    extName: '.html'
-};
+// const handlebarsOptions = {
+//     viewEngine: {
+//         extName: '.hbs',
+//         partialsDir: './views/resetPW.handlebars',
+//         layoutsDir: './views/resetPW.handlebars',
+//     },
+//     viewPath: path.resolve('./templates'),
+//     extName: '.html'
+// };
 
-transporter.use('compile', hbs(handlebarsOptions));
+// transporter.use('compile', hbs(handlebarsOptions));
 
 
 // Send email to reset password
-server.get('/reset_password', (req, res) => {
+server.put('/forget_password', (req, res) => {
     const { email } = req.body;
     Users
         .findOne({email})
         .then(user => {
             if (user) {
-                const mailOptions = {
-                    from: 'Pets e-Shopping',
-                    to: email,
-                    subject: 'Reset password link',
-                    html: `<p>Please click the link to reset your password</p>`,
-                };
-                transporter.sendMail(mailOptions, (err, info) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        res.status(200).json(info);
-                    }
-                })
+                // create a random token
+                return crypto.randomBytes(20);
             } else {
               res.status(200).json({msg: "User not found"});  
             }  
         })
+        .then(result => {
+            const token = result.toString('hex');
+            return Users
+                .findOneAndUpdate(
+                    { email }, 
+                    {
+                        reset_password_token: token, 
+                        // Token will be expired in 24 hours
+                        reset_password_expires: Date.now() + 86400000
+                    },
+                    { new: true }
+                );
+        })
+        .then(user => {
+            const mailOptions = {
+                from: EMAIL,
+                to: email,
+                subject: 'Pets e-Shopping: Reset password link',
+                // template: 'password-link-email',
+                context: {
+                    // url: `http://localhost:5000/reset_password/?token=${user.reset_password_token}`,
+                    name: user.username,
+                },
+                html: `
+                <div>
+                    <h3>Dear ${user.username},</h3>
+                    <p>You requested for a password reset, kindly use this <a href=http://localhost:5000/reset_password?token=${user.reset_password_token}>link</a> to reset your password</p>
+                    <br>
+                    <p>Cheers!</p>
+                </div>
+                `
+            };
+
+            transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.status(200).json(info);
+                }
+            })
+        })
         .catch(err => console.log("Error when varify email of reseting pw: " + err));
+});
+
+server.get('/reset_password', (req, res) => {
+    res.render('index');
 });
 
 // Middleware: Validate user for all the routers, except '/signin' and '/singup'

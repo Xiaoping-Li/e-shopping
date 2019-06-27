@@ -21,7 +21,7 @@ class SendPWEmailScreen extends Component {
   sendEmail = () => {
     const email = this.state.email;
     axios 
-      .get(`http://192.168.0.107:5000/reset_password`, email)
+      .put(`http://192.168.0.107:5000/forget_password`, email)
       .then()
       .catch(err => console.log("Error when send reset password email: " + err));
   }
