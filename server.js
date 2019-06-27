@@ -6,9 +6,6 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 
 // Import nodemailer and express-handlebars
-// const hbs = require('nodemailer-express-handlebars');
-// const exphbs = require('express-handlebars');
-// const path = require('path');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
@@ -43,9 +40,6 @@ server.use(session({
     saveUninitialized: false,
 }));
 
-// server.engine('handlebars', exphbs());
-// server.set('view engine', 'handlebars');
-
 // Reusable part for send email
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -54,19 +48,6 @@ const transporter = nodemailer.createTransport({
         pass: PASSWORD,
     },
 });
-
-// const handlebarsOptions = {
-//     viewEngine: {
-//         extName: '.hbs',
-//         partialsDir: './views/resetPW.handlebars',
-//         layoutsDir: './views/resetPW.handlebars',
-//     },
-//     viewPath: path.resolve('./templates'),
-//     extName: '.html'
-// };
-
-// transporter.use('compile', hbs(handlebarsOptions));
-
 
 // Send email to reset password
 server.put('/forget_password', (req, res) => {
@@ -95,11 +76,6 @@ server.put('/forget_password', (req, res) => {
                 from: EMAIL,
                 to: email,
                 subject: 'Pets e-Shopping: Reset password link',
-                // template: 'password-link-email',
-                // context: {
-                //     url: `http://localhost:5000/reset_password/?token=${user.reset_password_token}`,
-                //     name: user.username,
-                // },
                 html: `
                 <div>
                     <h3>Dear ${user.username},</h3>
@@ -122,7 +98,24 @@ server.put('/forget_password', (req, res) => {
 });
 
 server.get('/reset_password', (req, res) => {
-    
+    const { token } = req.query;
+    Users
+        .findOne({
+            reset_password_token: token,
+            reset_password_expires: { $gt: Date.now() }
+        })
+        .then(user => {
+            if (!user) {
+                res.json({success: false, msg: "Reset passwork link is invalid or expired!"});
+            } else {
+                res.status(200).json({success: true, username: user.username, email: user.email })
+            }
+        })
+        .catch(err => console.log("Error when open reset_password link: " + err));   
+});
+
+server.put('/reset_password', (req, res) => {
+
 });
 
 // Middleware: Validate user for all the routers, except '/signin' and '/singup'
