@@ -4,10 +4,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+
 // Import nodemailer and express-handlebars
-const hbs = require('nodemailer-express-handlebars');
-const exphbs = require('express-handlebars');
-const path = require('path');
+// const hbs = require('nodemailer-express-handlebars');
+// const exphbs = require('express-handlebars');
+// const path = require('path');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
@@ -42,8 +43,8 @@ server.use(session({
     saveUninitialized: false,
 }));
 
-server.engine('handlebars', exphbs());
-server.set('view engine', 'handlebars');
+// server.engine('handlebars', exphbs());
+// server.set('view engine', 'handlebars');
 
 // Reusable part for send email
 const transporter = nodemailer.createTransport({
@@ -75,23 +76,19 @@ server.put('/forget_password', (req, res) => {
         .then(user => {
             if (user) {
                 // create a random token
-                return crypto.randomBytes(20);
+                const token = crypto.randomBytes(20).toString('hex');
+                return Users
+                    .findOneAndUpdate(
+                        { email }, 
+                        {
+                            reset_password_token: token, 
+                            reset_password_expires: Date.now() + 86400000  // Token will be expired in 24 hours
+                        },
+                        { new: true } // return the updated user
+                    ); 
             } else {
               res.status(200).json({msg: "User not found"});  
             }  
-        })
-        .then(result => {
-            const token = result.toString('hex');
-            return Users
-                .findOneAndUpdate(
-                    { email }, 
-                    {
-                        reset_password_token: token, 
-                        // Token will be expired in 24 hours
-                        reset_password_expires: Date.now() + 86400000
-                    },
-                    { new: true }
-                );
         })
         .then(user => {
             const mailOptions = {
@@ -99,10 +96,10 @@ server.put('/forget_password', (req, res) => {
                 to: email,
                 subject: 'Pets e-Shopping: Reset password link',
                 // template: 'password-link-email',
-                context: {
-                    // url: `http://localhost:5000/reset_password/?token=${user.reset_password_token}`,
-                    name: user.username,
-                },
+                // context: {
+                //     url: `http://localhost:5000/reset_password/?token=${user.reset_password_token}`,
+                //     name: user.username,
+                // },
                 html: `
                 <div>
                     <h3>Dear ${user.username},</h3>
@@ -125,7 +122,7 @@ server.put('/forget_password', (req, res) => {
 });
 
 server.get('/reset_password', (req, res) => {
-    res.render('index');
+    
 });
 
 // Middleware: Validate user for all the routers, except '/signin' and '/singup'
