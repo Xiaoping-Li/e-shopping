@@ -14,6 +14,7 @@ import AddTaxScreen from './AddTaxScreen';
 import PaymentScreen from './PaymentScreen';
 import OrderScreen from './OrderScreen';
 import SendPWEmailScreen from './SendPWEmailScreen';
+import ResetPWScreen from './ResetPWScreen';
 
 export {
     HomeScreen,
@@ -32,4 +33,5 @@ export {
     PaymentScreen,
     OrderScreen,
     SendPWEmailScreen,
+    ResetPWScreen,
 }
