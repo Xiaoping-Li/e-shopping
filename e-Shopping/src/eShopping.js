@@ -204,7 +204,15 @@ const AuthStackNavigator = createStackNavigator(
       screen: ResetPWScreen,
       path: 'reset_password/',
     },
-  }
+  },
+  {
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        header: null,
+        gesturesEnabled: false,
+      }
+    }
+  },
 );
 
 const AppSwitchNavigator = createSwitchNavigator(

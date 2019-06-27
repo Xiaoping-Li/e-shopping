@@ -80,7 +80,7 @@ server.put('/forget_password', (req, res) => {
                 `
                 <div>
                     <h3>Dear ${user.username},</h3>
-                    <p>You requested for a password reset, kindly copy this <a href=https://expo.io/--/to-exp/exp%3A%2F%2F192.168.0.107%3A19000%2F--%2Freset_password>link</a> to reset your password</p>
+                    <p>You requested for a password reset, kindly click this <a href=https://expo.io/--/to-exp/exp%3A%2F%2F192.168.0.107%3A19000%2F--%2Freset_password?token=${user.reset_password_token}>link</a> to reset your password</p>
                     <br>
                     <p>Cheers!</p>
                 </div>
