@@ -75,8 +75,8 @@ server.put('/forget_password', (req, res) => {
             }  
         })
         .then(user => {
-            
-            // const url = expo.Linking.makeUrl(`https://expo.io/--/to-exp/exp%3A%2F%2F192.168.0.107%3A19000%2F--%2Freset_password`, {token: user.reset_password_token});
+            const token = user.reset_password_token;
+            const uri = encodeURIComponent(`://192.168.0.107:19000/--/reset_password/${token}`);
             
             const mailOptions = {
                 from: EMAIL,
@@ -86,9 +86,10 @@ server.put('/forget_password', (req, res) => {
                 `
                 <div>
                     <h3>Dear ${user.username},</h3>
-                    <p>You requested for a password reset, kindly Click this <a href=https://expo.io/--/to-exp/exp%3A%2F%2F192.168.0.107%3A19000%2F--%2Freset_password?token=${user.reset_password_token}>link</a> to reset your password</p>
+                    <p>You requested for a password reset, kindly Click this <a href=https://expo.io/--/to-exp/exp${uri}>link</a> to reset your password</p>
                     <br>
-                    
+                    <p>https://expo.io/--/to-exp/exp${uri}</p>
+                    <br>
                     <p>Cheers!</p>
                 </div>
                 `

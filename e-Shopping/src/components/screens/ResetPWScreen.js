@@ -33,13 +33,8 @@ class ResetPWScreen extends Component {
   }
 
   handleOpenURL = (event) => {
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        console.log('Initial url is: ' + url);
-      }
-    }).catch(err => console.error('An error occurred', err));
     // const result = Expo.Linking.parse(event.url);
-    // console.log(result);
+    console.log(event.url);
     console.log(event);
   }
 
