@@ -19,14 +19,18 @@ class SendPWEmailScreen extends Component {
   }
 
   sendEmail = () => {
-    const email = this.state.email;
+    const info = { email: this.state.email}
     axios 
-      .put(`http://192.168.0.107:5000/forget_password`, email)
-      .then()
+      .put(`http://192.168.0.107:5000/forget_password`, info)
+      .then(result => {
+        if (result.data.success) {
+          alert("Congras! A reset passwork email is on the way. Please check your mailbox! The link will be expired in 24 hours.");
+        } else {
+          alert("User not found! Please varify this is the correct register email!");
+        }
+      })
       .catch(err => console.log("Error when send reset password email: " + err));
   }
-
-  navigateToResetPW = () => this.props.navigation.navigate("ResetPW");
 
   render() {
     return (
@@ -40,7 +44,7 @@ class SendPWEmailScreen extends Component {
             style={[styles.input, styles.shadow]}
           />
 
-          <TouchableOpacity onPress={this.navigateToResetPW}>
+          <TouchableOpacity onPress={this.sendEmail}>
             <Icon
               color="#F08E52"
               name="send"

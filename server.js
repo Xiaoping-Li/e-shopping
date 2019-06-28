@@ -54,7 +54,7 @@ const transporter = nodemailer.createTransport({
 
 // Send email to reset password
 server.put('/forget_password', (req, res) => {
-    const { email } = req.body;
+    const email = req.body.email;
     Users
         .findOne({email})
         .then(user => {
@@ -71,8 +71,8 @@ server.put('/forget_password', (req, res) => {
                         { new: true } // return the updated user
                     ); 
             } else {
-              res.status(200).json({msg: "User not found"});  
-            }  
+              return res.json({success: false, msg: "User not found"});  
+            }    
         })
         .then(user => {
             const token = user.reset_password_token;
@@ -99,7 +99,7 @@ server.put('/forget_password', (req, res) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.status(200).json(info);
+                    res.status(200).json({success: true});
                 }
             })
         })
@@ -137,7 +137,7 @@ server.put('/reset_password', (req, res) => {
                     { 
                         password: newHashedPW,
                         reset_password_expires: null,
-                        reset_password_token: null, 
+                        reset_password_token: '', 
                     },
                 )
                 .then(result => res.status(200).json({resetPW: true, result}))
