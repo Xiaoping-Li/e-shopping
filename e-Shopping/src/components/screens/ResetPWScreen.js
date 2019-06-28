@@ -12,7 +12,6 @@ import Icon from '@expo/vector-icons/FontAwesome';
 import axios from 'axios';
 
 
-
 class ResetPWScreen extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +76,7 @@ class ResetPWScreen extends Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View>
           <Text style={styles.header}>Dear {this.state.username}:</Text>
-          <Text>Welcome back! Please reset your password. And the register email for reseting password is: {this.state.email}</Text>
+          <Text style={{fontSize: 20, color: '#0E4375'}}>Welcome back! Please reset your password. And the register email for reseting password is: {this.state.email}</Text>
         </View>
         
         <View style={styles.sendContainer}>
@@ -95,9 +94,9 @@ class ResetPWScreen extends Component {
             style={[styles.input, styles.shadow]}
           />
 
-          <TouchableOpacity onPress={this.resetPW}>
+          <TouchableOpacity onPress={this.resetPW} style={[styles.submit, styles.shadow]}>
             <Icon
-              color="#F08E52"
+              color="#fff"
               name="send"
               size={35} 
               style={styles.shadow}
@@ -119,8 +118,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    fontSize: 20, 
+    fontSize: 25, 
     color: '#0E4375',
+    fontWeight: '600',
+    marginBottom: 10,
   },
   sendContainer: {
     alignItems: 'center', 
@@ -133,8 +134,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
     width: 300,
-    marginRight: 10,
+    marginBottom: 10,
     borderRadius: 10,
+  },
+  submit: {
+    width: 300,
+    padding: 5,
+    marginTop: 30,
+    borderRadius: 10,
+    alignItems: 'center', 
+    justifyContent: 'center',
+    backgroundColor: '#F08E52'
   },
   shadow: {
     shadowColor: '#2F1A0C',
