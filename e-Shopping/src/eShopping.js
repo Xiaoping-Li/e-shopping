@@ -202,7 +202,7 @@ const AuthStackNavigator = createStackNavigator(
     SendEmail: SendPWEmailScreen,
     ResetPW: {
       screen: ResetPWScreen,
-      path: 'reset_password/',
+      path: 'reset_password',
     },
   },
   {

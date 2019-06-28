@@ -6,9 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  // Platform, 
+  Linking,
 } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
 import axios from 'axios';
+
 
 class ResetPWScreen extends Component {
   constructor(props) {
@@ -19,6 +22,25 @@ class ResetPWScreen extends Component {
       password: '',
       rePassword: '',
     };
+  }
+
+  componentDidMount = () => {
+    Linking.addEventListener('url', this.handleOpenURL);
+  }
+
+  componentWillUnmount = () => {
+    Linking.removeEventListener('url', this.handleOpenURL);
+  }
+
+  handleOpenURL = (event) => {
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        console.log('Initial url is: ' + url);
+      }
+    }).catch(err => console.error('An error occurred', err));
+    // const result = Expo.Linking.parse(event.url);
+    // console.log(result);
+    console.log(event);
   }
 
   navigateToSignIn = () => this.props.navigation.navigate("SignIn");
@@ -54,7 +76,9 @@ class ResetPWScreen extends Component {
               style={styles.shadow}
             />
           </TouchableOpacity>    
-        </View>  
+        </View> 
+
+        {/* <Text>{this.props.navigation.state.params}</Text> */}
       </KeyboardAvoidingView>
     );
   }
