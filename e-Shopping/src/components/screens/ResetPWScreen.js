@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform, 
   Linking,
 } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
@@ -27,66 +26,50 @@ class ResetPWScreen extends Component {
   }
 
   componentDidMount = () => {
-    // if (Platform.OS === 'android') {
-      Linking
-        .getInitialURL()
-        .then(url => {
-          const token = url.slice(44);
-          axios
-            .get(`http://192.168.0.107:5000/reset_password?token=${token}`)
-            .then(result => {
-              if (!result.data.success) {
-                alert(`${result.data.msg}`);
-                this.props.navigation.navigate("SendEmail");
-              } else {
-                this.setState({username: result.data.username, email: result.data.email, token });
-              }
-            })
-            .catch(err => console.log("Error when validate reset token: " + err)); 
-        });
-    // } else {
-    //   Linking.addEventListener('url', this.handleOpenURL);
-    // } 
-    
+    Linking
+      .getInitialURL()
+      .then(url => {
+        const token = url.slice(44);
+        axios
+          .get(`http://192.168.0.107:5000/reset_password?token=${token}`)
+          .then(result => {
+            if (!result.data.success) {
+              alert(`${result.data.msg}`);
+              this.props.navigation.navigate("SendEmail");
+            } else {
+              this.setState({username: result.data.username, email: result.data.email, token });
+            }
+          })
+          .catch(err => console.log("Error when validate reset token: " + err)); 
+      });  
   }
 
-  // componentWillUnmount = () => {
-  //   Linking.removeEventListener('url', this.handleOpenURL);
-  // }
-
-  // handleOpenURL = (event) => {
-  //   const token = event.url.slice(44);
-  //   this.setState({ token});
-  //   // axios
-  //   //   .get(`http://192.168.0.107:5000/reset_password?token=${token}`)
-  //   //   .then(result => {
-  //   //     if (!result.data.success) {
-  //   //       alert(`${result.data.msg}`);
-  //   //       this.props.navigation.navigate("SendEmail");
-  //   //     } else {
-  //   //       this.setState({username: result.data.username, email: result.data.email, token });
-  //   //     }
-  //   //   })
-  //   //   .catch(err => console.log("Error when validate reset token: " + err));
-  // }
-
   resetPW = () => {
-    const info = {
-      token: this.state.token,
-      newPW: this.state.password,
-    };
+    if (!this.state.password || !this.state.rePassword) {
+      alert('All fields are required');
+      return;
+    }
 
-    axios
-      .put(`http://192.168.0.107:5000/reset_password`, info)
-      .then(result => {
-        if (result.data.resetPW) {
-          alert("Congras! You have successfully reset your password. Please sign in with the new password!");
-          this.props.navigation.navigate("SignIn");
-        } else {
-          alert("Sorry! Some thing wrong when saving the new password. Please retry");
-        }
-      })
-      .catch(err => console.log("Error when saving the new password: " + err));
+    if (this.state.password !== this.state.rePassword) {
+      alert('Passwords do not match. Please try again');
+    } else {
+      const info = {
+        token: this.state.token,
+        newPW: this.state.password,
+      };
+
+      axios
+        .put(`http://192.168.0.107:5000/reset_password`, info)
+        .then(result => {
+          if (result.data.resetPW) {
+            alert("Congras! You have successfully reset your password. Please sign in with the new password!");
+            this.props.navigation.navigate("SignIn");
+          } else {
+            alert("Sorry! Some thing wrong when saving the new password. Please retry");
+          }
+        })
+        .catch(err => console.log("Error when saving the new password: " + err));
+      }  
   }
 
   render() {

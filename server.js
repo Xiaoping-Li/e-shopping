@@ -134,7 +134,11 @@ server.put('/reset_password', (req, res) => {
             Users
                 .findOneAndUpdate(
                     { reset_password_token: token },
-                    { password: newHashedPW },
+                    { 
+                        password: newHashedPW,
+                        reset_password_expires: null,
+                        reset_password_token: null, 
+                    },
                 )
                 .then(result => res.status(200).json({resetPW: true, result}))
                 .catch(err => console.log("Error when update password: " + err));
