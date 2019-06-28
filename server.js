@@ -124,7 +124,22 @@ server.get('/reset_password', (req, res) => {
 });
 
 server.put('/reset_password', (req, res) => {
+    const { token, newPW } = req.body;
 
+    bcrypt.hash(newPW, 11, (err, hashedPW) => {
+        if (err) {
+            res.status(422).json({resetPW: false, "error": err});
+        } else {
+            const newHashedPW = hashedPW;
+            Users
+                .findOneAndUpdate(
+                    { reset_password_token: token },
+                    { password: newHashedPW },
+                )
+                .then(result => res.status(200).json({resetPW: true, result}))
+                .catch(err => console.log("Error when update password: " + err));
+        }
+    });
 });
 
 // Middleware: Validate user for all the routers, except '/signin' and '/singup'
