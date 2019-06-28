@@ -64,6 +64,10 @@ class GlobalStore {
     };
     updateOrderID = (id) => this.order._id = id;
     updateTotal = (total) => this.order.total = total;
+
+    orders = [];
+    initOrder = (list) => this.orders = list;
+    addOrder = (order) => this.orders.unshift(order);
    
 
     // Carousel visible

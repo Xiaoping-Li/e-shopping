@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text, Image, FlatList, Dimensions} from 'react-native';
+import { View, StyleSheet, Text, Image, FlatList } from 'react-native';
 
 
 class OrderItems extends PureComponent {
@@ -13,23 +13,23 @@ class OrderItems extends PureComponent {
                 return (
                     <View style={styles.rowContainer}>
                         <View>
-                            <Image source={item.img} style={styles.img}/>   
+                            <Image source={{uri: item.pet.img}} style={styles.img}/>   
                         </View>
 
                         <View>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.left}>Name:</Text>
-                                <Text style={[styles.right, {color: '#0E4375'}]}>{item.name}</Text>
+                                <Text style={[styles.right, {color: '#0E4375'}]}>{item.pet.name}</Text>
                             </View>
 
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.left}>Price:</Text>
-                                <Text style={styles.right}>${item.price / 100}</Text>
+                                <Text style={styles.right}>${(item.pet.price / 100).toFixed(2)}</Text>
                             </View>
 
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.left}>Count:</Text>
-                                <Text style={styles.right}>{item.count}</Text>
+                                <Text style={styles.right}>{item.pet.count}</Text>
                             </View>    
                         </View>
                     </View>

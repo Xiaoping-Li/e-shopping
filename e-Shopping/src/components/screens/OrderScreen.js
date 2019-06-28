@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Text, FlatList, Dimensions, } from 'react-native';
 import DropDownItem from 'react-native-drop-down-item';
 import UP_IMG from '../../../assets/photo/ic_arr_up.png';
@@ -7,7 +7,12 @@ import DOWN_IMG from '../../../assets/photo/ic_arr_down.png';
 import { LinearGradient } from 'expo';
 import { OrderItems } from '../presentations';
 
-class OrderScreen extends PureComponent {
+import {observer} from 'mobx-react/native';
+import globalStore from '../../../GlobalStore';
+
+
+@observer
+class OrderScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -18,34 +23,42 @@ class OrderScreen extends PureComponent {
                 >
                     <Text style={styles.headerText}>Orders List</Text> 
                 </LinearGradient>
-        
-                <View>
-                    <FlatList
-                        data={data}
-                        keyExtractor={item => item._id}
-                        renderItem={({item}) => 
-                            <DropDownItem
-                                key={item._id}
-                                contentVisible={false}
-                                invisibleImage={DOWN_IMG}
-                                visibleImage={UP_IMG}
-                                header={
-                                    <View>
-                                        <Text style={styles.orderHeader}>{item.createAt}</Text>
-                                    </View>
-                                }
-                            >
-                                <View style={{flex: 1}}>
-                                    <View style={styles.tracking}>
-                                        <Text style={{fontWeight: '600', color: '#0E4375', marginRight: 30}}>Order Tracking:</Text>
-                                        <Text style={[item.status === "Delivered" ? {color: '#0E4375'} : {color: 'green'},{fontWeight: '600'}]}>{item.status}</Text>
-                                    </View>
-                                    <OrderItems pets={item.cartID} /> 
-                                </View>
-                            </DropDownItem>
-                        } 
-                    />
-                </View>
+
+                { globalStore.orders.length ? 
+                    (
+                        <View>
+                            <FlatList
+                                data={globalStore.orders}
+                                keyExtractor={item => item._id}
+                                renderItem={({item}) => 
+                                    <DropDownItem
+                                        key={item._id}
+                                        contentVisible={false}
+                                        invisibleImage={DOWN_IMG}
+                                        visibleImage={UP_IMG}
+                                        header={
+                                            <View>
+                                                <Text style={styles.orderHeader}>{item.createAt.slice(0,10)}</Text>
+                                            </View>
+                                        }
+                                    >
+                                        <View style={{flex: 1}}>
+                                            <View style={styles.tracking}>
+                                                <Text style={{fontWeight: '600', color: '#0E4375', marginRight: 30}}>Order Tracking:</Text>
+                                                <Text style={[item.status === "Delivered" ? {color: '#0E4375'} : {color: 'green'},{fontWeight: '600'}]}>{item.status}</Text>
+                                            </View>
+                                            <OrderItems pets={item.cartID.pets} /> 
+                                        </View>
+                                    </DropDownItem>
+                                } 
+                            />
+                        </View>
+                    ) 
+                    : 
+                    (
+                    <Text>Your Order List is Empty</Text>
+                    )
+                }
             </View>
         );
     }

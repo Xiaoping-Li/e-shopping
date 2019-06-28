@@ -6,16 +6,20 @@ const OrdersRouter = express.Router();
 OrdersRouter.get('', (req, res) => {
     const { userID, status } = req.query;
 
-    Orders
-        .findOne({userID, status})
-        .then(result => res.status(200).json(result))
-        .catch(err => console.log("Error when try to get pending order by ID: " + err));
-     
-
-    // Orders
-    //     .find()
-    //     .then(result => res.status(200).json(result))
-    //     .catch(err => console.log(err));   
+    if (status) {
+        Orders
+            .findOne({userID, status})
+            .then(result => res.status(200).json(result))
+            .catch(err => console.log("Error when try to get pending order by ID: " + err));
+    } else {
+        Orders
+            .find({userID, status: { $ne: "Pending" }})
+            .sort('-createAt')
+            .limit(20)
+            .populate({ path: 'cartID', populate: { path: 'pets.pet'}})
+            .then(result => res.status(200).json(result))
+            .catch(err => console.log(err)); 
+    }      
 });
 
 OrdersRouter.post('', (req, res) => {

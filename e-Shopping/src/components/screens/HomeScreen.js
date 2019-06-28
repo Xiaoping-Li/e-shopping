@@ -16,6 +16,7 @@ class HomeScreen extends React.Component {
     this.getReptile();
     this.getCart();
     this.getPendingOrderID();
+    this.getNonPendingOrders();
   }
 
   getAquarium = () => {
@@ -92,6 +93,18 @@ class HomeScreen extends React.Component {
           globalStore.updateOrderID(result.data._id);
         } else {
           globalStore.updateOrderID("");
+        }
+      }))
+      .catch(err => console.log("Error when get pending order ID: " + err));
+  }
+
+  getNonPendingOrders = () => {
+    const userID = globalStore.user._id;
+    axios
+      .get(`http://192.168.0.107:5000/orders/?userID=${userID}`)
+      .then(action(result => {
+        if (result.data.length) {
+          globalStore.initOrder(result.data);
         }
       }))
       .catch(err => console.log("Error when get pending order ID: " + err));
