@@ -24,7 +24,7 @@ class AddTaxScreen extends Component {
     }
 
     render() {
-        const total = (globalStore.subTotal/100) + Number(((globalStore.subTotal/100) * 0.095).toFixed(2)) + 20;
+        const total = Number(((globalStore.subTotal/100) + (globalStore.subTotal/100) * 0.095 + 20).toFixed(2));
         return (
             <View style={styles.container}>
                 <View style={styles.summary}>

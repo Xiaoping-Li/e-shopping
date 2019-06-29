@@ -108,6 +108,9 @@ decorate(
 
         // Pending Order
         order: observable,
+        orders: observable,
+        initOrder: action,
+        addOrder: action,
         updateOrderID: action,
         updateTotal: action,
 

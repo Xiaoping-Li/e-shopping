@@ -55,7 +55,6 @@ class ShippingScreen extends Component {
             .then(action(result => {
                 if (result.data.ok) {
                     globalStore.updateAddress(address);
-                    console.log(globalStore.user.address);
                     alert("Set this address as your default address");
                 }
             }))

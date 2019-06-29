@@ -71,6 +71,12 @@ class PaymentScreen extends Component {
             .then(result => {
                 if (result.data.paid) {
                     this.setState({paid: true});
+                    const order = {};
+                    order._id = globalStore.order._id;
+                    order.cartID = {};
+                    order.createAt = new Date().toISOString();
+                    order.cartID.pets = globalStore.pets;
+                    globalStore.addOrder(order);
                     const cartStatusPromise = axios.put(`http://192.168.0.107:5000/carts/?userID=${globalStore.user._id}&status=Success`);
                     const orderStatusPromise = axios.put(`http://192.168.0.107:5000/orders/?id=${globalStore.order._id}&status=Packaging`);
                     return Promise.all([cartStatusPromise, orderStatusPromise]);
@@ -81,7 +87,7 @@ class PaymentScreen extends Component {
                     globalStore.initCart({});
                     globalStore.initPets([]);
                     globalStore.updateOrderID('');
-                    globalStore.updateTotal(0);   
+                    globalStore.updateTotal(0);
                 }
             }))
             .catch(err => console.log("Error when try to charge order: " + err));
