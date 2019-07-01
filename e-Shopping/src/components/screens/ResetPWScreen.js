@@ -76,7 +76,7 @@ class ResetPWScreen extends Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View>
           <Text style={styles.header}>Dear {this.state.username}:</Text>
-          <Text style={{fontSize: 20, color: '#0E4375'}}>Welcome back! Please reset your password. And the register email for reseting password is: {this.state.email}</Text>
+          <Text style={{fontSize: 20, color: '#0E4375'}}>Welcome back! Please reset your password here.</Text>
         </View>
         
         <View style={styles.sendContainer}>
