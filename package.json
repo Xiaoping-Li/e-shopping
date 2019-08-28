@@ -1,12 +1,12 @@
 {
-  "name": "Pets-e-Shopping",
+  "name": "pets-e-shopping",
   "version": "1.0.0",
   "description": "This is a React-Native Project",
   "main": "index.js",
   "repository": "https://github.com/Xiaoping-Li/e-shopping.git",
   "author": "Xiaoping-Li <narci2008@gmail.com>",
   "license": "MIT",
-  "private": null,
+  "private": true,
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",

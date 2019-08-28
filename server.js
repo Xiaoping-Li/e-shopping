@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-// const { Expo } = require('expo-server-sdk');
-// const expo = new Expo();
 
 
 // Import nodemailer and express-handlebars
