@@ -60,3 +60,27 @@ server listen on 5000
 
 
 ### WIRE UP Front-end
+* 1. If you develop on your laptop and present the app on your phone, please make sure your laptop and device(phone, tablet) using the same Wi-Fi. 
+* 2. CD to `e-Shopping` directory.
+```
+cd some_path/e-shopping/e-Shopping
+expo start
+```
+**Note:** Login to your Expo account, and you will see different ways to connect to you Expo client on your phone. 
+* 3. Open your `Expo client` on the phone. If you already login, then you could see the project there, just click the project, it will load and render.
+* 4. **IMPORTANT** When you develop the app on your laptop and present it on your phone, if you want to make requests to the server on you laptop, you **HAVE TO** include your _IP address_ in the URL, for example:
+```
+  getAquarium = () => {
+    axios
+      .get(`http://192.168.0.107:5000/pets/?category=Aquarium`)
+      .then(action(result => {
+        if (result.data.length) {
+          globalStore.initAquarium(result.data);
+        }
+      }))
+      .catch(err => console.log("getAquarium error: " + err));
+  }
+```
+The **URL** here for the **GET** method is like this: `http://192.168.0.107:5000/pets/?category=Aquarium`. **Please remember to replace ALL 'http://192.168.0.107' with your IP address**.
+
+If everything goes well, you could have the app run on your phone, and could registe user, create shopping cart and make orders. Have fun!!!
