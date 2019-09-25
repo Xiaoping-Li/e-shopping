@@ -85,4 +85,8 @@ expo start
 ```
 The **URL** here for the **GET** method is like this: `http://192.168.0.107:5000/pets/?category=Aquarium`. **Please remember to replace ALL 'http://192.168.0.107' with your IP address**.
 
-If everything goes well, you could have the app run on your phone, and could registe user, create shopping cart and make orders. If not, don't panic, all these errors are chances to learn, fixing them is what develper's doing! Be patience and have fun!!!
+If everything goes well, you could have the app run on your phone, and could registe user, create shopping cart and make orders. 
+
+If not, don't panic, all these errors are chances to learn, fixing them is what develper's doing! 
+
+Be patience and have fun!!!
