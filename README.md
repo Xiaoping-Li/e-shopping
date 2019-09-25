@@ -22,7 +22,7 @@ This is a Full-stack project, so before you could run the app through Expo on yo
 ```
 git clone https://github.com/Xiaoping-Li/e-shopping.git
 ```
-2. CD to the root directory of this project, create a new directory called `config` and create a new file named `keys_dev.js`. And **ADD** `/config/keys_dev.js` to your root `.gitignore` file. Because we keep those **SECRET_KEYs** here for _MongoDB_, _Stripe_, _Express-Session_, and _Nodemailer_, and these are confidential information, **Please carefully! Don't leak these information!!! ADD `/config/keys_dev.js` to root `.gitignore` file** Below is an example of what should you keep inside `keys_dev.js`:
+2. CD to the root directory of this project, create a new directory called `config` and create a new file named `keys_dev.js`. And **ADD** `/config/keys_dev.js` to your root `.gitignore` file. Because we keep those **SECRET_KEYs** here for _MongoDB_, _Stripe_, _Express-Session_, and _Nodemailer_, and these are confidential information, **Please carefully! Don't leak these information!!! ADD `/config/keys_dev.js` to root `.gitignore` file!** Below is an example of what should you keep inside `keys_dev.js`:
 ```
 module.exports = {
     mongoURI: 'mongodb+srv://<username>:<password>@<clustreID-given-by-mongoDB>.mongodb.net/test?retryWrites=true&w=majority',
@@ -34,7 +34,7 @@ module.exports = {
 };
 
 ```
-**Notes:** No details for how to get these _keys_ or _mongoURI_ here. There are lots of good resources online teaching you how to do that. I used MongoDB Atlas which is use to set up. Below are some resources:
+**Notes:** No details for how to get these _keys_ or _mongoURI_ here. There are lots of good resources online teaching you how to do that. I used MongoDB Atlas for this project. Below are some resources:
 
     1). MongoDB In The Cloud With Atlas: https://www.youtube.com/watch?v=KKyag6t98g8
     2). How to Get Your Test and Live Stripe API Keys from Your Stripe Account: https://www.youtube.com/watch?v=UxpgwkiA5OM
@@ -66,8 +66,10 @@ server listen on 5000
 cd some_path/e-shopping/e-Shopping
 expo start
 ```
-**Note:** Login to your Expo account, and you will see different ways to connect to you Expo client on your phone. 
+**Note:** Login to your Expo account, and you will see different ways to connect to you Expo client on your phone.
+
 3. Open your `Expo client` on the phone. If you already login, then you could see the project there, just click the project, it will load and render.
+
 4. **IMPORTANT** When you develop the app on your laptop and present it on your phone, if you want to make requests to the server on you laptop, you **HAVE TO** include your _IP address_ in the URL, for example:
 ```
   getAquarium = () => {
@@ -83,4 +85,4 @@ expo start
 ```
 The **URL** here for the **GET** method is like this: `http://192.168.0.107:5000/pets/?category=Aquarium`. **Please remember to replace ALL 'http://192.168.0.107' with your IP address**.
 
-If everything goes well, you could have the app run on your phone, and could registe user, create shopping cart and make orders. Have fun!!!
+If everything goes well, you could have the app run on your phone, and could registe user, create shopping cart and make orders. If not, don't panic, all these errors are chances to learn, fixing them is what develper's doing! Be patience and have fun!!!
