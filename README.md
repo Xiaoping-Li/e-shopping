@@ -34,6 +34,29 @@ module.exports = {
 };
 
 ```
+**Notes:** No details for how to get these _keys_ or _mongoURI_ here. There are lots of good resources online teaching you how to do that. I used MongoDB Atlas which is use to set up. Below are some resources:
+
+    * i). MongoDB In The Cloud With Atlas: https://www.youtube.com/watch?v=KKyag6t98g8
+    * ii). How to Get Your Test and Live Stripe API Keys from Your Stripe Account: https://www.youtube.com/watch?v=UxpgwkiA5OM
+    * iii). Send email with Nodemailer using gmail account - Nodejs: https://www.youtube.com/watch?v=Va9UKGs1bwI
+
+* 3. Install all the dependencies for back-end. On terminal under root directory:
+```
+yarn install
+or
+npm install
+```
+* 4. Start the server by using Nodemon
+```
+yarn add nodemon
+nodemon server.js
+```
+**Note:** If everything setup correctly, you could see the below notification on terminal:
+```
+MongoDB Connected
+server listen on 5000
+```
+* 5. You don't have any data yet in your database, Please use these models under `models` directory to prepare some `pets` data before you could run the app. There are photos here for your referrence: `e-Shopping/assets/photo`.
 
 
 ### WIRE UP Front-end
