@@ -36,9 +36,9 @@ module.exports = {
 ```
 **Notes:** No details for how to get these _keys_ or _mongoURI_ here. There are lots of good resources online teaching you how to do that. I used MongoDB Atlas which is use to set up. Below are some resources:
 
-    * i). MongoDB In The Cloud With Atlas: https://www.youtube.com/watch?v=KKyag6t98g8
-    * ii). How to Get Your Test and Live Stripe API Keys from Your Stripe Account: https://www.youtube.com/watch?v=UxpgwkiA5OM
-    * iii). Send email with Nodemailer using gmail account - Nodejs: https://www.youtube.com/watch?v=Va9UKGs1bwI
+    * 1). MongoDB In The Cloud With Atlas: https://www.youtube.com/watch?v=KKyag6t98g8
+    * 2). How to Get Your Test and Live Stripe API Keys from Your Stripe Account: https://www.youtube.com/watch?v=UxpgwkiA5OM
+    * 3). Send email with Nodemailer using gmail account - Nodejs: https://www.youtube.com/watch?v=Va9UKGs1bwI
 
 * 3. Install all the dependencies for back-end. On terminal under root directory:
 ```
